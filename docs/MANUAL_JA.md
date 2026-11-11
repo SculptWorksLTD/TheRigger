@@ -53,6 +53,7 @@ GitHub のプロジェクトの **Releases** ページから、お使いのシ�
 
 - **WSJT-X**：*設定 › 無線機*：Rig *Hamlib NET rigctl*、Network Server *127.0.0.1:4532*、PTT *CAT*。
 - **Log4OM**：CAT 設定で、Log4OM 用に表示されたポートの *Kenwood TS-2000* を選びます。OmniRig はもう不要です。
+- **OmniRig を使うプログラム**（Windows）：OmniRig をインストールする必要はありません。The Rigger がその代わりになります。プログラムで *OmniRig* を選びます。*Rig 1* は The Rigger でオンになっている最初の無線機、*Rig 2* は 2 台目です。The Rigger が閉じているときにプログラムが求めると、Windows が自動で起動します。（Alex Shovkoplyas VE3NEA の OmniRig と互換のインターフェース、MIT ライセンス）
 - **N1MM Logger+**：*Config › Configure Ports*：Radio *Kenwood TS-2000*、N1MM 用に表示された COM ポート、速度は任意、*DTR* と *RTS* はオフ。
 
 ## 設定

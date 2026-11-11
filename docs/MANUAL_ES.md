@@ -53,6 +53,7 @@ Un programa por puerto: The Rigger ya los asigna para que nunca choquen. Cada ra
 
 - **WSJT-X**: *Ajustes › Radio*: Radio *Hamlib NET rigctl*, Servidor *127.0.0.1:4532*, PTT *CAT*.
 - **Log4OM**: en la configuración CAT elige la radio *Kenwood TS-2000* en el puerto indicado para Log4OM. OmniRig ya no hace falta.
+- **Programas que usan OmniRig** (Windows): no hace falta instalar OmniRig. The Rigger ocupa su lugar: en el programa elige *OmniRig*; *Rig 1* es la primera radio encendida en The Rigger, *Rig 2* la segunda. Si el programa lo pide con The Rigger cerrado, Windows lo abre solo. (Interfaz compatible con OmniRig de Alex Shovkoplyas VE3NEA, licencia MIT.)
 - **N1MM Logger+**: *Config › Configure Ports*: Radio *Kenwood TS-2000*, el puerto COM indicado para N1MM, cualquier velocidad, *DTR* y *RTS* desactivados.
 
 ## Ajustes

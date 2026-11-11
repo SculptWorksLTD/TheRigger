@@ -218,6 +218,24 @@ jobs:
           mkdir -p dist zipdir
           cp "The Rigger.exe" zipdir/
           cd zipdir && 7z a "../dist/The-Rigger-${VERSION}-Windows.zip" "The Rigger.exe" >/dev/null
+      - name: Prova OmniRig (programmi a 64 e 32 bit)
+        continue-on-error: true
+        shell: pwsh
+        run: |
+          $p = Start-Process -FilePath ".\The Rigger.exe" -ArgumentList "--demo" -PassThru
+          Start-Sleep 10
+          $t = @'
+          $o = New-Object -ComObject OmniRig.OmniRigX
+          $r = $o.Rig1
+          "versione " + $o.InterfaceVersion + " | Rig1 " + $r.RigType + " | " + $r.StatusStr + " | " + $r.Freq + " Hz | modo " + $r.Mode + " | vfo " + $r.Vfo
+          $r.Freq = 7074000; Start-Sleep -Milliseconds 800; "dopo la scrittura: " + $r.Freq + " Hz"
+          "Rig2 " + $o.Rig2.RigType + " | split " + $o.Rig2.Split + " | tx " + $o.Rig2.GetTxFrequency()
+          '@
+          Set-Content omni.ps1 $t
+          "--- 64 bit"; powershell -NoProfile -ExecutionPolicy Bypass -File omni.ps1
+          "--- 32 bit"; & "$env:WINDIR\SysWOW64\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -File omni.ps1
+          Stop-Process $p -ErrorAction SilentlyContinue
+          Get-Content "$env:APPDATA\TheRigger\engine.log" -ErrorAction SilentlyContinue | Select-String OmniRig
       - uses: actions/upload-artifact@v4
         with:
           name: app-windows
