@@ -255,7 +255,6 @@ jobs:
             stop
             [ -f $1.png ] && echo "SHOT-$1:$(base64 -w0 $1.png)"
           }
-          npx electron --version
           shot benvenuto it ""
           shot radio-it it --updated
           shot radio-en en --updated
