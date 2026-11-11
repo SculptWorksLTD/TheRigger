@@ -1,7 +1,8 @@
 name: build
 
-# Costruisce The Rigger dal sorgente privato e pubblica solo i programmi compilati.
-# Serve il segreto SOURCE_TOKEN (lettura della repo privata del sorgente).
+# Costruisce The Rigger dal sorgente privato (segreto SOURCE_TOKEN) e pubblica solo l'app
+# pronta, come CWIU1MVI: finestra Electron + motore Go compilato.
+# Resta solo l'ultima release: il programma installato scarica sempre quella.
 
 on:
   workflow_dispatch:
@@ -36,32 +37,56 @@ jobs:
             echo "::error::SOURCE_TOKEN non riesce a leggere il sorgente (scaduto o senza permessi)."
             exit 1
           fi
-          mark="build ${sha:0:12}"
           last=$(gh api "repos/${GITHUB_REPOSITORY}/releases/latest" --jq '.tag_name + "|" + .body' 2>/dev/null || true)
           tag="${last%%|*}"
           n=0
-          case "$tag" in v0.2.*) n="${tag#v0.2.}";; esac
+          case "$tag" in v0.3.*) n="${tag#v0.3.}";; esac
           echo "sha=$sha" >> "$GITHUB_OUTPUT"
-          echo "version=0.2.$((n+1))" >> "$GITHUB_OUTPUT"
-          if printf '%s' "$last" | grep -q "$mark"; then
+          echo "version=0.3.$((n+1))" >> "$GITHUB_OUTPUT"
+          if [ "${{ github.event_name }}" != "workflow_dispatch" ] && printf '%s' "$last" | grep -q "build ${sha:0:12}"; then
             echo "Nessuna novità: ultima versione già pubblicata."
             echo "build=false" >> "$GITHUB_OUTPUT"
           else
             echo "build=true" >> "$GITHUB_OUTPUT"
           fi
 
-  build:
+  engine:
+    # il motore è Go puro: si compila per tutti i sistemi in meno di un minuto
     needs: check
     if: needs.check.outputs.build == 'true'
-    strategy:
-      fail-fast: true
-      matrix:
-        include:
-          - { os: windows-latest,   goos: windows, goarch: amd64 }
-          - { os: macos-latest,     goos: darwin,  goarch: arm64 }
-          - { os: macos-latest,     goos: darwin,  goarch: amd64 }
-    runs-on: ${{ matrix.os }}
-    timeout-minutes: 40
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ env.SOURCE_REPO }}
+          ref: ${{ needs.check.outputs.sha }}
+          token: ${{ secrets.SOURCE_TOKEN }}
+          persist-credentials: false
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+          cache: false
+      - name: Compila il motore
+        env:
+          CGO_ENABLED: '0'
+          VERSION: ${{ needs.check.outputs.version }}
+        run: |
+          flags="-s -w -X main.Version=${VERSION}"
+          GOOS=windows GOARCH=amd64 go build -trimpath -ldflags "$flags" -o out/engine/win-x64/therigger-engine.exe .
+          GOOS=darwin  GOARCH=arm64 go build -trimpath -ldflags "$flags" -o out/engine/mac-arm64/therigger-engine .
+          GOOS=darwin  GOARCH=amd64 go build -trimpath -ldflags "$flags" -o out/engine/mac-x64/therigger-engine .
+          GOOS=linux   GOARCH=amd64 go build -trimpath -ldflags "$flags" -o out/engine/linux-x64/therigger-engine .
+          ls -laR out/engine
+      - uses: actions/upload-artifact@v4
+        with:
+          name: engine
+          path: out/engine
+          retention-days: 2
+
+  windows:
+    needs: [check, engine]
+    runs-on: windows-latest
+    timeout-minutes: 30
     env:
       VERSION: ${{ needs.check.outputs.version }}
     steps:
@@ -71,96 +96,167 @@ jobs:
           ref: ${{ needs.check.outputs.sha }}
           token: ${{ secrets.SOURCE_TOKEN }}
           persist-credentials: false
-
-      - uses: actions/setup-go@v5
+      - uses: actions/download-artifact@v4
         with:
-          go-version: '1.24'
-          cache: false
-
-      - name: Build
-        shell: bash
-        env:
-          CGO_ENABLED: '1'
-          GOOS: ${{ matrix.goos }}
-          GOARCH: ${{ matrix.goarch }}
-        run: |
-          # i download dei moduli a volte falliscono: tre tentativi
-          for n in 1 2 3; do
-            if go get fyne.io/fyne/v2@v2.8.2 >/dev/null 2>&1 && go mod tidy >/dev/null 2>&1; then break; fi
-            echo "download moduli fallito (tentativo $n)"; sleep 10
-            [ "$n" = 3 ] && { echo "::error::moduli Go non scaricabili"; exit 1; }
-          done
-          name=therigger-${{ matrix.goos }}-${{ matrix.goarch }}
-          flags="-s -w -X main.Version=${VERSION}"
-          if [ "${{ matrix.goos }}" = "windows" ]; then
-            name=$name.exe
-            flags="$flags -H=windowsgui"
-          fi
-          if [ "${{ matrix.goos }}" = "darwin" ]; then
-            export CGO_CFLAGS="-mmacosx-version-min=11.0"
-            export CGO_LDFLAGS="-mmacosx-version-min=11.0"
-            if [ "${{ matrix.goarch }}" = "amd64" ]; then
-              export CC="clang -arch x86_64"
-            fi
-          fi
-          if [ "${{ matrix.goos }}" = "windows" ]; then
-            # icona dentro il file .exe
-            go run github.com/akavel/rsrc@v0.10.2 -arch amd64 -ico assets/icon.ico -o rsrc_windows_amd64.syso >/dev/null 2>&1 || echo "::warning::icona non inserita nel file .exe"
-          fi
-          mkdir -p "$RUNNER_TEMP/dist"
-          go build -trimpath -ldflags "$flags" -o "$RUNNER_TEMP/dist/$name" .
-
-      - name: macOS app bundle
-        if: runner.os == 'macOS'
+          name: engine
+          path: engine
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/cache@v4
+        with:
+          path: ~\AppData\Local\electron\Cache
+          key: electron-win-${{ hashFiles('package.json') }}
+          restore-keys: electron-win-
+      - name: Installa i pacchetti
         shell: bash
         run: |
-          cd "$RUNNER_TEMP/dist"
-          app="The Rigger.app"
-          mkdir -p "$app/Contents/MacOS" "$app/Contents/Resources"
-          cp therigger-darwin-${{ matrix.goarch }} "$app/Contents/MacOS/therigger"
-          ico="$RUNNER_TEMP/icon.iconset"; mkdir -p "$ico"
-          for s in 16 32 128 256 512; do
-            sips -z $s $s "$GITHUB_WORKSPACE/assets/icon.png" --out "$ico/icon_${s}x${s}.png" >/dev/null
-            sips -z $((s*2)) $((s*2)) "$GITHUB_WORKSPACE/assets/icon.png" --out "$ico/icon_${s}x${s}@2x.png" >/dev/null
+          npm pkg set version="$VERSION"
+          for t in 1 2 3 4 5; do
+            if npm install --no-audit --no-fund > install.log 2>&1; then exit 0; fi
+            echo "Tentativo $t fallito"; tail -n 20 install.log; sleep 20
           done
-          iconutil -c icns "$ico" -o "$app/Contents/Resources/icon.icns"
-          cat > "$app/Contents/Info.plist" <<EOF
-          <?xml version="1.0" encoding="UTF-8"?>
-          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-          <plist version="1.0"><dict>
-          <key>CFBundleName</key><string>The Rigger</string>
-          <key>CFBundleDisplayName</key><string>The Rigger</string>
-          <key>CFBundleIdentifier</key><string>com.sculptworks.therigger</string>
-          <key>CFBundleExecutable</key><string>therigger</string>
-          <key>CFBundleIconFile</key><string>icon</string>
-          <key>CFBundleVersion</key><string>${VERSION}</string>
-          <key>CFBundleShortVersionString</key><string>${VERSION}</string>
-          <key>CFBundlePackageType</key><string>APPL</string>
-          <key>LSMinimumSystemVersion</key><string>11.0</string>
-          <key>NSHighResolutionCapable</key><true/>
-          <key>NSHumanReadableCopyright</key><string>© 2026 Enrico Migliorati (IU1MVI). Tutti i diritti riservati.</string>
-          </dict></plist>
-          EOF
-          codesign --force --deep -s - "$app"
-          ditto -c -k --keepParent "$app" TheRigger-macOS-${{ matrix.goarch }}.zip && rm -rf "$app"
-
-      # only compiled programs leave this job: the source checkout is never uploaded
+          exit 1
+      - name: Build Windows
+        shell: bash
+        run: |
+          for t in 1 2 3; do npm run dist:win && exit 0; echo "Tentativo $t fallito"; sleep 15; done
+          exit 1
       - uses: actions/upload-artifact@v4
         with:
-          name: bin-${{ matrix.goos }}-${{ matrix.goarch }}
-          path: ${{ runner.temp }}/dist/*
-          retention-days: 3
+          name: app-windows
+          path: |
+            dist/*-Windows.zip
+            dist/*-Setup.exe
+          if-no-files-found: error
+          retention-days: 2
+
+  mac:
+    needs: [check, engine]
+    runs-on: macos-latest
+    timeout-minutes: 30
+    env:
+      VERSION: ${{ needs.check.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ env.SOURCE_REPO }}
+          ref: ${{ needs.check.outputs.sha }}
+          token: ${{ secrets.SOURCE_TOKEN }}
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: engine
+          path: engine
+      - run: chmod +x engine/mac-*/therigger-engine
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/cache@v4
+        with:
+          path: ~/Library/Caches/electron
+          key: electron-mac-${{ hashFiles('package.json') }}
+          restore-keys: electron-mac-
+      - name: Installa i pacchetti
+        run: |
+          npm pkg set version="$VERSION"
+          for t in 1 2 3 4 5; do
+            if npm install --no-audit --no-fund > install.log 2>&1; then exit 0; fi
+            echo "Tentativo $t fallito"; tail -n 20 install.log; sleep 20
+          done
+          exit 1
+      - name: Build Mac (Apple e Intel)
+        run: |
+          for t in 1 2 3; do npm run dist:mac && exit 0; echo "Tentativo $t fallito"; sleep 15; done
+          exit 1
+      - name: Firma ad-hoc, zip e installer
+        run: |
+          set -e
+          ls -d dist/mac*/*.app
+          pack() { # cartella, suffisso, architettura per l'installer
+            APP="$(ls -d "$1"/*.app | head -n 1)"
+            codesign --force --deep --sign - "$APP"
+            codesign --verify --deep "$APP"
+            ditto -c -k --sequesterRsrc --keepParent "$APP" "dist/The-Rigger-${VERSION}-$2.zip"
+            rm -rf pkgtmp && mkdir -p pkgtmp/scripts && cp build/pkg/postinstall pkgtmp/scripts/ && chmod +x pkgtmp/scripts/postinstall
+            pkgbuild --analyze --root "$1" pkgtmp/comp.plist
+            /usr/libexec/PlistBuddy -c "Set :0:BundleIsRelocatable false" -c "Set :0:BundleOverwriteAction upgrade" pkgtmp/comp.plist
+            pkgbuild --root "$1" --component-plist pkgtmp/comp.plist --install-location /Applications \
+              --scripts pkgtmp/scripts --identifier com.sculptworks.therigger --version "$VERSION" pkgtmp/TheRigger-core.pkg
+            sed -e "s/__VERSION__/${VERSION}/" -e "s/__ARCH__/$3/" build/pkg/distribution.xml > pkgtmp/distribution.xml
+            productbuild --distribution pkgtmp/distribution.xml --resources build/pkg/resources --package-path pkgtmp "dist/The-Rigger-${VERSION}-$2.pkg"
+          }
+          pack dist/mac-arm64 Mac arm64
+          pack dist/mac Mac-Intel x86_64
+          ls -la dist/*.zip dist/*.pkg
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app-mac
+          path: |
+            dist/*-Mac.zip
+            dist/*-Mac.pkg
+            dist/*-Mac-Intel.zip
+            dist/*-Mac-Intel.pkg
+          if-no-files-found: error
+          retention-days: 2
+
+  preview:
+    # controllo visivo: avvia l'app con due radio simulate e ne fotografa la finestra (non blocca la release)
+    needs: [check, engine]
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ env.SOURCE_REPO }}
+          ref: ${{ needs.check.outputs.sha }}
+          token: ${{ secrets.SOURCE_TOKEN }}
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: engine
+          path: engine
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Avvio e foto
+        run: |
+          chmod +x engine/linux-x64/therigger-engine
+          npm install --no-audit --no-fund electron@33 >/dev/null 2>&1
+          which xvfb-run import >/dev/null || sudo apt-get install -y -q --no-install-recommends xvfb imagemagick >/dev/null
+          cat > /tmp/clients.py <<'PY'
+          import os, socket, time
+          time.sleep(4)
+          fd = os.open("/tmp/TheRigger/IC-7100-1", os.O_RDWR | os.O_NOCTTY)
+          s = socket.create_connection(("127.0.0.1", 4532))
+          while True:
+              os.write(fd, b"FA;"); s.sendall(b"f\n"); s.recv(100); time.sleep(0.3)
+          PY
+          shot() { # nome, lingua, argomenti
+            mkdir -p ~/.config/TheRigger && echo "{\"lang\":\"$2\",\"vports\":4,\"rigctld\":4532,\"drivers\":false}" > ~/.config/TheRigger/config.json
+            xvfb-run -a -s "-screen 0 1100x900x24" bash -c "
+              npx electron . --no-sandbox --disable-gpu --demo $3 >app.log 2>&1 &
+              python3 /tmp/clients.py & sleep 12
+              import -window root -trim $1.png" || true
+            pkill -f electron || true; pkill -f therigger-engine || true; pkill -f clients.py || true; sleep 1
+            [ -f $1.png ] && echo "SHOT-$1:$(base64 -w0 $1.png)"
+          }
+          shot benvenuto it ""
+          shot radio-it it --updated
+          shot radio-en en --updated
+          tail -n 20 app.log || true
 
   release:
-    needs: [check, build]
+    needs: [check, windows, mac]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
         with:
           path: dist
-          pattern: bin-*
+          pattern: app-*
           merge-multiple: true
-      - name: Publish release
+      - name: Pubblica la release
         env:
           GH_TOKEN: ${{ github.token }}
           VERSION: ${{ needs.check.outputs.version }}
@@ -170,7 +266,7 @@ jobs:
           gh release create "v${VERSION}" dist/* \
             --repo "${{ github.repository }}" \
             --title "The Rigger ${VERSION}" \
-            --notes "Le installazioni esistenti si aggiornano da sole. (build ${SHA:0:12})"
+            --notes "Le installazioni esistenti si aggiornano da sole. (build ${SHA:0:12})" --latest
           # resta solo l'ultima release: via le precedenti e i loro tag
           gh release list --repo "${{ github.repository }}" --limit 100 --json tagName --jq '.[].tagName' | while read -r t; do
             if [ "$t" != "v${VERSION}" ]; then

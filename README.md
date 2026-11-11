@@ -2,7 +2,7 @@
 
 Gestore CAT per radioamatori: collega tutte le radio USB e le condivide con tutti i programmi, contemporaneamente. Sostituisce OmniRig ed è fatto per non doverci mai mettere le mani.
 
-**Windows · macOS**: un solo programma, senza dipendenze. Si scarica dalla pagina [Releases](../../releases/latest).
+**Windows · macOS** Si scarica dalla pagina [Releases](../../releases/latest).
 
 ## Cosa fa
 
@@ -36,11 +36,13 @@ Manuale: [Italiano](docs/MANUALE_IT.md) · [English](docs/MANUAL_EN.md) · [Fran
 
 ## Uso
 
-1. Scarica dalla pagina [Releases](../../releases/latest) il file per il tuo sistema.
-2. Avvialo e collega la radio. Nient'altro.
+1. Scarica dalla pagina [Releases](../../releases/latest) il file per il tuo sistema:
+   - **Windows**: `The-Rigger-…-Setup.exe`
+   - **Mac con chip Apple**: `The-Rigger-…-Mac.pkg` · **Mac Intel**: `The-Rigger-…-Mac-Intel.pkg`
+2. Installalo e collega la radio. Nient'altro.
 3. Premi **?** nella finestra: per ogni programma ti dice cosa impostare, con la porta già assegnata. In generale, nel tuo programma scegli la radio **Kenwood TS-2000** sulla porta che vedi nella finestra (un clic la copia), oppure **Hamlib NET rigctl** con l'indirizzo `tcp`.
 
-Su macOS, la prima volta: tasto destro sull'app → Apri (l'app non è ancora firmata da Apple).
+Su macOS, se il Mac blocca l'installer: tasto destro sul file → Apri (il programma non è ancora firmato da Apple).
 
 ## Licenza
 

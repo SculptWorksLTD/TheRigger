@@ -10,8 +10,8 @@ Gestiona varias radios a la vez, en Windows y macOS.
 
 Descarga el archivo para tu sistema desde la página **Releases** del proyecto en GitHub.
 
-- **Windows**: ejecuta `therigger-windows-amd64.exe`. Si aparece «Windows protegió su PC», elige *Más información › Ejecutar de todas formas*.
-- **macOS**: descomprime `TheRigger-macOS-arm64.zip` (Mac con chip Apple) o `TheRigger-macOS-amd64.zip` (Mac Intel) y mueve *The Rigger* a Aplicaciones. La primera vez: clic derecho › *Abrir*.
+- **Windows**: ejecuta `The-Rigger-…-Setup.exe` y sigue la instalación. Si aparece «Windows protegió su PC», elige *Más información › Ejecutar de todas formas*.
+- **macOS**: abre `The-Rigger-…-Mac.pkg` (Mac con chip Apple) o `The-Rigger-…-Mac-Intel.pkg` (Mac Intel): The Rigger se instala en Aplicaciones. Si el Mac lo bloquea: clic derecho sobre el archivo › *Abrir*.
 
 A partir de ahí The Rigger se actualiza solo y arranca solo al encender el ordenador.
 

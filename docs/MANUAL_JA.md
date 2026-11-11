@@ -10,8 +10,8 @@ The Rigger は、無線機とパソコンのソフトをつなぐ交換台です
 
 GitHub のプロジェクトの **Releases** ページから、お使いのシステム用のファイルをダウンロードします。
 
-- **Windows**：`therigger-windows-amd64.exe` を実行します。「Windows によって PC が保護されました」と表示されたら、*詳細情報 › 実行* を選びます。
-- **macOS**：`TheRigger-macOS-arm64.zip`（Apple シリコンの Mac）または `TheRigger-macOS-amd64.zip`（Intel Mac）を展開し、*The Rigger* をアプリケーションフォルダに移します。初回は右クリック › *開く*。
+- **Windows**：`The-Rigger-…-Setup.exe` を実行し、インストールを進めます。「Windows によって PC が保護されました」と表示されたら、*詳細情報 › 実行* を選びます。
+- **macOS**：`The-Rigger-…-Mac.pkg`（Apple シリコンの Mac）または `The-Rigger-…-Mac-Intel.pkg`（Intel Mac）を開くと、The Rigger がアプリケーションフォルダにインストールされます。Mac がブロックした場合は、ファイルを右クリック › *開く*。
 
 以後、The Rigger は自動でアップデートし、パソコンの起動時に自動で起動します。
 

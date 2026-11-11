@@ -10,8 +10,8 @@ It handles several radios at the same time, on Windows and macOS.
 
 Download the file for your system from the project's **Releases** page on GitHub.
 
-- **Windows**: run `therigger-windows-amd64.exe`. If "Windows protected your PC" appears, choose *More info › Run anyway*.
-- **macOS**: unzip `TheRigger-macOS-arm64.zip` (Apple silicon Macs) or `TheRigger-macOS-amd64.zip` (Intel Macs) and move *The Rigger* to Applications. The first time: right-click › *Open*.
+- **Windows**: run `The-Rigger-…-Setup.exe` and follow the installer. If "Windows protected your PC" appears, choose *More info › Run anyway*.
+- **macOS**: open `The-Rigger-…-Mac.pkg` (Apple silicon Macs) or `The-Rigger-…-Mac-Intel.pkg` (Intel Macs): The Rigger is installed in Applications. If the Mac blocks it: right-click the file › *Open*.
 
 From then on The Rigger updates itself and starts by itself when the computer starts.
 

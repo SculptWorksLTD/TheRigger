@@ -10,8 +10,8 @@ Es verwaltet mehrere Funkgeräte gleichzeitig, unter Windows und macOS.
 
 Lade die Datei für dein System von der Seite **Releases** des Projekts auf GitHub herunter.
 
-- **Windows**: `therigger-windows-amd64.exe` starten. Erscheint „Der Computer wurde durch Windows geschützt“, *Weitere Informationen › Trotzdem ausführen* wählen.
-- **macOS**: `TheRigger-macOS-arm64.zip` (Mac mit Apple-Chip) oder `TheRigger-macOS-amd64.zip` (Intel-Mac) entpacken und *The Rigger* in den Ordner Programme ziehen. Beim ersten Mal: Rechtsklick › *Öffnen*.
+- **Windows**: `The-Rigger-…-Setup.exe` starten und der Installation folgen. Erscheint „Der Computer wurde durch Windows geschützt“, *Weitere Informationen › Trotzdem ausführen* wählen.
+- **macOS**: `The-Rigger-…-Mac.pkg` (Mac mit Apple-Chip) oder `The-Rigger-…-Mac-Intel.pkg` (Intel-Mac) öffnen: The Rigger wird im Ordner Programme installiert. Blockiert der Mac die Datei: Rechtsklick › *Öffnen*.
 
 Danach aktualisiert sich The Rigger selbst und startet automatisch mit dem Computer.
 

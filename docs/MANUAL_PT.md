@@ -10,8 +10,8 @@ Gere vários rádios ao mesmo tempo, em Windows e macOS.
 
 Transfira o ficheiro para o seu sistema na página **Releases** do projeto no GitHub.
 
-- **Windows**: execute `therigger-windows-amd64.exe`. Se aparecer «O Windows protegeu o seu PC», escolha *Mais informações › Executar mesmo assim*.
-- **macOS**: descompacte `TheRigger-macOS-arm64.zip` (Mac com chip Apple) ou `TheRigger-macOS-amd64.zip` (Mac Intel) e mova *The Rigger* para Aplicações. Da primeira vez: clique com o botão direito › *Abrir*.
+- **Windows**: execute `The-Rigger-…-Setup.exe` e siga a instalação. Se aparecer «O Windows protegeu o seu PC», escolha *Mais informações › Executar mesmo assim*.
+- **macOS**: abra `The-Rigger-…-Mac.pkg` (Mac com chip Apple) ou `The-Rigger-…-Mac-Intel.pkg` (Mac Intel): o The Rigger é instalado em Aplicações. Se o Mac o bloquear: botão direito sobre o ficheiro › *Abrir*.
 
 A partir daí o The Rigger atualiza-se sozinho e arranca sozinho quando liga o computador.
 
