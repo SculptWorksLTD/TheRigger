@@ -57,8 +57,6 @@ jobs:
       fail-fast: true
       matrix:
         include:
-          - { os: ubuntu-22.04,     goos: linux,   goarch: amd64 }
-          - { os: ubuntu-22.04-arm, goos: linux,   goarch: arm64 }
           - { os: windows-latest,   goos: windows, goarch: amd64 }
           - { os: macos-latest,     goos: darwin,  goarch: arm64 }
           - { os: macos-latest,     goos: darwin,  goarch: amd64 }
@@ -78,22 +76,6 @@ jobs:
         with:
           go-version: '1.24'
           cache: false
-
-      - name: Linux deps
-        if: runner.os == 'Linux'
-        timeout-minutes: 12
-        run: |
-          # solo le librerie che servono alla finestra; niente indice dei manuali (si blocca)
-          sudo rm -f /var/lib/man-db/auto-update
-          pkgs="libgl1-mesa-dev libx11-dev libxcursor-dev libxrandr-dev libxinerama-dev libxi-dev libxxf86vm-dev libwayland-dev libxkbcommon-dev wayland-protocols"
-          for n in 1 2 3; do
-            if timeout 180 sudo apt-get -q -o Acquire::Retries=3 update \
-               && timeout 300 sudo DEBIAN_FRONTEND=noninteractive apt-get -q -o Acquire::Retries=3 install -y --no-install-recommends $pkgs; then
-              exit 0
-            fi
-            echo "installazione pacchetti fallita (tentativo $n)"; sleep 15
-          done
-          exit 1
 
       - name: Build
         shell: bash
@@ -127,9 +109,6 @@ jobs:
           fi
           mkdir -p "$RUNNER_TEMP/dist"
           go build -trimpath -ldflags "$flags" -o "$RUNNER_TEMP/dist/$name" .
-          if [ "${{ matrix.goos }}" = "linux" ]; then
-            CGO_ENABLED=0 go build -trimpath -tags nogui -ldflags "-s -w -X main.Version=${VERSION}" -o "$RUNNER_TEMP/dist/therigger-headless-linux-${{ matrix.goarch }}" .
-          fi
 
       - name: macOS app bundle
         if: runner.os == 'macOS'

@@ -4,7 +4,7 @@
 
 The Rigger ist eine Vermittlungsstelle zwischen deinen Funkgeräten und den Programmen auf dem Computer. Normalerweise kann die serielle Schnittstelle eines Funkgeräts nur von einem Programm gleichzeitig benutzt werden. The Rigger spricht als einziges mit dem Funkgerät und gibt jedem Programm eine eigene Verbindung. So arbeiten WSJT-X, das Logprogramm, das Contestprogramm und alle anderen gemeinsam am selben Funkgerät, ohne sich zu stören.
 
-Es verwaltet mehrere Funkgeräte gleichzeitig, unter Windows, macOS und Linux.
+Es verwaltet mehrere Funkgeräte gleichzeitig, unter Windows und macOS.
 
 ## Installation
 
@@ -12,7 +12,6 @@ Lade die Datei für dein System von der Seite **Releases** des Projekts auf GitH
 
 - **Windows**: `therigger-windows-amd64.exe` starten. Erscheint „Der Computer wurde durch Windows geschützt“, *Weitere Informationen › Trotzdem ausführen* wählen.
 - **macOS**: `TheRigger-macOS-arm64.zip` (Mac mit Apple-Chip) oder `TheRigger-macOS-amd64.zip` (Intel-Mac) entpacken und *The Rigger* in den Ordner Programme ziehen. Beim ersten Mal: Rechtsklick › *Öffnen*.
-- **Linux**: `therigger-linux-amd64` (oder `arm64`, zum Beispiel auf dem Raspberry Pi) ausführbar machen und starten.
 
 Danach aktualisiert sich The Rigger selbst und startet automatisch mit dem Computer.
 
@@ -44,7 +43,7 @@ Es gibt zwei Verbindungsarten:
 1. **Hamlib NET rigctl**: für WSJT-X, JTDX, JS8Call, fldigi, CQRLOG und andere Programme, die es unterstützen. Im Programm als Funkgerät *Hamlib NET rigctl* und als Server die angezeigte Adresse wählen (zum Beispiel `127.0.0.1:4532`). Beliebig viele Programme können sich damit verbinden.
 2. **Serieller Port**: für Log4OM, N1MM Logger+, HRD, Logger32, DXLab Commander, MixW und alle anderen. Im Programm als Funkgerät **das echte Modell deines Funkgeräts** (zum Beispiel Icom IC-7100) oder **Kenwood TS-2000** und den angezeigten Port wählen. Baudrate beliebig, kein Handshake, PTT über CAT.
    - Unter Windows sind es normale `COM`-Ports.
-   - Auf Mac und Linux liegen sie in `/tmp/TheRigger/`, zum Beispiel `/tmp/TheRigger/IC-7100-1`.
+   - Auf dem Mac liegen sie in `/tmp/TheRigger/`, zum Beispiel `/tmp/TheRigger/IC-7100-1`.
 
 **Automatische Erkennung**: Jeder Port erkennt das Protokoll des Programms von selbst (Icom CI-V, Kenwood, Elecraft, Yaesu, FT-817 oder TS-2000). Wählst du im Programm das echte Modell, gehen die Befehle direkt ans Funkgerät und alle seine Funktionen stehen zur Verfügung. Wählst du Kenwood TS-2000, funktionieren die gemeinsamen Funktionen: Frequenz, Betriebsart, PTT und Split. Bei Yaesu-Geräten kann die PTT beim allerersten Mal, wenn ein auf TS-2000 eingestelltes Programm einen Port benutzt, beim ersten Durchgang ausbleiben: ab dem zweiten funktioniert sie, und der Port merkt es sich.
 
@@ -67,7 +66,6 @@ Ein Programm pro Port: The Rigger teilt sie schon so zu, dass sie sich nie in di
 ## USB-Treiber
 
 - **Windows**: Schließt du ein Funkgerät ohne Treiber an, lädt The Rigger den offiziellen, signierten Treiber von Windows Update (oder vom Hersteller) und installiert ihn. Windows fragt einmal nach. Abgedeckt sind Silicon Labs (Icom, Yaesu, Kenwood), FTDI (Elecraft und viele Kabel), WCH CH340 (Xiegu und günstige Kabel) und Prolific.
-- **Linux**: Die Treiber sind schon im System. The Rigger behebt selbst die Zugriffsrechte der Ports und den Dienst *brltty*, der unter Ubuntu CH340-Kabel blockiert. Das Passwort wird einmal abgefragt.
 - **macOS**: Die Treiber sind bereits Teil des Systems.
 
 Die virtuellen COM-Ports unter Windows nutzen den kostenlosen Treiber *com0com*, den The Rigger beim ersten Mal selbst installiert (mit einer Windows-Bestätigung).

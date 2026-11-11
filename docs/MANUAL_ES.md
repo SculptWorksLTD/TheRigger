@@ -4,7 +4,7 @@
 
 The Rigger hace de centralita entre tus radios y los programas del ordenador. Normalmente, el puerto serie de una radio solo lo puede usar un programa a la vez. The Rigger es el único que habla con la radio y da a cada programa una conexión propia, así WSJT-X, el programa de registro, el de concursos y los demás trabajan juntos con la misma radio sin estorbarse.
 
-Gestiona varias radios a la vez, en Windows, macOS y Linux.
+Gestiona varias radios a la vez, en Windows y macOS.
 
 ## Instalación
 
@@ -12,7 +12,6 @@ Descarga el archivo para tu sistema desde la página **Releases** del proyecto e
 
 - **Windows**: ejecuta `therigger-windows-amd64.exe`. Si aparece «Windows protegió su PC», elige *Más información › Ejecutar de todas formas*.
 - **macOS**: descomprime `TheRigger-macOS-arm64.zip` (Mac con chip Apple) o `TheRigger-macOS-amd64.zip` (Mac Intel) y mueve *The Rigger* a Aplicaciones. La primera vez: clic derecho › *Abrir*.
-- **Linux**: haz ejecutable `therigger-linux-amd64` (o `arm64`, por ejemplo en una Raspberry Pi) y ejecútalo.
 
 A partir de ahí The Rigger se actualiza solo y arranca solo al encender el ordenador.
 
@@ -44,7 +43,7 @@ Hay dos tipos de conexión:
 1. **Hamlib NET rigctl**: para WSJT-X, JTDX, JS8Call, fldigi, CQRLOG y los demás programas que lo admiten. En el programa elige *Hamlib NET rigctl* como radio y la dirección indicada como servidor (por ejemplo `127.0.0.1:4532`). Se pueden conectar todos los programas que quieras.
 2. **Puerto serie**: para Log4OM, N1MM Logger+, HRD, Logger32, DXLab Commander, MixW y todos los demás. En el programa elige como radio **el modelo real de tu radio** (por ejemplo Icom IC-7100) o **Kenwood TS-2000**, y el puerto indicado. Velocidad cualquiera, sin control de flujo, PTT por CAT.
    - En Windows son puertos `COM` normales.
-   - En Mac y Linux están en `/tmp/TheRigger/`, por ejemplo `/tmp/TheRigger/IC-7100-1`.
+   - En Mac están en `/tmp/TheRigger/`, por ejemplo `/tmp/TheRigger/IC-7100-1`.
 
 **Reconocimiento automático**: cada puerto reconoce solo el protocolo del programa (Icom CI-V, Kenwood, Elecraft, Yaesu, FT-817 o TS-2000). Si en el programa eliges el modelo real, los comandos van directamente a la radio y funcionan todas sus funciones. Si eliges Kenwood TS-2000 funcionan las funciones comunes: frecuencia, modo, PTT y split. Con las radios Yaesu, la primera vez que un programa configurado como TS-2000 usa un puerto, el PTT puede no activarse en la primera transmisión: a partir de la segunda funciona, y el puerto lo recuerda.
 
@@ -67,7 +66,6 @@ Un programa por puerto: The Rigger ya los asigna para que nunca choquen. Cada ra
 ## Drivers USB
 
 - **Windows**: si conectas una radio sin driver, The Rigger descarga el driver oficial firmado desde Windows Update (o del fabricante) y lo instala. Windows pide una confirmación. Cubre Silicon Labs (Icom, Yaesu, Kenwood), FTDI (Elecraft y muchos cables), WCH CH340 (Xiegu y cables económicos) y Prolific.
-- **Linux**: los drivers ya están en el sistema. The Rigger arregla solo los permisos de los puertos y el servicio *brltty*, que en Ubuntu bloquea los cables CH340. Pide la contraseña una vez.
 - **macOS**: los drivers ya vienen con el sistema.
 
 Los puertos COM virtuales de Windows usan el driver gratuito *com0com*, que The Rigger instala solo la primera vez (con una confirmación de Windows).

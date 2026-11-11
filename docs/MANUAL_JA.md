@@ -4,7 +4,7 @@
 
 The Rigger は、無線機とパソコンのソフトをつなぐ交換台です。ふつう無線機のシリアルポートは一度に 1 つのソフトしか使えません。The Rigger だけが無線機と通信し、各ソフトに専用の接続を用意します。そのため WSJT-X、ログソフト、コンテストソフトなどが同じ無線機を同時に使っても、互いに邪魔をしません。
 
-複数の無線機を同時に扱えます。Windows、macOS、Linux で動作します。
+複数の無線機を同時に扱えます。Windows と macOS で動作します。
 
 ## インストール
 
@@ -12,7 +12,6 @@ GitHub のプロジェクトの **Releases** ページから、お使いのシ�
 
 - **Windows**：`therigger-windows-amd64.exe` を実行します。「Windows によって PC が保護されました」と表示されたら、*詳細情報 › 実行* を選びます。
 - **macOS**：`TheRigger-macOS-arm64.zip`（Apple シリコンの Mac）または `TheRigger-macOS-amd64.zip`（Intel Mac）を展開し、*The Rigger* をアプリケーションフォルダに移します。初回は右クリック › *開く*。
-- **Linux**：`therigger-linux-amd64`（Raspberry Pi などでは `arm64`）に実行権限を付けて起動します。
 
 以後、The Rigger は自動でアップデートし、パソコンの起動時に自動で起動します。
 
@@ -44,7 +43,7 @@ GitHub のプロジェクトの **Releases** ページから、お使いのシ�
 1. **Hamlib NET rigctl**：WSJT-X、JTDX、JS8Call、fldigi、CQRLOG など対応ソフト用。ソフトで無線機に *Hamlib NET rigctl* を、サーバーに表示されたアドレス（例：`127.0.0.1:4532`）を選びます。いくつのソフトでも接続できます。
 2. **シリアルポート**：Log4OM、N1MM Logger+、HRD、Logger32、DXLab Commander、MixW などそのほかのソフト用。ソフトで無線機に **お使いの無線機の実際の機種**（例：Icom IC-7100）または **Kenwood TS-2000** を、ポートに表示されたものを選びます。速度は任意、フロー制御なし、PTT は CAT。
    - Windows では通常の `COM` ポートです。
-   - Mac と Linux では `/tmp/TheRigger/` にあります（例：`/tmp/TheRigger/IC-7100-1`）。
+   - Mac では `/tmp/TheRigger/` にあります（例：`/tmp/TheRigger/IC-7100-1`）。
 
 **自動判別**：各ポートはソフトのプロトコル（Icom CI-V、Kenwood、Elecraft、Yaesu、FT-817、TS-2000）を自動で判別します。ソフトで実際の機種を選ぶと、コマンドは無線機に直接届き、その無線機のすべての機能が使えます。Kenwood TS-2000 を選ぶと、周波数・モード・PTT・スプリットの共通機能が使えます。Yaesu の無線機では、TS-2000 に設定したソフトがポートを初めて使うとき、最初の送信で PTT が効かないことがあります。2 回目からは動作し、ポートがそれを記憶します。
 
@@ -67,7 +66,6 @@ GitHub のプロジェクトの **Releases** ページから、お使いのシ�
 ## USB ドライバー
 
 - **Windows**：ドライバーのない無線機をつなぐと、The Rigger が Windows Update（またはメーカー）から署名済みの公式ドライバーをダウンロードしてインストールします。Windows の確認が 1 回表示されます。対象は Silicon Labs（Icom、Yaesu、Kenwood）、FTDI（Elecraft と多くのケーブル）、WCH CH340（Xiegu と廉価なケーブル）、Prolific です。
-- **Linux**：ドライバーはシステムに含まれています。ポートの権限と、Ubuntu で CH340 ケーブルを妨げる *brltty* サービスを The Rigger が自動で修正します。パスワードを 1 回入力します。
 - **macOS**：ドライバーはシステムに含まれています。
 
 Windows の仮想 COM ポートは無料の *com0com* ドライバーを使います。初回に The Rigger が自動でインストールします（Windows の確認が 1 回あります）。

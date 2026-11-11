@@ -2,16 +2,16 @@
 
 Gestore CAT per radioamatori: collega tutte le radio USB e le condivide con tutti i programmi, contemporaneamente. Sostituisce OmniRig ed è fatto per non doverci mai mettere le mani.
 
-**Windows · macOS · Linux**: un solo eseguibile, senza dipendenze. Si scarica dalla pagina [Releases](../../releases/latest).
+**Windows · macOS**: un solo programma, senza dipendenze. Si scarica dalla pagina [Releases](../../releases/latest).
 
 ## Cosa fa
 
 - **Trova le radio da solo**: scansiona le porte USB e prova CI-V, CAT testuale e CAT binario Yaesu a tutte le velocità. Riconosce il modello. Se scolleghi e ricolleghi il cavo, la radio si ricollega da sola.
 - **Tutte le radio insieme**, senza il limite di due di OmniRig.
 - **Porte seriali virtuali create in automatico**: da 1 a 16 per ogni radio, modificabili al volo. Ogni porta **riconosce da sola il linguaggio del programma**: se scegli il modello vero della radio (Icom CI-V, Kenwood, Elecraft, Yaesu, FT-817) i comandi arrivano direttamente alla radio, con tutte le sue funzioni; se scegli **Kenwood TS-2000**, che quasi tutti i programmi conoscono, funzionano le funzioni comuni.
-  - macOS / Linux: `/tmp/TheRigger/IC-7100-1` … senza driver e senza permessi di amministratore.
+  - macOS: `/tmp/TheRigger/IC-7100-1` … senza driver e senza permessi di amministratore.
   - Windows: normali porte `COMx`. Al primo uso The Rigger installa da solo il driver firmato com0com (Windows chiede una conferma, una volta sola).
-- **Driver USB automatici**: su Windows, se colleghi una radio senza driver, The Rigger scarica quello ufficiale firmato da Windows Update (o dal produttore) e lo installa. Una sola conferma. Su Linux sistema da solo i permessi delle porte e il blocco di brltty sui cavi CH340. Su Mac i driver sono già nel sistema.
+- **Driver USB automatici**: su Windows, se colleghi una radio senza driver, The Rigger scarica quello ufficiale firmato da Windows Update (o dal produttore) e lo installa. Una sola conferma. Su Mac i driver sono già nel sistema.
 - **Server Hamlib rigctld** per ogni radio (`127.0.0.1:4532`, `4534`, …). Nei programmi scegli "Hamlib NET rigctl".
 - **Nessun conflitto**: un solo processo parla con la radio, mette in coda i comandi e risponde a tutti dalla memoria. Il PTT ha la precedenza.
 - **Si aggiorna da solo** dalle release GitHub, e solo quando nessun programma sta usando la radio.
