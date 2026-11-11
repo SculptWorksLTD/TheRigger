@@ -6,6 +6,11 @@ name: build
 
 on:
   workflow_dispatch:
+    inputs:
+      solo_foto:
+        description: 'Solo le foto di controllo, senza nuova release'
+        type: boolean
+        default: false
   schedule:
     - cron: '17 */3 * * *'
 
@@ -85,6 +90,7 @@ jobs:
 
   windows:
     needs: [check, engine]
+    if: ${{ success() && !inputs.solo_foto }}
     runs-on: windows-latest
     timeout-minutes: 30
     env:
@@ -133,6 +139,7 @@ jobs:
 
   mac:
     needs: [check, engine]
+    if: ${{ success() && !inputs.solo_foto }}
     runs-on: macos-latest
     timeout-minutes: 30
     env:
@@ -227,25 +234,31 @@ jobs:
           which xvfb-run import >/dev/null || sudo apt-get install -y -q --no-install-recommends xvfb imagemagick >/dev/null
           cat > /tmp/clients.py <<'PY'
           import os, socket, time
-          time.sleep(4)
-          fd = os.open("/tmp/TheRigger/IC-7100-1", os.O_RDWR | os.O_NOCTTY)
+          p = "/tmp/TheRigger/IC-7100-1"
+          for _ in range(60):
+              if os.path.exists(p): break
+              time.sleep(0.5)
+          fd = os.open(p, os.O_RDWR | os.O_NOCTTY)
           s = socket.create_connection(("127.0.0.1", 4532))
           while True:
               os.write(fd, b"FA;"); s.sendall(b"f\n"); s.recv(100); time.sleep(0.3)
           PY
+          stop() { pkill -9 -f clients.py; pkill -9 -f electron; pkill -9 -f therigger-engine; sleep 2; rm -rf /tmp/TheRigger; true; }
           shot() { # nome, lingua, argomenti
+            stop
             mkdir -p ~/.config/TheRigger && echo "{\"lang\":\"$2\",\"vports\":4,\"rigctld\":4532,\"drivers\":false}" > ~/.config/TheRigger/config.json
             xvfb-run -a -s "-screen 0 1100x900x24" bash -c "
-              npx electron . --no-sandbox --disable-gpu --demo $3 >app.log 2>&1 &
-              python3 /tmp/clients.py & sleep 12
+              npx electron . --no-sandbox --disable-gpu --demo $3 >app-$1.log 2>&1 &
+              python3 /tmp/clients.py >clients-$1.log 2>&1 & sleep 15
               import -window root -trim $1.png" || true
-            pkill -f electron || true; pkill -f therigger-engine || true; pkill -f clients.py || true; sleep 1
+            echo "--- $1"; ls -la /tmp/TheRigger 2>&1 | head -5; tail -n 8 app-$1.log clients-$1.log ~/.config/TheRigger/engine.log 2>/dev/null
+            stop
             [ -f $1.png ] && echo "SHOT-$1:$(base64 -w0 $1.png)"
           }
+          npx electron --version
           shot benvenuto it ""
           shot radio-it it --updated
           shot radio-en en --updated
-          tail -n 20 app.log || true
 
   release:
     needs: [check, windows, mac]
