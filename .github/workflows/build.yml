@@ -123,6 +123,9 @@ jobs:
             echo "Tentativo $t fallito"; tail -n 20 install.log; sleep 20
           done
           exit 1
+      - name: Rendi illeggibile la finestra
+        shell: bash
+        run: node tools/offusca.js
       - name: Build Windows
         shell: bash
         run: |
@@ -172,6 +175,8 @@ jobs:
             echo "Tentativo $t fallito"; tail -n 20 install.log; sleep 20
           done
           exit 1
+      - name: Rendi illeggibile la finestra
+        run: node tools/offusca.js
       - name: Build Mac (Apple e Intel)
         run: |
           for t in 1 2 3; do npm run dist:mac && exit 0; echo "Tentativo $t fallito"; sleep 15; done
@@ -230,7 +235,8 @@ jobs:
       - name: Avvio e foto
         run: |
           chmod +x engine/linux-x64/therigger-engine
-          npm install --no-audit --no-fund electron@33 >/dev/null 2>&1
+          npm install --no-audit --no-fund electron@33 terser html-minifier-terser >/dev/null 2>&1
+          node tools/offusca.js
           which xvfb-run import >/dev/null || sudo apt-get install -y -q --no-install-recommends xvfb imagemagick >/dev/null
           cat > /tmp/clients.py <<'PY'
           import os, socket, time
