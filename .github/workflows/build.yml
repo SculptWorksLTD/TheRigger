@@ -48,21 +48,12 @@ jobs:
           case "$tag" in v0.3.*) n="${tag#v0.3.}";; esac
           echo "sha=$sha" >> "$GITHUB_OUTPUT"
           echo "version=0.3.$((n+1))" >> "$GITHUB_OUTPUT"
-          build=true
-          if [ "${{ github.event_name }}" != "workflow_dispatch" ]; then
-            prev=$(printf '%s' "$last" | grep -o 'build [0-9a-f]\{12\}' | cut -d' ' -f2)
-            if [ "$prev" = "${sha:0:12}" ]; then
-              build=false
-            elif [ -n "$prev" ]; then
-              # nuova versione solo se cambia qualcosa che finisce nel programma
-              files=$(GH_TOKEN="$SOURCE_TOKEN" gh api "repos/${SOURCE_REPO}/compare/${prev}...${sha}" --jq '.files[].filename' 2>/dev/null) || files="?"
-              if ! printf '%s\n' "$files" | grep -Ev '_test\.go$' | grep -Eq '^(\?|[^/]+\.go|go\.(mod|sum)|drivers\.json|app/.*|docs/.*|build/.*)$'; then
-                build=false
-              fi
-            fi
+          if [ "${{ github.event_name }}" != "workflow_dispatch" ] && printf '%s' "$last" | grep -q "build ${sha:0:12}"; then
+            echo "Nessuna novità: ultima versione già pubblicata."
+            echo "build=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "build=true" >> "$GITHUB_OUTPUT"
           fi
-          [ "$build" = false ] && echo "Nessuna modifica al programma: niente nuova versione."
-          echo "build=$build" >> "$GITHUB_OUTPUT"
 
   mac:
     needs: check
