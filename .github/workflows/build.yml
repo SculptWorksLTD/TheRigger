@@ -11,6 +11,10 @@ on:
         description: 'Solo le foto di controllo, senza nuova release'
         type: boolean
         default: false
+      completa:
+        description: 'Build completa anche se è cambiata solo la finestra'
+        type: boolean
+        default: false
   schedule:
     - cron: '17 */3 * * *'
 
@@ -53,7 +57,7 @@ jobs:
           echo "tag=$tag" >> "$GITHUB_OUTPUT"
           # full = build completa; web = cambia solo la finestra (aggiornamento leggero, secondi); none = niente
           mode=full
-          if [ "${{ github.event_name }}" != "workflow_dispatch" ]; then
+          if [ "${{ inputs.completa }}" != "true" ]; then
             pb=$(printf '%s' "$last" | grep -o 'build [0-9a-f]\{12\}' | head -1 | cut -d' ' -f2)
             pw=$(printf '%s' "$last" | grep -o 'web [0-9a-f]\{12\}' | head -1 | cut -d' ' -f2)
             if [ "${sha:0:12}" = "$pb" ] || [ "${sha:0:12}" = "$pw" ]; then
