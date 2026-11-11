@@ -243,7 +243,7 @@ jobs:
           while True:
               os.write(fd, b"FA;"); s.sendall(b"f\n"); s.recv(100); time.sleep(0.3)
           PY
-          stop() { pkill -9 -f clients.py; pkill -9 -f electron; pkill -9 -f therigger-engine; sleep 2; rm -rf /tmp/TheRigger; true; }
+          stop() { pkill -9 -f clients.py || true; pkill -9 -f electron || true; pkill -9 -f therigger-engine || true; sleep 2; rm -rf /tmp/TheRigger; }
           shot() { # nome, lingua, argomenti
             stop
             mkdir -p ~/.config/TheRigger && echo "{\"lang\":\"$2\",\"vports\":4,\"rigctld\":4532,\"drivers\":false}" > ~/.config/TheRigger/config.json
