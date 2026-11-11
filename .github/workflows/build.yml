@@ -63,6 +63,7 @@ jobs:
           - { os: macos-latest,     goos: darwin,  goarch: arm64 }
           - { os: macos-latest,     goos: darwin,  goarch: amd64 }
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
     env:
       VERSION: ${{ needs.check.outputs.version }}
     steps:
@@ -80,7 +81,18 @@ jobs:
 
       - name: Linux deps
         if: runner.os == 'Linux'
-        run: sudo apt-get update >/dev/null && sudo apt-get install -y gcc libgl1-mesa-dev xorg-dev libwayland-dev libxkbcommon-dev wayland-protocols >/dev/null
+        timeout-minutes: 12
+        run: |
+          # a volte un mirror di Ubuntu si blocca: tempo massimo e nuovi tentativi
+          pkgs="gcc libgl1-mesa-dev xorg-dev libwayland-dev libxkbcommon-dev wayland-protocols"
+          for n in 1 2 3; do
+            if timeout 180 sudo apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=20 update >/dev/null \
+               && timeout 300 sudo DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=20 install -y --no-install-recommends $pkgs >/dev/null; then
+              exit 0
+            fi
+            echo "installazione pacchetti fallita (tentativo $n)"; sleep 15
+          done
+          exit 1
 
       - name: Build
         shell: bash
