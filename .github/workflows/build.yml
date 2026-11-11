@@ -1,8 +1,8 @@
 name: build
 
-# Costruisce The Rigger dal sorgente privato (segreto SOURCE_TOKEN) e pubblica solo l'app
-# pronta, come CWIU1MVI: finestra Electron + motore Go compilato.
-# Resta solo l'ultima release: il programma installato scarica sempre quella.
+# Costruisce The Rigger dal sorgente privato (segreto SOURCE_TOKEN) e pubblica solo
+# il programma pronto. Un unico file nativo: finestra WebView del sistema + motore Go,
+# senza Electron. Resta solo l'ultima release: l'app installata scarica sempre quella.
 
 on:
   workflow_dispatch:
@@ -18,7 +18,7 @@ permissions:
   contents: write
 
 env:
-  SOURCE_REPO: SculptWorksLTD/TheRiggerSource
+  SOURCE_REPO: SculptWorksLTD/TheRigger
 
 jobs:
   check:
@@ -55,94 +55,9 @@ jobs:
             echo "build=true" >> "$GITHUB_OUTPUT"
           fi
 
-  engine:
-    # il motore è Go puro: si compila per tutti i sistemi in meno di un minuto
-    needs: check
-    if: needs.check.outputs.build == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          repository: ${{ env.SOURCE_REPO }}
-          ref: ${{ needs.check.outputs.sha }}
-          token: ${{ secrets.SOURCE_TOKEN }}
-          persist-credentials: false
-      - uses: actions/setup-go@v5
-        with:
-          go-version: '1.24'
-          cache: false
-      - name: Compila il motore
-        env:
-          CGO_ENABLED: '0'
-          VERSION: ${{ needs.check.outputs.version }}
-        run: |
-          flags="-s -w -X main.Version=${VERSION}"
-          GOOS=windows GOARCH=amd64 go build -trimpath -ldflags "$flags" -o out/engine/win-x64/therigger-engine.exe .
-          GOOS=darwin  GOARCH=arm64 go build -trimpath -ldflags "$flags" -o out/engine/mac-arm64/therigger-engine .
-          GOOS=darwin  GOARCH=amd64 go build -trimpath -ldflags "$flags" -o out/engine/mac-x64/therigger-engine .
-          GOOS=linux   GOARCH=amd64 go build -trimpath -ldflags "$flags" -o out/engine/linux-x64/therigger-engine .
-          ls -laR out/engine
-      - uses: actions/upload-artifact@v4
-        with:
-          name: engine
-          path: out/engine
-          retention-days: 2
-
-  windows:
-    needs: [check, engine]
-    if: ${{ success() && !inputs.solo_foto }}
-    runs-on: windows-latest
-    timeout-minutes: 30
-    env:
-      VERSION: ${{ needs.check.outputs.version }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          repository: ${{ env.SOURCE_REPO }}
-          ref: ${{ needs.check.outputs.sha }}
-          token: ${{ secrets.SOURCE_TOKEN }}
-          persist-credentials: false
-      - uses: actions/download-artifact@v4
-        with:
-          name: engine
-          path: engine
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - uses: actions/cache@v4
-        with:
-          path: ~\AppData\Local\electron\Cache
-          key: electron-win-${{ hashFiles('package.json') }}
-          restore-keys: electron-win-
-      - name: Installa i pacchetti
-        shell: bash
-        run: |
-          npm pkg set version="$VERSION"
-          for t in 1 2 3 4 5; do
-            if npm install --no-audit --no-fund > install.log 2>&1; then exit 0; fi
-            echo "Tentativo $t fallito"; tail -n 20 install.log; sleep 20
-          done
-          exit 1
-      - name: Rendi illeggibile la finestra
-        shell: bash
-        run: node tools/offusca.js
-      - name: Build Windows
-        shell: bash
-        run: |
-          for t in 1 2 3; do npm run dist:win && exit 0; echo "Tentativo $t fallito"; sleep 15; done
-          exit 1
-      - uses: actions/upload-artifact@v4
-        with:
-          name: app-windows
-          path: |
-            dist/*-Windows.zip
-            dist/*-Setup.exe
-          if-no-files-found: error
-          retention-days: 2
-
   mac:
-    needs: [check, engine]
-    if: ${{ success() && !inputs.solo_foto }}
+    needs: check
+    if: ${{ needs.check.outputs.build == 'true' && !inputs.solo_foto }}
     runs-on: macos-latest
     timeout-minutes: 30
     env:
@@ -154,70 +69,84 @@ jobs:
           ref: ${{ needs.check.outputs.sha }}
           token: ${{ secrets.SOURCE_TOKEN }}
           persist-credentials: false
-      - uses: actions/download-artifact@v4
-        with:
-          name: engine
-          path: engine
-      - run: chmod +x engine/mac-*/therigger-engine
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - uses: actions/cache@v4
-        with:
-          path: ~/Library/Caches/electron
-          key: electron-mac-${{ hashFiles('package.json') }}
-          restore-keys: electron-mac-
-      - name: Installa i pacchetti
+      - uses: actions/setup-go@v5
+        with: { go-version: '1.24', cache: false }
+      - name: Prepara (dipendenze e finestra compattata)
         run: |
-          npm pkg set version="$VERSION"
-          for t in 1 2 3 4 5; do
-            if npm install --no-audit --no-fund > install.log 2>&1; then exit 0; fi
-            echo "Tentativo $t fallito"; tail -n 20 install.log; sleep 20
+          go get github.com/webview/webview_go@latest
+          go mod tidy
+          npx --yes html-minifier-terser@7 --collapse-whitespace --remove-comments \
+            --minify-css true --minify-js true -o app/therigger.html app/therigger.html
+      - name: Compila (Apple e Intel)
+        run: |
+          flags="-s -w -X main.Version=${VERSION}"
+          CGO_ENABLED=1 GOARCH=arm64 go build -trimpath -ldflags "$flags" -o bin/arm64/therigger .
+          CGO_ENABLED=1 GOARCH=amd64 CGO_CFLAGS="-arch x86_64" CGO_LDFLAGS="-arch x86_64" \
+            go build -trimpath -ldflags "$flags" -o bin/x64/therigger .
+          file bin/arm64/therigger bin/x64/therigger
+      - name: Icona
+        run: |
+          mkdir -p icon.iconset
+          for s in 16 32 128 256 512; do
+            sips -z $s $s build/icon.png --out icon.iconset/icon_${s}x${s}.png >/dev/null
+            d=$((s*2)); sips -z $d $d build/icon.png --out icon.iconset/icon_${s}x${s}@2x.png >/dev/null
           done
-          exit 1
-      - name: Rendi illeggibile la finestra
-        run: node tools/offusca.js
-      - name: Build Mac (Apple e Intel)
-        run: |
-          for t in 1 2 3; do npm run dist:mac && exit 0; echo "Tentativo $t fallito"; sleep 15; done
-          exit 1
-      - name: Firma ad-hoc, zip e installer
+          iconutil -c icns icon.iconset -o icon.icns
+      - name: Crea i .app, firma, zip e installer
         run: |
           set -e
-          ls -d dist/mac*/*.app
-          pack() { # cartella, suffisso, architettura per l'installer
-            APP="$(ls -d "$1"/*.app | head -n 1)"
+          mkapp() { # cartella-bin, destinazione
+            APP="$2/The Rigger.app"; C="$APP/Contents"
+            mkdir -p "$C/MacOS" "$C/Resources"
+            cp "$1/therigger" "$C/MacOS/therigger"; chmod +x "$C/MacOS/therigger"
+            cp icon.icns "$C/Resources/icon.icns"
+            cat > "$C/Info.plist" <<PL
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0"><dict>
+            <key>CFBundleName</key><string>The Rigger</string>
+            <key>CFBundleDisplayName</key><string>The Rigger</string>
+            <key>CFBundleExecutable</key><string>therigger</string>
+            <key>CFBundleIdentifier</key><string>com.sculptworks.therigger</string>
+            <key>CFBundleIconFile</key><string>icon</string>
+            <key>CFBundleShortVersionString</key><string>${VERSION}</string>
+            <key>CFBundleVersion</key><string>${VERSION}</string>
+            <key>CFBundlePackageType</key><string>APPL</string>
+            <key>LSMinimumSystemVersion</key><string>10.15</string>
+            <key>NSHighResolutionCapable</key><true/>
+          </dict></plist>
+          PL
             codesign --force --deep --sign - "$APP"
-            codesign --verify --deep "$APP"
-            ditto -c -k --sequesterRsrc --keepParent "$APP" "dist/The-Rigger-${VERSION}-$2.zip"
+          }
+          pack() { # cartella-bin, suffisso, arch-installer, destinazione
+            mkapp "$1" "$4"
+            ditto -c -k --sequesterRsrc --keepParent "$4/The Rigger.app" "dist/The-Rigger-${VERSION}-$2.zip"
             rm -rf pkgtmp && mkdir -p pkgtmp/scripts && cp build/pkg/postinstall pkgtmp/scripts/ && chmod +x pkgtmp/scripts/postinstall
-            pkgbuild --analyze --root "$1" pkgtmp/comp.plist
+            pkgbuild --analyze --root "$4" pkgtmp/comp.plist
             /usr/libexec/PlistBuddy -c "Set :0:BundleIsRelocatable false" -c "Set :0:BundleOverwriteAction upgrade" pkgtmp/comp.plist
-            pkgbuild --root "$1" --component-plist pkgtmp/comp.plist --install-location /Applications \
+            pkgbuild --root "$4" --component-plist pkgtmp/comp.plist --install-location /Applications \
               --scripts pkgtmp/scripts --identifier com.sculptworks.therigger --version "$VERSION" pkgtmp/TheRigger-core.pkg
             sed -e "s/__VERSION__/${VERSION}/" -e "s/__ARCH__/$3/" build/pkg/distribution.xml > pkgtmp/distribution.xml
             productbuild --distribution pkgtmp/distribution.xml --resources build/pkg/resources --package-path pkgtmp "dist/The-Rigger-${VERSION}-$2.pkg"
           }
-          pack dist/mac-arm64 Mac arm64
-          pack dist/mac Mac-Intel x86_64
-          ls -la dist/*.zip dist/*.pkg
+          mkdir -p dist
+          pack bin/arm64 Mac arm64 appA
+          pack bin/x64 Mac-Intel x86_64 appI
+          ls -la dist
       - uses: actions/upload-artifact@v4
         with:
           name: app-mac
-          path: |
-            dist/*-Mac.zip
-            dist/*-Mac.pkg
-            dist/*-Mac-Intel.zip
-            dist/*-Mac-Intel.pkg
+          path: dist/*
           if-no-files-found: error
           retention-days: 2
 
-  preview:
-    # controllo visivo: avvia l'app con due radio simulate e ne fotografa la finestra (non blocca la release)
-    needs: [check, engine]
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    timeout-minutes: 15
+  windows:
+    needs: check
+    if: ${{ needs.check.outputs.build == 'true' && !inputs.solo_foto }}
+    runs-on: windows-latest
+    timeout-minutes: 30
+    env:
+      VERSION: ${{ needs.check.outputs.version }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -225,19 +154,56 @@ jobs:
           ref: ${{ needs.check.outputs.sha }}
           token: ${{ secrets.SOURCE_TOKEN }}
           persist-credentials: false
-      - uses: actions/download-artifact@v4
+      - uses: actions/setup-go@v5
+        with: { go-version: '1.24', cache: false }
+      - name: Prepara (dipendenze, icona e finestra compattata)
+        shell: bash
+        run: |
+          go get github.com/webview/webview_go@latest
+          go mod tidy
+          npx --yes html-minifier-terser@7 --collapse-whitespace --remove-comments \
+            --minify-css true --minify-js true -o app/therigger.html app/therigger.html
+          go run github.com/tc-hib/go-winres@latest simply --icon build/icon.ico --product-name "The Rigger" --file-description "The Rigger"
+      - name: Compila
+        shell: bash
+        run: |
+          flags="-s -w -H=windowsgui -X main.Version=${VERSION}"
+          CGO_ENABLED=1 go build -trimpath -ldflags "$flags" -o "The Rigger.exe" .
+          mkdir -p dist zipdir
+          cp "The Rigger.exe" zipdir/
+          cd zipdir && 7z a "../dist/The-Rigger-${VERSION}-Windows.zip" "The Rigger.exe" >/dev/null
+      - uses: actions/upload-artifact@v4
         with:
-          name: engine
-          path: engine
-      - uses: actions/setup-node@v4
+          name: app-windows
+          path: dist/*
+          if-no-files-found: error
+          retention-days: 2
+
+  preview:
+    # controllo visivo: avvia il programma con due radio simulate e ne fotografa la finestra
+    needs: check
+    if: ${{ needs.check.outputs.build == 'true' }}
+    runs-on: ubuntu-22.04
+    continue-on-error: true
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
         with:
-          node-version: 22
+          repository: ${{ env.SOURCE_REPO }}
+          ref: ${{ needs.check.outputs.sha }}
+          token: ${{ secrets.SOURCE_TOKEN }}
+          persist-credentials: false
+      - uses: actions/setup-go@v5
+        with: { go-version: '1.24', cache: false }
+      - name: Dipendenze di sistema
+        run: sudo apt-get update -q && sudo apt-get install -y -q --no-install-recommends libwebkit2gtk-4.0-dev xvfb imagemagick xclip >/dev/null
+      - name: Compila la finestra
+        run: |
+          go get github.com/webview/webview_go@latest
+          go mod tidy
+          CGO_ENABLED=1 go build -o therigger .
       - name: Avvio e foto
         run: |
-          chmod +x engine/linux-x64/therigger-engine
-          npm install --no-audit --no-fund electron@33 terser html-minifier-terser >/dev/null 2>&1
-          node tools/offusca.js
-          which xvfb-run import >/dev/null || sudo apt-get install -y -q --no-install-recommends xvfb imagemagick >/dev/null
           cat > /tmp/clients.py <<'PY'
           import os, socket, time
           p = "/tmp/TheRigger/IC-7100-1"
@@ -249,13 +215,13 @@ jobs:
           while True:
               os.write(fd, b"FA;"); s.sendall(b"f\n"); s.recv(100); time.sleep(0.3)
           PY
-          stop() { pkill -9 -f clients.py || true; pkill -9 -f electron || true; pkill -9 -f therigger-engine || true; sleep 2; rm -rf /tmp/TheRigger; }
+          stop() { pkill -9 -f clients.py || true; pkill -9 -f therigger || true; sleep 2; rm -rf /tmp/TheRigger; }
           shot() { # nome, lingua, argomenti
             stop
             mkdir -p ~/.config/TheRigger && echo "{\"lang\":\"$2\",\"vports\":4,\"rigctld\":4532,\"drivers\":false}" > ~/.config/TheRigger/config.json
             xvfb-run -a -s "-screen 0 1100x900x24" bash -c "
-              npx electron . --no-sandbox --disable-gpu --demo $3 >app-$1.log 2>&1 &
-              python3 /tmp/clients.py >clients-$1.log 2>&1 & sleep 15
+              ./therigger --demo $3 >app-$1.log 2>&1 &
+              python3 /tmp/clients.py >clients-$1.log 2>&1 & sleep 14
               import -window root -trim $1.png" || true
             echo "--- $1"; ls -la /tmp/TheRigger 2>&1 | head -5; tail -n 8 app-$1.log clients-$1.log ~/.config/TheRigger/engine.log 2>/dev/null
             stop
@@ -285,7 +251,6 @@ jobs:
             --repo "${{ github.repository }}" \
             --title "The Rigger ${VERSION}" \
             --notes "Le installazioni esistenti si aggiornano da sole. (build ${SHA:0:12})" --latest
-          # resta solo l'ultima release: via le precedenti e i loro tag
           gh release list --repo "${{ github.repository }}" --limit 100 --json tagName --jq '.[].tagName' | while read -r t; do
             if [ "$t" != "v${VERSION}" ]; then
               gh release delete "$t" --repo "${{ github.repository }}" --yes --cleanup-tag || true
