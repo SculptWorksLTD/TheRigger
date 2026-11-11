@@ -25,6 +25,8 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       build: ${{ steps.c.outputs.build }}
+      web: ${{ steps.c.outputs.web }}
+      tag: ${{ steps.c.outputs.tag }}
       sha: ${{ steps.c.outputs.sha }}
       version: ${{ steps.c.outputs.version }}
     steps:
@@ -48,12 +50,51 @@ jobs:
           case "$tag" in v0.3.*) n="${tag#v0.3.}";; esac
           echo "sha=$sha" >> "$GITHUB_OUTPUT"
           echo "version=0.3.$((n+1))" >> "$GITHUB_OUTPUT"
-          if [ "${{ github.event_name }}" != "workflow_dispatch" ] && printf '%s' "$last" | grep -q "build ${sha:0:12}"; then
-            echo "Nessuna novità: ultima versione già pubblicata."
-            echo "build=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "build=true" >> "$GITHUB_OUTPUT"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          # full = build completa; web = cambia solo la finestra (aggiornamento leggero, secondi); none = niente
+          mode=full
+          if [ "${{ github.event_name }}" != "workflow_dispatch" ]; then
+            pb=$(printf '%s' "$last" | grep -o 'build [0-9a-f]\{12\}' | head -1 | cut -d' ' -f2)
+            pw=$(printf '%s' "$last" | grep -o 'web [0-9a-f]\{12\}' | head -1 | cut -d' ' -f2)
+            if [ "${sha:0:12}" = "$pb" ] || [ "${sha:0:12}" = "$pw" ]; then
+              mode=none
+            elif [ -n "$pb" ]; then
+              files=$(GH_TOKEN="$SOURCE_TOKEN" gh api "repos/${SOURCE_REPO}/compare/${pb}...${sha}" --jq '.files[].filename' 2>/dev/null || echo "?")
+              rel=$(printf '%s\n' "$files" | grep -Ev '_test\.go$' | grep -E '^(\?|[^/]+\.go|go\.(mod|sum)|drivers\.json|app/.*|docs/.*|build/.*)$' || true)
+              if [ -z "$rel" ]; then
+                mode=none
+              elif [ "$rel" = "app/therigger.html" ]; then
+                mode=web
+              fi
+            fi
           fi
+          echo "Modo: $mode"
+          if [ "$mode" = full ]; then echo "build=true" >> "$GITHUB_OUTPUT"; else echo "build=false" >> "$GITHUB_OUTPUT"; fi
+          if [ "$mode" = web ]; then echo "web=true" >> "$GITHUB_OUTPUT"; else echo "web=false" >> "$GITHUB_OUTPUT"; fi
+
+  web:
+    # aggiornamento leggero: nuova finestra nella release attuale, il programma la scarica da solo
+    needs: check
+    if: ${{ needs.check.outputs.web == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ env.SOURCE_REPO }}
+          ref: ${{ needs.check.outputs.sha }}
+          token: ${{ secrets.SOURCE_TOKEN }}
+          persist-credentials: false
+      - name: Pubblica la finestra
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.check.outputs.tag }}
+          SHA: ${{ needs.check.outputs.sha }}
+        run: |
+          npx --yes html-minifier-terser@7 --collapse-whitespace --remove-comments \
+            --minify-css true --minify-js true -o window.html app/therigger.html
+          gh release upload "$TAG" window.html --clobber --repo "${{ github.repository }}"
+          body=$(gh release view "$TAG" --repo "${{ github.repository }}" --json body --jq .body | sed 's/ web [0-9a-f]\{12\}//')
+          gh release edit "$TAG" --repo "${{ github.repository }}" --notes "$body web ${SHA:0:12}"
 
   mac:
     needs: check
@@ -77,6 +118,7 @@ jobs:
           go mod tidy
           npx --yes html-minifier-terser@7 --collapse-whitespace --remove-comments \
             --minify-css true --minify-js true -o app/therigger.html app/therigger.html
+          mkdir -p dist && cp app/therigger.html dist/window.html
       - name: Compila (Apple e Intel)
         run: |
           flags="-s -w -X main.Version=${VERSION}"
