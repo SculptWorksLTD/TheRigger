@@ -18,7 +18,7 @@ permissions:
   contents: write
 
 env:
-  SOURCE_REPO: SculptWorksLTD/TheRigger
+  SOURCE_REPO: SculptWorksLTD/TheRiggerSource
 
 jobs:
   check:
