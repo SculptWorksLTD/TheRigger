@@ -83,11 +83,12 @@ jobs:
         if: runner.os == 'Linux'
         timeout-minutes: 12
         run: |
-          # a volte un mirror di Ubuntu si blocca: tempo massimo e nuovi tentativi
-          pkgs="gcc libgl1-mesa-dev xorg-dev libwayland-dev libxkbcommon-dev wayland-protocols"
+          # solo le librerie che servono alla finestra; niente indice dei manuali (si blocca)
+          sudo rm -f /var/lib/man-db/auto-update
+          pkgs="libgl1-mesa-dev libx11-dev libxcursor-dev libxrandr-dev libxinerama-dev libxi-dev libxxf86vm-dev libwayland-dev libxkbcommon-dev wayland-protocols"
           for n in 1 2 3; do
-            if timeout 180 sudo apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=20 update >/dev/null \
-               && timeout 300 sudo DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=20 install -y --no-install-recommends $pkgs >/dev/null; then
+            if timeout 180 sudo apt-get -q -o Acquire::Retries=3 update \
+               && timeout 300 sudo DEBIAN_FRONTEND=noninteractive apt-get -q -o Acquire::Retries=3 install -y --no-install-recommends $pkgs; then
               exit 0
             fi
             echo "installazione pacchetti fallita (tentativo $n)"; sleep 15
