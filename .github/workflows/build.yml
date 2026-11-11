@@ -89,8 +89,12 @@ jobs:
           GOOS: ${{ matrix.goos }}
           GOARCH: ${{ matrix.goarch }}
         run: |
-          go get fyne.io/fyne/v2@v2.8.2 >/dev/null 2>&1
-          go mod tidy >/dev/null 2>&1
+          # i download dei moduli a volte falliscono: tre tentativi
+          for n in 1 2 3; do
+            if go get fyne.io/fyne/v2@v2.8.2 >/dev/null 2>&1 && go mod tidy >/dev/null 2>&1; then break; fi
+            echo "download moduli fallito (tentativo $n)"; sleep 10
+            [ "$n" = 3 ] && { echo "::error::moduli Go non scaricabili"; exit 1; }
+          done
           name=therigger-${{ matrix.goos }}-${{ matrix.goarch }}
           flags="-s -w -X main.Version=${VERSION}"
           if [ "${{ matrix.goos }}" = "windows" ]; then
@@ -106,7 +110,7 @@ jobs:
           fi
           if [ "${{ matrix.goos }}" = "windows" ]; then
             # icona dentro il file .exe
-            go run github.com/akavel/rsrc@v0.10.2 -arch amd64 -ico assets/icon.ico -o rsrc_windows_amd64.syso >/dev/null 2>&1
+            go run github.com/akavel/rsrc@v0.10.2 -arch amd64 -ico assets/icon.ico -o rsrc_windows_amd64.syso >/dev/null 2>&1 || echo "::warning::icona non inserita nel file .exe"
           fi
           mkdir -p "$RUNNER_TEMP/dist"
           go build -trimpath -ldflags "$flags" -o "$RUNNER_TEMP/dist/$name" .
