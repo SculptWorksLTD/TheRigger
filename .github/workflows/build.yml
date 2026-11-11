@@ -108,7 +108,8 @@ jobs:
             APP="$2/The Rigger.app"; C="$APP/Contents"
             mkdir -p "$C/MacOS" "$C/Resources"
             cp "$1/therigger" "$C/MacOS/therigger"; chmod +x "$C/MacOS/therigger"
-            cp icon.icns "$C/Resources/icon.icns"
+            # nome diverso a ogni versione: il Mac rilegge l'icona anche in Applicazioni
+            cp icon.icns "$C/Resources/icon-${VERSION}.icns"
             cat > "$C/Info.plist" <<PL
           <?xml version="1.0" encoding="UTF-8"?>
           <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -117,7 +118,7 @@ jobs:
             <key>CFBundleDisplayName</key><string>The Rigger</string>
             <key>CFBundleExecutable</key><string>therigger</string>
             <key>CFBundleIdentifier</key><string>com.sculptworks.therigger</string>
-            <key>CFBundleIconFile</key><string>icon</string>
+            <key>CFBundleIconFile</key><string>icon-${VERSION}</string>
             <key>CFBundleShortVersionString</key><string>${VERSION}</string>
             <key>CFBundleVersion</key><string>${VERSION}</string>
             <key>CFBundlePackageType</key><string>APPL</string>
