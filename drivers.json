@@ -1,0 +1,14 @@
+{
+  "_info": "Pacchetti dei produttori usati da The Rigger su Windows quando Windows Update non ha il driver. Modificabile senza rilasciare una nuova versione.",
+  "packages": [
+    {
+      "name": "Silicon Labs CP210x (Icom, Yaesu, Kenwood)",
+      "match": ["10C4"],
+      "url": "https://www.silabs.com/documents/public/software/CP210x_Universal_Windows_Driver.zip",
+      "args": ""
+    },
+    { "name": "FTDI (Elecraft, cavi CAT)", "match": ["0403"], "url": "", "args": "" },
+    { "name": "WCH CH340 (Xiegu, cavi economici)", "match": ["1A86"], "url": "", "args": "/S" },
+    { "name": "Prolific PL2303", "match": ["067B"], "url": "", "args": "" }
+  ]
+}

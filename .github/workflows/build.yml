@@ -1,0 +1,172 @@
+name: build
+
+# Costruisce The Rigger dal sorgente privato e pubblica solo i programmi compilati.
+# Serve il segreto SOURCE_TOKEN (lettura della repo privata del sorgente).
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */3 * * *'
+
+permissions:
+  contents: write
+
+env:
+  SOURCE_REPO: SculptWorksLTD/TheRiggerSource
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      build: ${{ steps.c.outputs.build }}
+      sha: ${{ steps.c.outputs.sha }}
+      version: ${{ steps.c.outputs.version }}
+    steps:
+      - id: c
+        env:
+          SOURCE_TOKEN: ${{ secrets.SOURCE_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -z "$SOURCE_TOKEN" ]; then
+            echo "::notice::Manca il segreto SOURCE_TOKEN: nessuna build."
+            echo "build=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          sha=$(git ls-remote "https://x-access-token:${SOURCE_TOKEN}@github.com/${SOURCE_REPO}" refs/heads/main 2>/dev/null | cut -f1)
+          if [ -z "$sha" ]; then
+            echo "::error::SOURCE_TOKEN non riesce a leggere il sorgente (scaduto o senza permessi)."
+            exit 1
+          fi
+          mark="build ${sha:0:12}"
+          last=$(gh api "repos/${GITHUB_REPOSITORY}/releases/latest" --jq '.tag_name + "|" + .body' 2>/dev/null || true)
+          tag="${last%%|*}"
+          n=0
+          case "$tag" in v0.2.*) n="${tag#v0.2.}";; esac
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          echo "version=0.2.$((n+1))" >> "$GITHUB_OUTPUT"
+          if printf '%s' "$last" | grep -q "$mark"; then
+            echo "Nessuna novità: ultima versione già pubblicata."
+            echo "build=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "build=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  build:
+    needs: check
+    if: needs.check.outputs.build == 'true'
+    strategy:
+      fail-fast: true
+      matrix:
+        include:
+          - { os: ubuntu-22.04,     goos: linux,   goarch: amd64 }
+          - { os: ubuntu-22.04-arm, goos: linux,   goarch: arm64 }
+          - { os: windows-latest,   goos: windows, goarch: amd64 }
+          - { os: macos-latest,     goos: darwin,  goarch: arm64 }
+          - { os: macos-latest,     goos: darwin,  goarch: amd64 }
+    runs-on: ${{ matrix.os }}
+    env:
+      VERSION: ${{ needs.check.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ env.SOURCE_REPO }}
+          ref: ${{ needs.check.outputs.sha }}
+          token: ${{ secrets.SOURCE_TOKEN }}
+          persist-credentials: false
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+          cache: false
+
+      - name: Linux deps
+        if: runner.os == 'Linux'
+        run: sudo apt-get update >/dev/null && sudo apt-get install -y gcc libgl1-mesa-dev xorg-dev libwayland-dev libxkbcommon-dev wayland-protocols >/dev/null
+
+      - name: Build
+        shell: bash
+        env:
+          CGO_ENABLED: '1'
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+        run: |
+          go get fyne.io/fyne/v2@v2.8.2 >/dev/null 2>&1
+          go mod tidy >/dev/null 2>&1
+          name=therigger-${{ matrix.goos }}-${{ matrix.goarch }}
+          flags="-s -w -X main.Version=${VERSION}"
+          if [ "${{ matrix.goos }}" = "windows" ]; then
+            name=$name.exe
+            flags="$flags -H=windowsgui"
+          fi
+          if [ "${{ matrix.goos }}" = "darwin" ]; then
+            export CGO_CFLAGS="-mmacosx-version-min=11.0"
+            export CGO_LDFLAGS="-mmacosx-version-min=11.0"
+            if [ "${{ matrix.goarch }}" = "amd64" ]; then
+              export CC="clang -arch x86_64"
+            fi
+          fi
+          mkdir -p "$RUNNER_TEMP/dist"
+          go build -trimpath -ldflags "$flags" -o "$RUNNER_TEMP/dist/$name" .
+          if [ "${{ matrix.goos }}" = "linux" ]; then
+            CGO_ENABLED=0 go build -trimpath -tags nogui -ldflags "-s -w -X main.Version=${VERSION}" -o "$RUNNER_TEMP/dist/therigger-headless-linux-${{ matrix.goarch }}" .
+          fi
+
+      - name: macOS app bundle
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          cd "$RUNNER_TEMP/dist"
+          app="The Rigger.app"
+          mkdir -p "$app/Contents/MacOS" "$app/Contents/Resources"
+          cp therigger-darwin-${{ matrix.goarch }} "$app/Contents/MacOS/therigger"
+          cat > "$app/Contents/Info.plist" <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0"><dict>
+          <key>CFBundleName</key><string>The Rigger</string>
+          <key>CFBundleDisplayName</key><string>The Rigger</string>
+          <key>CFBundleIdentifier</key><string>com.sculptworks.therigger</string>
+          <key>CFBundleExecutable</key><string>therigger</string>
+          <key>CFBundleVersion</key><string>${VERSION}</string>
+          <key>CFBundleShortVersionString</key><string>${VERSION}</string>
+          <key>CFBundlePackageType</key><string>APPL</string>
+          <key>LSMinimumSystemVersion</key><string>11.0</string>
+          <key>NSHighResolutionCapable</key><true/>
+          <key>NSHumanReadableCopyright</key><string>© 2026 Enrico Migliorati (IU1MVI). Tutti i diritti riservati.</string>
+          </dict></plist>
+          EOF
+          codesign --force --deep -s - "$app"
+          ditto -c -k --keepParent "$app" TheRigger-macOS-${{ matrix.goarch }}.zip && rm -rf "$app"
+
+      # only compiled programs leave this job: the source checkout is never uploaded
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bin-${{ matrix.goos }}-${{ matrix.goarch }}
+          path: ${{ runner.temp }}/dist/*
+          retention-days: 3
+
+  release:
+    needs: [check, build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          pattern: bin-*
+          merge-multiple: true
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.check.outputs.version }}
+          SHA: ${{ needs.check.outputs.sha }}
+        run: |
+          ls -la dist
+          gh release create "v${VERSION}" dist/* \
+            --repo "${{ github.repository }}" \
+            --title "The Rigger ${VERSION}" \
+            --notes "Le installazioni esistenti si aggiornano da sole. (build ${SHA:0:12})"
+          # resta solo l'ultima release: via le precedenti e i loro tag
+          gh release list --repo "${{ github.repository }}" --limit 100 --json tagName --jq '.[].tagName' | while read -r t; do
+            if [ "$t" != "v${VERSION}" ]; then
+              gh release delete "$t" --repo "${{ github.repository }}" --yes --cleanup-tag || true
+            fi
+          done
