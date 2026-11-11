@@ -104,6 +104,10 @@ jobs:
               export CC="clang -arch x86_64"
             fi
           fi
+          if [ "${{ matrix.goos }}" = "windows" ]; then
+            # icona dentro il file .exe
+            go run github.com/akavel/rsrc@v0.10.2 -arch amd64 -ico assets/icon.ico -o rsrc_windows_amd64.syso >/dev/null 2>&1
+          fi
           mkdir -p "$RUNNER_TEMP/dist"
           go build -trimpath -ldflags "$flags" -o "$RUNNER_TEMP/dist/$name" .
           if [ "${{ matrix.goos }}" = "linux" ]; then
@@ -118,6 +122,12 @@ jobs:
           app="The Rigger.app"
           mkdir -p "$app/Contents/MacOS" "$app/Contents/Resources"
           cp therigger-darwin-${{ matrix.goarch }} "$app/Contents/MacOS/therigger"
+          ico="$RUNNER_TEMP/icon.iconset"; mkdir -p "$ico"
+          for s in 16 32 128 256 512; do
+            sips -z $s $s "$GITHUB_WORKSPACE/assets/icon.png" --out "$ico/icon_${s}x${s}.png" >/dev/null
+            sips -z $((s*2)) $((s*2)) "$GITHUB_WORKSPACE/assets/icon.png" --out "$ico/icon_${s}x${s}@2x.png" >/dev/null
+          done
+          iconutil -c icns "$ico" -o "$app/Contents/Resources/icon.icns"
           cat > "$app/Contents/Info.plist" <<EOF
           <?xml version="1.0" encoding="UTF-8"?>
           <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -126,6 +136,7 @@ jobs:
           <key>CFBundleDisplayName</key><string>The Rigger</string>
           <key>CFBundleIdentifier</key><string>com.sculptworks.therigger</string>
           <key>CFBundleExecutable</key><string>therigger</string>
+          <key>CFBundleIconFile</key><string>icon</string>
           <key>CFBundleVersion</key><string>${VERSION}</string>
           <key>CFBundleShortVersionString</key><string>${VERSION}</string>
           <key>CFBundlePackageType</key><string>APPL</string>
