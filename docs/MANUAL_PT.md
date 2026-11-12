@@ -383,6 +383,17 @@ Com o tempo o com0com deixa dezenas ou centenas de portas virtuais e números CO
 
 **Definições → Portas e drivers → Limpeza do com0com → Limpar…** (o botão só está ativo se o com0com estiver no PC). Leia o aviso, marque *Li e compreendi* e carregue em **Iniciar a limpeza**. O Windows pede permissão de administrador: responda **Sim**. Os passos aparecem na mesma janela do The Rigger; depois da procura carregue em **Continuar** (ou **Cancelar** para não alterar nada). No fim pode carregar em **Reiniciar agora** ou **Fechar**. Se a janela disser que restam dispositivos, reinicie o PC e repita a limpeza.
 
+## Problemas e ideias
+
+O botão com o balão, em cima à direita, serve para comunicar um problema ou propor uma ideia, gratuitamente e de forma anónima.
+
+- **Algo não funciona**: escreva o que estava a fazer, o que esperava e o que aconteceu; indique rádio e programa. Normalmente convém anexar o registo do **último arranque**; se o problema acontece de vez em quando, o dos **últimos 7 dias**.
+- **Ideia ou pedido**: uma função nova, um programa para ligar, um rádio para acrescentar. Todas as ideias são avaliadas; as úteis para muitos entram nas versões seguintes.
+
+**Anonimato.** Não enviamos nome, indicativo, email nem endereço IP. Antes do envio, o The Rigger retira do registo o utilizador, o nome do PC, as pastas pessoais e os endereços de rede. Com *Ver exatamente o que é enviado* confirma palavra a palavra o que sai. Não escreva dados pessoais no texto.
+
+O registo é um ficheiro de texto que o The Rigger guarda no seu computador (os últimos 12 arranques); só é enviado se o escolher.
+
 ## Problemas comuns
 
 **O rádio não aparece.** Verifique se está ligado e com o cabo USB, depois carregue em *Procurar rádios de novo*. Se outro programa abriu a porta USB do rádio antes do The Rigger, feche-o: a porta tem de ficar com o The Rigger. Nos Icom, o *CI-V USB Baud Rate* deve estar em *Auto* ou num valor normal.

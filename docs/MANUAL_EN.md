@@ -383,6 +383,17 @@ Administrator permission is required. Programs that use com0com stop working wit
 
 **Settings → Ports and drivers → com0com cleanup → Clean up…** (the button is active only if com0com is on the PC). Read the warning, tick *I have read and understood* and press **Start cleanup**. Windows asks for administrator permission: answer **Yes**. The steps appear in the same The Rigger window; after the search press **Go ahead** (or **Cancel** to leave everything as it is). At the end you can press **Restart now** or **Close**. If the window says some devices are left, restart the PC and run the cleanup again.
 
+## Reports and ideas
+
+The speech-bubble button at the top right lets you report a problem or suggest an idea, free and anonymously.
+
+- **Something is wrong**: write what you were doing, what you expected and what happened; mention radio and program. Usually attach the log of the **last start**; if the problem happens now and then, the **last 7 days**.
+- **Idea or request**: a new feature, a program to connect, a radio to add. Every idea is evaluated; the ones useful to many go into later versions.
+
+**Anonymity.** We do not send your name, callsign, email or IP address. Before sending, The Rigger removes user name, PC name, personal folders and network addresses from the log. With *See exactly what is sent* you can check word by word what leaves your computer. Do not write personal data in the text.
+
+The log is a text file The Rigger keeps on your computer (the last 12 starts); it is sent only if you choose so.
+
 ## Troubleshooting
 
 **The radio does not appear.** Check that it is on and connected with the USB cable, then press *Search radios again*. If another program opened the radio's USB port before The Rigger, close it: The Rigger must own the port. On Icom radios the *CI-V USB Baud Rate* should be *Auto* or a normal value.

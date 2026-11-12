@@ -383,6 +383,17 @@ Il faut l’autorisation d’administrateur. Les programmes qui utilisent com0co
 
 **Réglages → Ports et pilotes → Nettoyage com0com → Nettoyer…** (le bouton n’est actif que si com0com est sur le PC). Lisez l’avertissement, cochez *J’ai lu et compris* et appuyez sur **Lancer le nettoyage**. Windows demande l’autorisation d’administrateur : répondez **Oui**. Les étapes s’affichent dans la même fenêtre de The Rigger ; après la recherche, appuyez sur **Continuer** (ou **Annuler** pour ne rien modifier). À la fin, appuyez sur **Redémarrer maintenant** ou **Fermer**. Si la fenêtre indique qu’il reste des périphériques, redémarrez le PC et relancez le nettoyage.
 
+## Signalements et idées
+
+Le bouton en forme de bulle, en haut à droite, sert à signaler un problème ou proposer une idée, gratuitement et anonymement.
+
+- **Quelque chose ne va pas** : décrivez ce que vous faisiez, ce que vous attendiez et ce qui s’est passé ; indiquez la radio et le programme. En général, joignez le journal du **dernier démarrage** ; si le problème arrive de temps en temps, celui des **7 derniers jours**.
+- **Idée ou demande** : une nouvelle fonction, un programme à relier, une radio à ajouter. Toutes les idées sont étudiées ; celles utiles à beaucoup entrent dans les versions suivantes.
+
+**Anonymat.** Nous n’envoyons ni nom, ni indicatif, ni e-mail, ni adresse IP. Avant l’envoi, The Rigger retire du journal le nom d’utilisateur, le nom du PC, les dossiers personnels et les adresses réseau. Avec *Voir exactement ce qui est envoyé*, vous vérifiez mot à mot ce qui part. N’écrivez pas de données personnelles dans le texte.
+
+Le journal est un fichier texte que The Rigger garde sur votre ordinateur (les 12 derniers démarrages) ; il n’est envoyé que si vous le choisissez.
+
 ## Problèmes courants
 
 **La radio n'apparaît pas.** Vérifiez qu'elle est allumée et branchée avec le câble USB, puis appuyez sur *Rechercher à nouveau les radios*. Si un autre programme a ouvert le port USB de la radio avant The Rigger, fermez-le : c'est The Rigger qui doit avoir le port. Sur les Icom, le *CI-V USB Baud Rate* doit être sur *Auto* ou une valeur normale.

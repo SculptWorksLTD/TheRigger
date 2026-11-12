@@ -383,6 +383,17 @@ Serve il permesso di amministratore. I programmi che usano com0com smettono di f
 
 **Impostazioni → Porte e driver → Pulizia com0com → Pulisci…** (il tasto è attivo solo se com0com è sul PC). Leggi l’avviso, spunta *Ho letto e ho capito* e premi **Avvia la pulizia**. Windows chiede il permesso di amministratore: rispondi **Sì**. I passi compaiono nella stessa finestra di The Rigger; dopo la ricerca premi **Procedi** (o **Annulla** per non toccare niente). Alla fine puoi premere **Riavvia ora** oppure **Chiudi**. Se la finestra dice che restano dei dispositivi, riavvia il PC e ripeti la pulizia.
 
+## Segnalazioni e idee
+
+Il tasto con il fumetto, in alto a destra, serve per segnalare un problema o proporre un'idea, gratis e in forma anonima.
+
+- **Qualcosa non va**: scrivi cosa stavi facendo, cosa ti aspettavi e cosa è successo; indica radio e programma. Di solito conviene allegare il diario dell'**ultimo avvio**; se il problema capita ogni tanto, quello degli **ultimi 7 giorni**.
+- **Idea o richiesta**: una funzione nuova, un programma da collegare, una radio da aggiungere. Le idee si valutano tutte; quelle utili a molti entrano nelle versioni successive.
+
+**Anonimato.** Non inviamo nome, nominativo, email né indirizzo IP. Prima dell'invio The Rigger toglie dal diario nome utente, nome del PC, cartelle personali e indirizzi di rete. Con *Vedi esattamente cosa viene inviato* controlli parola per parola cosa parte. Non scrivere dati personali nel testo.
+
+Il diario è un file di testo che The Rigger tiene sul tuo computer (gli ultimi 12 avvii); parte solo se lo scegli tu.
+
 ## Problemi comuni
 
 **La radio non compare.** Controlla che sia accesa e collegata con il cavo USB, poi premi *Cerca di nuovo le radio*. Se un altro programma ha aperto la porta USB della radio prima di The Rigger, chiudilo: la porta deve averla The Rigger. Sulle Icom la velocità *CI-V USB Baud Rate* va su *Auto* o su un valore normale.

@@ -383,6 +383,17 @@ Administratorrechte sind nötig. Programme, die com0com benutzen, funktionieren 
 
 **Einstellungen → Ports und Treiber → com0com-Bereinigung → Bereinigen…** (die Taste ist nur aktiv, wenn com0com auf dem PC ist). Lies den Hinweis, setze den Haken bei *Gelesen und verstanden* und drücke **Bereinigung starten**. Windows fragt nach Administratorrechten: mit **Ja** bestätigen. Die Schritte erscheinen im selben Fenster von The Rigger; nach der Suche **Weiter** drücken (oder **Abbrechen**, um nichts zu ändern). Am Ende **Jetzt neu starten** oder **Schließen** drücken. Wenn das Fenster meldet, dass Geräte übrig sind, PC neu starten und die Bereinigung wiederholen.
 
+## Meldungen und Ideen
+
+Mit der Sprechblasen-Taste oben rechts meldest du ein Problem oder schlägst eine Idee vor, kostenlos und anonym.
+
+- **Etwas funktioniert nicht**: beschreibe, was du gemacht hast, was du erwartet hast und was passiert ist; nenne Funkgerät und Programm. Meist das Protokoll des **letzten Starts** anhängen; tritt das Problem nur ab und zu auf, das der **letzten 7 Tage**.
+- **Idee oder Wunsch**: eine neue Funktion, ein Programm zum Anbinden, ein Funkgerät. Alle Ideen werden geprüft; was vielen nützt, kommt in spätere Versionen.
+
+**Anonymität.** Wir senden weder Name, Rufzeichen, E-Mail noch IP-Adresse. Vor dem Senden entfernt The Rigger Benutzername, PC-Name, persönliche Ordner und Netzwerkadressen aus dem Protokoll. Mit *Genau ansehen, was gesendet wird* prüfst du Wort für Wort, was rausgeht. Schreib keine persönlichen Daten in den Text.
+
+Das Protokoll ist eine Textdatei, die The Rigger auf deinem Computer führt (die letzten 12 Starts); sie wird nur gesendet, wenn du es wählst.
+
 ## Häufige Probleme
 
 **Das Funkgerät erscheint nicht.** Prüfe, ob es eingeschaltet und mit dem USB-Kabel verbunden ist, und drücke dann *Funkgeräte erneut suchen*. Hat ein anderes Programm den USB-Port des Geräts vor The Rigger geöffnet, schließe es: Den Port muss The Rigger haben. Bei Icom-Geräten sollte *CI-V USB Baud Rate* auf *Auto* oder einem normalen Wert stehen.
