@@ -384,6 +384,17 @@ Version, crédits et le bouton pour offrir un café à IU1MVI avec PayPal.
 
 Les Icom dont l'adresse CI-V a été changée dans le menu sont trouvées quand même.
 
+## Programmes en conflit (Windows)
+
+Certains programmes font le même travail que The Rigger et, s’ils sont ouverts ou installés, lui prennent la radio ou les ports où les programmes le cherchent : le vrai OmniRig, CatBKT, DXLab Commander, flrig, Hamlib rigctld, Ham Radio Deluxe et les programmes qui créent des ports COM virtuels (VSPE, Virtual Serial Port Driver). The Rigger les cherche tout seul toutes les 20 secondes.
+
+S’il en trouve, une ligne jaune avec le lien **Voir** apparaît dans l’onglet **Radio** et mène à **Réglages › Ports et pilotes › Programmes en conflit**. Pour chaque programme, on voit s’il est ouvert ou installé et quel problème il cause, avec deux boutons :
+
+- **Fermer…** le ferme tout de suite, sans rien désinstaller ;
+- **Désinstaller…** ouvre son désinstalleur (Windows demande l’autorisation d’administrateur).
+
+Avant chaque action, une fenêtre explique ce qui se passe, pourquoi et les risques ; on continue seulement en cochant *J’ai lu et compris*. Ensuite The Rigger reprend tout seul la radio et les ports libérés. DXLab Commander, rigctld et Ham Radio Deluxe peuvent seulement être fermés : ils font partie de suites plus larges que vous voulez peut-être garder.
+
 ## Nettoyage com0com (Windows)
 
 ### Ce que ça fait

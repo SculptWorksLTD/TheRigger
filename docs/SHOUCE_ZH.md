@@ -384,6 +384,17 @@ The Rigger 在重启后也会记住这个选择。再按一次按钮即可收回
 
 即使在菜单中更改过 CI-V 地址的 Icom 电台也能被找到。
 
+## 冲突的程序（Windows）
+
+有些程序和 The Rigger 做同样的事，如果它们正在运行或已安装，就会抢走电台，或占用其他程序寻找 The Rigger 的端口：真正的 OmniRig、CatBKT、DXLab Commander、flrig、Hamlib rigctld、Ham Radio Deluxe，以及创建虚拟 COM 端口的程序（VSPE、Virtual Serial Port Driver）。The Rigger 每 20 秒自动查找一次。
+
+如果找到，**电台**选项卡会出现一行带 **查看** 链接的黄色提示，点击进入 **设置 › 端口和驱动 › 冲突的程序**。每个程序都会显示它是正在运行还是已安装、会造成什么问题，并有两个按钮：
+
+- **关闭…**：立即关闭，不卸载任何东西；
+- **卸载…**：打开它的卸载程序（Windows 会请求管理员权限）。
+
+每次操作前都会有窗口说明会发生什么、原因和风险；只有勾选 *我已阅读并理解* 才能继续。之后 The Rigger 会自动接管空出来的电台和端口。DXLab Commander、rigctld 和 Ham Radio Deluxe 只能关闭：它们属于更大的软件包，你可能想保留。
+
 ## com0com 清理（Windows）
 
 ### 它会做什么

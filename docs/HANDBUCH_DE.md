@@ -384,6 +384,17 @@ Version, Credits und die Taste, um IU1MVI mit PayPal einen Kaffee zu spendieren.
 
 Icom-Geräte, deren CI-V-Adresse im Menü geändert wurde, werden trotzdem gefunden.
 
+## Störende Programme (Windows)
+
+Manche Programme machen dieselbe Arbeit wie The Rigger und nehmen ihm, wenn sie laufen oder installiert sind, das Funkgerät oder die Ports weg, an denen Programme The Rigger suchen: das echte OmniRig, CatBKT, DXLab Commander, flrig, Hamlib rigctld, Ham Radio Deluxe und Programme mit virtuellen COM-Ports (VSPE, Virtual Serial Port Driver). The Rigger sucht sie selbst alle 20 Sekunden.
+
+Findet er welche, erscheint im Reiter **Radio** eine gelbe Zeile mit dem Link **Ansehen**, der zu **Einstellungen › Ports und Treiber › Störende Programme** führt. Für jedes Programm steht dort, ob es läuft oder installiert ist und welches Problem es macht, mit zwei Tasten:
+
+- **Schließen…** schließt es sofort, ohne etwas zu deinstallieren;
+- **Deinstallieren…** öffnet sein Deinstallationsprogramm (Windows fragt nach Administratorrechten).
+
+Vor jeder Aktion erklärt ein Fenster, was passiert, warum und welche Risiken es gibt; weiter geht es nur mit dem Haken bei *Gelesen und verstanden*. Danach übernimmt The Rigger das freie Funkgerät und die Ports selbst. DXLab Commander, rigctld und Ham Radio Deluxe lassen sich nur schließen: sie gehören zu größeren Paketen, die du vielleicht behalten willst.
+
 ## com0com-Bereinigung (Windows)
 
 ### Was passiert
