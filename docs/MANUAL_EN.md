@@ -28,6 +28,8 @@ Download the file for your system from the **Releases** page of the project on G
 
 Nothing else to install: no OmniRig, no com0com, no Hamlib.
 
+On first start The Rigger creates a **The Rigger** shortcut on the Desktop and in the Start menu, so you no longer have to look for the .exe file. To keep it running without a window tick **Settings › General › Start hidden**: the icon next to the clock stays (click to open, right-click to quit). Double-clicking the shortcut while it is running brings the window back to the front.
+
 ### macOS
 
 1. Download `The-Rigger-…-Mac.pkg` if your Mac has an Apple chip (M1, M2, M3, M4), or `The-Rigger-…-Mac-Intel.pkg` for an Intel Mac.
@@ -394,6 +396,8 @@ If it finds any, a yellow line with a **See** link appears on the **Radio** tab 
 - **Uninstall…** opens its uninstaller (Windows asks for administrator permission).
 
 Before each action a window explains what happens, why and the risks; you go ahead only by ticking *I have read and understood*. Afterwards The Rigger takes back the freed radio and ports by itself. DXLab Commander, rigctld and Ham Radio Deluxe can only be closed: they belong to larger suites you may want to keep.
+
+If only pieces of OmniRig are left in the Windows registry (for example after removing it by hand), **Clean up…** appears instead of *Uninstall…*: it removes the old OmniRig keys registered for the whole PC and leaves those of The Rigger. Start radio programs normally anyway, not *as administrator*: programs opened as administrator cannot use The Rigger.
 
 ## com0com cleanup (Windows)
 

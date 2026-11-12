@@ -28,6 +28,8 @@ The Rigger 从不自行发射，也从不更改电台上的任何设置：它只
 
 无需安装其他任何东西：不需要 OmniRig、com0com 或 Hamlib。
 
+首次启动时，The Rigger 会自动在桌面和开始菜单中创建 **The Rigger** 快捷方式，不必再去找 .exe 文件。如果想让它在没有窗口的情况下运行，请勾选 **设置 › 常规 › 隐藏启动**：时钟旁会保留图标（单击打开，右键退出）。它已在运行时双击快捷方式，窗口会回到最前面。
+
 ### macOS
 
 1. 如果你的 Mac 是 Apple 芯片（M1、M2、M3、M4），下载 `The-Rigger-…-Mac.pkg`；Intel 芯片的 Mac 下载 `The-Rigger-…-Mac-Intel.pkg`。
@@ -394,6 +396,8 @@ The Rigger 在重启后也会记住这个选择。再按一次按钮即可收回
 - **卸载…**：打开它的卸载程序（Windows 会请求管理员权限）。
 
 每次操作前都会有窗口说明会发生什么、原因和风险；只有勾选 *我已阅读并理解* 才能继续。之后 The Rigger 会自动接管空出来的电台和端口。DXLab Commander、rigctld 和 Ham Radio Deluxe 只能关闭：它们属于更大的软件包，你可能想保留。
+
+如果 Windows 注册表中只剩下 OmniRig 的残留（例如手动删除之后），*卸载…* 会变成 **清理…**：删除旧 OmniRig 为整台电脑注册的键，保留 The Rigger 的键。无论如何请正常启动电台程序，不要*以管理员身份*运行：以管理员身份打开的程序无法使用 The Rigger。
 
 ## com0com 清理（Windows）
 

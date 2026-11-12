@@ -28,6 +28,8 @@ Lade die Datei für dein System von der Seite **Releases** des Projekts auf GitH
 
 Sonst ist nichts zu installieren: kein OmniRig, kein com0com, kein Hamlib.
 
+Beim ersten Start legt The Rigger selbst die Verknüpfung **The Rigger** auf dem Desktop und im Startmenü an, so musst du die .exe-Datei nicht mehr suchen. Damit es ohne Fenster weiterläuft, setze den Haken bei **Einstellungen › Allgemein › Versteckt starten**: das Symbol neben der Uhr bleibt (Klick öffnet, Rechtsklick beendet). Ein Doppelklick auf die Verknüpfung, während es läuft, holt das Fenster nach vorn.
+
 ### macOS
 
 1. `The-Rigger-…-Mac.pkg` herunterladen, wenn dein Mac einen Apple-Chip hat (M1, M2, M3, M4), oder `The-Rigger-…-Mac-Intel.pkg` für einen Intel-Mac.
@@ -394,6 +396,8 @@ Findet er welche, erscheint im Reiter **Radio** eine gelbe Zeile mit dem Link **
 - **Deinstallieren…** öffnet sein Deinstallationsprogramm (Windows fragt nach Administratorrechten).
 
 Vor jeder Aktion erklärt ein Fenster, was passiert, warum und welche Risiken es gibt; weiter geht es nur mit dem Haken bei *Gelesen und verstanden*. Danach übernimmt The Rigger das freie Funkgerät und die Ports selbst. DXLab Commander, rigctld und Ham Radio Deluxe lassen sich nur schließen: sie gehören zu größeren Paketen, die du vielleicht behalten willst.
+
+Sind von OmniRig nur Reste in der Windows-Registry übrig (zum Beispiel nach einem Entfernen von Hand), erscheint statt *Deinstallieren…* **Bereinigen…**: es entfernt die für den ganzen PC eingetragenen Schlüssel des alten OmniRig und lässt die von The Rigger. Starte Funkprogramme trotzdem normal, nicht *als Administrator*: als Administrator geöffnete Programme können The Rigger nicht nutzen.
 
 ## com0com-Bereinigung (Windows)
 
