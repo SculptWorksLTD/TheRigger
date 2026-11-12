@@ -17,7 +17,7 @@ Gestore CAT per radioamatori: collega tutte le radio USB e le condivide con tutt
   - **CAT via rete** (`127.0.0.1:4600`…): come la porta seriale della radio, per N1MM Logger+ e simili.
   - **Porte seriali virtuali** (Mac e Linux, `/tmp/TheRigger/…`): ogni porta riconosce da sola il linguaggio del programma (Icom CI-V, Kenwood, Elecraft, Yaesu, FT-817 o Kenwood TS-2000).
 - **Anche DXLab Commander e N3FJP**: Commander si collega via rete come a Thetis; ad ACLog The Rigger manda da solo banda, modo e frequenza.
-- **Manuale con le istruzioni passo per passo per più di 40 programmi**, in 7 lingue, dentro il programma.
+- **Manuale con le istruzioni passo per passo per più di 40 programmi**, in 10 lingue, dentro il programma.
 - **Driver USB automatici**: su Windows, se colleghi una radio senza driver, The Rigger scarica quello ufficiale firmato e lo installa. Su Mac i driver sono già nel sistema.
 - **Nessun conflitto**: un solo processo parla con la radio, mette in coda i comandi e risponde a tutti dalla memoria. Il PTT ha la precedenza.
 - **Leggerissimo**: un solo programma nativo di pochi MB.
@@ -37,7 +37,7 @@ Gestore CAT per radioamatori: collega tutte le radio USB e le condivide con tutt
 
 ## Lingue e manuale
 
-Interfaccia in 7 lingue: italiano, English, français, Deutsch, español, português, 日本語.
+Interfaccia in 10 lingue: italiano, English, français, Deutsch, español, português, 日本語, русский, العربية, 中文.
 
 Manuale: [Italiano](docs/MANUALE_IT.md) · [English](docs/MANUAL_EN.md) · [Français](docs/MANUEL_FR.md) · [Deutsch](docs/HANDBUCH_DE.md) · [Español](docs/MANUAL_ES.md) · [Português](docs/MANUAL_PT.md) · [日本語](docs/MANUAL_JA.md)
 

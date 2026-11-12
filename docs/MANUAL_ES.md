@@ -11,7 +11,7 @@ En resumen:
 - **encuentra las radios solo**: conectas el cable USB y la radio aparece, sin elegir puerto, velocidad ni modelo;
 - **varias radios a la vez**: cada una tiene sus conexiones;
 - **todas las conexiones que usan los programas**: Hamlib, flrig, TCI, OmniRig (Windows), Ham Radio Deluxe, CAT por red y puertos serie (Mac y Linux);
-- **se actualiza solo** y habla 7 idiomas.
+- **se actualiza solo** y habla 10 idiomas.
 
 The Rigger nunca transmite por su cuenta ni cambia nada en la radio: solo hace lo que piden los programas.
 
@@ -326,7 +326,7 @@ The Rigger recuerda la elección también tras reiniciar. Pulsa el botón otra v
 
 ### General
 
-- **Idioma**: *Automático* usa el idioma del sistema; si no, elige entre italiano, inglés, francés, alemán, español, portugués y japonés. Cambian enseguida toda la ventana, el manual y las instrucciones de los programas.
+- **Idioma**: *Automático* usa el idioma del sistema; si no, elige entre italiano, inglés, francés, alemán, español, portugués, japonés, ruso, árabe y chino. Cambian enseguida toda la ventana, el manual y las instrucciones de los programas.
 - **Inicio automático**: The Rigger se abre solo al encender el ordenador, así las radios están listas antes que los programas.
 
 ### Actualizaciones

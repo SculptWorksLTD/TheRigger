@@ -11,7 +11,7 @@ Kurz gesagt:
 - **findet Funkgeräte selbst**: USB-Kabel einstecken, und das Funkgerät erscheint, ohne Port, Geschwindigkeit oder Modell zu wählen;
 - **mehrere Funkgeräte gleichzeitig**: jedes hat seine eigenen Verbindungen;
 - **alle Verbindungen, die Programme nutzen**: Hamlib, flrig, TCI, OmniRig (Windows), Ham Radio Deluxe, Netzwerk-CAT und serielle Ports (Mac und Linux);
-- **aktualisiert sich selbst** und spricht 7 Sprachen.
+- **aktualisiert sich selbst** und spricht 10 Sprachen.
 
 The Rigger sendet nie von sich aus und ändert nichts am Funkgerät: Es tut nur, was die Programme verlangen.
 
@@ -326,7 +326,7 @@ The Rigger merkt sich die Wahl auch nach einem Neustart. Erneut drücken, um das
 
 ### Allgemein
 
-- **Sprache**: *Automatisch* nimmt die Sprache des Systems; sonst Italienisch, Englisch, Französisch, Deutsch, Spanisch, Portugiesisch oder Japanisch wählen. Das ganze Fenster, das Handbuch und die Programmanleitungen ändern sich sofort.
+- **Sprache**: *Automatisch* nimmt die Sprache des Systems; sonst Italienisch, Englisch, Französisch, Deutsch, Spanisch, Portugiesisch, Japanisch, Russisch, Arabisch oder Chinesisch wählen. Das ganze Fenster, das Handbuch und die Programmanleitungen ändern sich sofort.
 - **Automatisch starten**: The Rigger öffnet sich beim Start des Computers selbst, so sind die Funkgeräte vor den Programmen bereit.
 
 ### Updates
