@@ -294,6 +294,7 @@ BBLogger 本身不直接与电台通信，而是借助一个使用 DXLab Command
 2. 在 **CAT** 区域保持 **IP** 为 `127.0.0.1`、**Porta** 为 `52002`（第二台电台 `52102`）。不需要点击 *Download*，也不需要安装 CatBKT。
 3. **Autostart** 留空：The Rigger 已经在运行。
 4. 关闭窗口：BBLogger 会显示电台的频率和模式，并可在 QSO 窗口中修改。
+5. 在 QSO 窗口中按 **CAT ON**：Freq 和 Modo 标签会变成黄色。要自动开启，请勾选 *Strumenti › ABILITA CONNESSIONE CAT*。
 
 如果 BBLogger 读不到频率，请关闭已打开的 CatBKT 或 DXLab Commander：它们占用了 52002 端口。
 

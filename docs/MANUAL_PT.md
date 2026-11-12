@@ -294,6 +294,7 @@ O BBLogger não fala sozinho com o rádio: usa um programa CAT externo com as me
 2. No quadro **CAT** deixe **IP** `127.0.0.1` e **Porta** `52002` (segundo rádio `52102`). Não é preciso carregar em *Download* nem instalar o CatBKT.
 3. Deixe **Autostart** vazio: o The Rigger já está aberto.
 4. Feche a janela: o BBLogger mostra frequência e modo do rádio, e pode mudá-los na janela do QSO.
+5. Na janela do QSO carregue em **CAT ON**: as etiquetas Freq e Modo ficam amarelas. Para o fazer automaticamente marque *Strumenti › ABILITA CONNESSIONE CAT*.
 
 Se o BBLogger não ler a frequência, feche o CatBKT ou o DXLab Commander se estiverem abertos: ocupam a porta 52002.
 

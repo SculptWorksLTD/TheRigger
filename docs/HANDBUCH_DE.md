@@ -294,6 +294,7 @@ BBLogger spricht nicht selbst mit dem Funkgerät: es nutzt ein externes CAT-Prog
 2. Im Feld **CAT** **IP** `127.0.0.1` und **Porta** `52002` lassen (zweites Funkgerät `52102`). *Download* und CatBKT sind nicht nötig.
 3. **Autostart** leer lassen: The Rigger läuft schon.
 4. Fenster schließen: BBLogger zeigt Frequenz und Betriebsart und kann sie im QSO-Fenster ändern.
+5. Im QSO-Fenster **CAT ON** drücken: die Felder Freq und Modo werden gelb. Automatisch geht es mit dem Haken bei *Strumenti › ABILITA CONNESSIONE CAT*.
 
 Liest BBLogger die Frequenz nicht, CatBKT oder DXLab Commander schließen, falls offen: sie belegen Port 52002.
 

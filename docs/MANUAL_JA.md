@@ -294,6 +294,7 @@ BBLogger は自分では無線機と通信せず、DXLab Commander のメッセ�
 2. **CAT** 欄の **IP** は `127.0.0.1`、**Porta** は `52002`（2 台目は `52102`）のままにします。*Download* や CatBKT のインストールは不要です。
 3. **Autostart** は空のままにします。The Rigger はすでに起動しています。
 4. ウィンドウを閉じると、BBLogger に周波数とモードが表示され、QSO ウィンドウから変更できます。
+5. QSO ウィンドウで **CAT ON** を押します。Freq と Modo の表示が黄色になります。自動にするには *Strumenti › ABILITA CONNESSIONE CAT* にチェックを入れます。
 
 周波数が読めない場合は、CatBKT や DXLab Commander が開いていれば閉じてください。ポート 52002 を使っています。
 
