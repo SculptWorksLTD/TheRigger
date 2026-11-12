@@ -48,7 +48,7 @@ Sobald das Funkgerät im Reiter **Funkgeräte** erscheint, ist es bereit: Wie je
 
 Das Fenster hat drei Reiter, oben in der Mitte:
 
-- **Funkgeräte**: die gefundenen Funkgeräte mit Frequenz, Betriebsart, verbundenen Programmen und Adressen;
+- **Funkgeräte**: die gefundenen Funkgeräte mit Frequenz, Betriebsart und verbundenen Programmen;
 - **Handbuch**: dieses Handbuch, mit dem Inhaltsverzeichnis links;
 - **Einstellungen**: Sprache, Start, Updates, Ports und Info.
 
@@ -94,10 +94,6 @@ Die Liste der Programme, die dieses Funkgerät benutzen, jedes mit einer Lampe:
 
 Rechts steht die benutzte Verbindung (zum Beispiel `tcp:4532`, `flrig`, `TCI`, ein serieller Port). Anklicken kopiert ihre Adresse.
 
-### Adressen für Programme
-
-Alle Wege, auf denen sich ein Programm mit diesem Funkgerät verbinden kann, mit der Adresse, die im Programm einzutragen ist. Eine Adresse anklicken kopiert sie. Die Erklärungen stehen im Kapitel **Die Verbindungen**.
-
 ### Tasten
 
 - **Verbindung testen**: tut so, als wäre es ein Programm, und liest die Frequenz über jede Verbindung (serieller Port, Hamlib, flrig, Netzwerk-CAT, TCI). Jede Zeile mit **✓** funktioniert, jede Zeile mit **✗** hat ein Problem. Der Test liest nur: Er sendet nie und ändert nichts.
@@ -120,7 +116,7 @@ The Rigger öffnet für jedes Funkgerät alle diese Verbindungen gleichzeitig. J
 | OmniRig | Rig 1 | Rig 2 | Windows |
 | Serielle Ports | /tmp/TheRigger/… | /tmp/TheRigger/… | Mac und Linux |
 
-Ist ein Port schon von einem anderen Programm belegt (zum Beispiel ein echtes flrig oder rigctld), nimmt The Rigger den nächsten freien: Die genaue Adresse steht immer im Reiter Funkgeräte.
+Ist ein Port schon von einem anderen Programm belegt (zum Beispiel ein echtes flrig oder rigctld), nimmt The Rigger den nächsten freien: Die genaue Adresse zeigt *Verbindung testen* auf der Karte des Funkgeräts.
 
 ### Hamlib NET rigctl
 
@@ -178,7 +174,7 @@ CWIU1MVI findet The Rigger selbst: in der Funkgeräteliste von CWIU1MVI **The Ri
 
 ## Anleitungen für Programme
 
-Hier die Schritte für die meistbenutzten Programme. Die Adressen gelten für das erste Funkgerät: für die anderen aus dem Reiter Funkgeräte kopieren.
+Hier die Schritte für die meistbenutzten Programme. Die Adressen gelten für das erste Funkgerät: für die anderen siehe die Tabelle im Kapitel *Die Verbindungen*.
 
 ### WSJT-X, JTDX, JS8Call, WSJT-Z
 
@@ -375,7 +371,7 @@ Icom-Geräte, deren CI-V-Adresse im Menü geändert wurde, werden trotzdem gefun
 
 **Unter Windows erscheint das Funkgerät nicht und der Treiber fehlt.** *USB-Treiber automatisch* eingeschaltet lassen und die Frage von Windows bestätigen. Reicht das nicht, den Treiber des Kabelherstellers installieren und *Funkgeräte erneut suchen* drücken.
 
-**Das Programm verbindet sich nicht.** Prüfe in diesem Handbuch die gewählte Verbindung und kopiere die genaue Adresse aus dem Reiter Funkgeräte (ein Klick kopiert sie). Dann *Verbindung testen* drücken: Haben alle Zeilen ✓, funktioniert The Rigger und das Problem liegt in den Einstellungen des Programms.
+**Das Programm verbindet sich nicht.** Prüfe in diesem Handbuch die gewählte Verbindung und die Adresse. Dann auf der Karte des Funkgeräts *Verbindung testen* drücken: Es zeigt die genauen Adressen, und haben alle Zeilen ✓, funktioniert The Rigger und das Problem liegt in den Einstellungen des Programms.
 
 **Die Lampe des Programms ist gelb.** Das Programm ist verbunden, fragt das Funkgerät aber nichts. Prüfe im Programm, ob die CAT-Steuerung aktiv ist (oft gibt es eine Taste *Connect* oder *Enable*).
 
@@ -383,7 +379,7 @@ Icom-Geräte, deren CI-V-Adresse im Menü geändert wurde, werden trotzdem gefun
 
 **Ein OmniRig-Programm sagt, OmniRig fehlt.** The Rigger muss auf diesem Computer mindestens einmal geöffnet worden sein. Öffne es und starte dann das Programm neu.
 
-**Ein Port wird schon von einem anderen Programm benutzt.** Belegt flrig, rigctld oder ein anderes Programm dieselben Ports, nimmt The Rigger den nächsten freien: Kopiere die genaue Adresse aus dem Reiter Funkgeräte.
+**Ein Port wird schon von einem anderen Programm benutzt.** Belegt flrig, rigctld oder ein anderes Programm dieselben Ports, nimmt The Rigger den nächsten freien: Prüfe die genaue Adresse mit *Verbindung testen*.
 
 **Ich will das Funkgerät mit dem Programm des Herstellers benutzen.** Schalte das Funkgerät in The Rigger mit seiner Ein-/Aus-Taste aus: Der USB-Port wird frei.
 

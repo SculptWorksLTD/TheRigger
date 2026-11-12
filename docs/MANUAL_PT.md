@@ -48,7 +48,7 @@ Quando o rádio aparecer no separador **Rádios** está pronto: para configurar 
 
 A janela tem três separadores, em cima ao centro:
 
-- **Rádios**: os rádios encontrados, com frequência, modo, programas ligados e endereços;
+- **Rádios**: os rádios encontrados, com frequência, modo e programas ligados;
 - **Manual**: este manual, com o índice à esquerda;
 - **Definições**: idioma, arranque, atualizações, portas e informações.
 
@@ -94,10 +94,6 @@ A lista dos programas que usam este rádio, cada um com uma luz:
 
 À direita está a ligação que usa (por exemplo `tcp:4532`, `flrig`, `TCI`, uma porta série). Clique para copiar o endereço.
 
-### Endereços para os programas
-
-Todas as maneiras de um programa se ligar a este rádio, com o endereço a escrever no programa. Clique num endereço para o copiar. As explicações estão no capítulo **As ligações**.
-
 ### Botões
 
 - **Testar ligação**: faz de conta que é um programa e lê a frequência por cada ligação (porta série, Hamlib, flrig, CAT em rede, TCI). Cada linha com **✓** funciona, cada linha com **✗** tem um problema. O teste só lê: nunca transmite nem muda nada.
@@ -120,7 +116,7 @@ O The Rigger abre todas estas ligações para cada rádio ao mesmo tempo. Cada p
 | OmniRig | Rig 1 | Rig 2 | Windows |
 | Portas série | /tmp/TheRigger/… | /tmp/TheRigger/… | Mac e Linux |
 
-Se uma porta já estiver ocupada por outro programa (por exemplo um flrig ou rigctld verdadeiros já abertos), o The Rigger usa a seguinte livre: o endereço exato está sempre no separador Rádios.
+Se uma porta já estiver ocupada por outro programa (por exemplo um flrig ou rigctld verdadeiros já abertos), o The Rigger usa a seguinte livre: vê o endereço exato carregando em *Testar ligação* na ficha do rádio.
 
 ### Hamlib NET rigctl
 
@@ -178,7 +174,7 @@ O CWIU1MVI encontra o The Rigger sozinho: na lista de rádios do CWIU1MVI escolh
 
 ## Instruções para os programas
 
-Aqui estão os passos para os programas mais usados. Os endereços são os do primeiro rádio: para os outros, copie-os do separador Rádios.
+Aqui estão os passos para os programas mais usados. Os endereços são os do primeiro rádio: para os outros, veja a tabela do capítulo *As ligações*.
 
 ### WSJT-X, JTDX, JS8Call, WSJT-Z
 
@@ -375,7 +371,7 @@ Os Icom com o endereço CI-V alterado no menu são encontrados na mesma.
 
 **No Windows o rádio não aparece e falta o driver.** Deixe ativo *Drivers USB automáticos* e confirme o pedido do Windows. Se não chegar, instale o driver do fabricante do cabo e carregue em *Procurar rádios de novo*.
 
-**O programa não se liga.** Verifique neste manual a ligação escolhida e copie o endereço exato do separador Rádios (um clique copia-o). Depois carregue em *Testar ligação*: se todas as linhas tiverem ✓, o The Rigger funciona e o problema está nas definições do programa.
+**O programa não se liga.** Verifique neste manual a ligação escolhida e o endereço. Depois carregue em *Testar ligação* na ficha do rádio: mostra os endereços exatos e, se todas as linhas tiverem ✓, o The Rigger funciona e o problema está nas definições do programa.
 
 **A luz do programa está amarela.** O programa está ligado mas não pede nada ao rádio. Verifique no programa se o controlo CAT está ativo (costuma haver um botão *Connect* ou *Enable*).
 
@@ -383,7 +379,7 @@ Os Icom com o endereço CI-V alterado no menu são encontrados na mesma.
 
 **Um programa OmniRig diz que falta o OmniRig.** O The Rigger tem de ter sido aberto pelo menos uma vez neste computador. Abra-o e volte a abrir o programa.
 
-**Uma porta já está a ser usada por outro programa.** Se o flrig, o rigctld ou outro programa ocupar as mesmas portas, o The Rigger usa a seguinte livre: copie o endereço exato do separador Rádios.
+**Uma porta já está a ser usada por outro programa.** Se o flrig, o rigctld ou outro programa ocupar as mesmas portas, o The Rigger usa a seguinte livre: verifique o endereço exato com *Testar ligação*.
 
 **Quero usar o rádio com o programa do fabricante.** Desligue o rádio no The Rigger com o seu botão de ligar: a porta USB fica livre.
 

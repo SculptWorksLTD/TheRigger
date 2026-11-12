@@ -48,7 +48,7 @@ Quand la radio apparaît dans l'onglet **Radios**, elle est prête : pour régle
 
 La fenêtre a trois onglets, choisis en haut au centre :
 
-- **Radios** : les radios trouvées, avec fréquence, mode, programmes connectés et adresses ;
+- **Radios** : les radios trouvées, avec fréquence, mode et programmes connectés ;
 - **Manuel** : ce manuel, avec la table des matières à gauche ;
 - **Réglages** : langue, démarrage, mises à jour, ports et informations.
 
@@ -94,10 +94,6 @@ La liste des programmes qui utilisent cette radio, chacun avec un voyant :
 
 À droite figure la connexion utilisée (par exemple `tcp:4532`, `flrig`, `TCI`, un port série). Cliquez dessus pour copier son adresse.
 
-### Adresses pour les programmes
-
-Toutes les façons dont un programme peut se connecter à cette radio, avec l'adresse à écrire dans le programme. Cliquez sur une adresse pour la copier. Les explications sont dans le chapitre **Les connexions**.
-
 ### Boutons
 
 - **Tester la connexion** : se fait passer pour un programme et lit la fréquence par chaque connexion (port série, Hamlib, flrig, CAT réseau, TCI). Chaque ligne avec **✓** fonctionne, chaque ligne avec **✗** a un problème. Le test ne fait que lire : il n'émet jamais et ne modifie rien.
@@ -120,7 +116,7 @@ The Rigger ouvre toutes ces connexions pour chaque radio en même temps. Chaque 
 | OmniRig | Rig 1 | Rig 2 | Windows |
 | Ports série | /tmp/TheRigger/… | /tmp/TheRigger/… | Mac et Linux |
 
-Si un port est déjà pris par un autre programme (par exemple un vrai flrig ou rigctld déjà lancé), The Rigger utilise le suivant libre : l'adresse exacte est toujours dans l'onglet Radios.
+Si un port est déjà pris par un autre programme (par exemple un vrai flrig ou rigctld déjà lancé), The Rigger utilise le suivant libre : vous voyez l'adresse exacte en appuyant sur *Tester la connexion* dans la fiche de la radio.
 
 ### Hamlib NET rigctl
 
@@ -178,7 +174,7 @@ CWIU1MVI trouve The Rigger tout seul : dans la liste des radios de CWIU1MVI, cho
 
 ## Instructions pour les programmes
 
-Voici les étapes pour les programmes les plus utilisés. Les adresses sont celles de la première radio : pour les autres, copiez-les depuis l'onglet Radios.
+Voici les étapes pour les programmes les plus utilisés. Les adresses sont celles de la première radio : pour les autres, voyez le tableau du chapitre *Les connexions*.
 
 ### WSJT-X, JTDX, JS8Call, WSJT-Z
 
@@ -375,7 +371,7 @@ Les Icom dont l'adresse CI-V a été changée dans le menu sont trouvées quand 
 
 **Sous Windows, la radio n'apparaît pas et le pilote manque.** Laissez *Pilotes USB automatiques* activé et confirmez la demande de Windows. Si cela ne suffit pas, installez le pilote du fabricant du câble et appuyez sur *Rechercher à nouveau les radios*.
 
-**Le programme ne se connecte pas.** Vérifiez dans ce manuel la connexion choisie et copiez l'adresse exacte depuis l'onglet Radios (un clic la copie). Puis appuyez sur *Tester la connexion* : si toutes les lignes ont ✓, The Rigger fonctionne et le problème vient des réglages du programme.
+**Le programme ne se connecte pas.** Vérifiez dans ce manuel la connexion choisie et l'adresse. Puis appuyez sur *Tester la connexion* dans la fiche de la radio : il affiche les adresses exactes et, si toutes les lignes ont ✓, The Rigger fonctionne et le problème vient des réglages du programme.
 
 **Le voyant du programme est jaune.** Le programme est connecté mais ne demande rien à la radio. Vérifiez dans le programme que le contrôle CAT est activé (il y a souvent un bouton *Connect* ou *Enable*).
 
@@ -383,7 +379,7 @@ Les Icom dont l'adresse CI-V a été changée dans le menu sont trouvées quand 
 
 **Un programme OmniRig dit qu'OmniRig est absent.** The Rigger doit avoir été ouvert au moins une fois sur cet ordinateur. Ouvrez-le, puis rouvrez le programme.
 
-**Un port est déjà utilisé par un autre programme.** Si flrig, rigctld ou un autre programme occupe les mêmes ports, The Rigger prend le suivant libre : copiez l'adresse exacte depuis l'onglet Radios.
+**Un port est déjà utilisé par un autre programme.** Si flrig, rigctld ou un autre programme occupe les mêmes ports, The Rigger prend le suivant libre : vérifiez l'adresse exacte avec *Tester la connexion*.
 
 **Je veux utiliser la radio avec le logiciel du fabricant.** Désactivez la radio dans The Rigger avec son bouton marche : le port USB se libère.
 

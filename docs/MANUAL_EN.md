@@ -48,7 +48,7 @@ When the radio appears in the **Radios** tab it is ready: to set up each program
 
 The window has three tabs, chosen at the top in the middle:
 
-- **Radios**: the radios found, with frequency, mode, connected programs and addresses;
+- **Radios**: the radios found, with frequency, mode and connected programs;
 - **Manual**: this manual, with the index on the left;
 - **Settings**: language, start-up, updates, ports and information.
 
@@ -94,10 +94,6 @@ The list of programs using this radio, each with a light:
 
 On the right is the connection it uses (for example `tcp:4532`, `flrig`, `TCI`, a serial port). Click it to copy its address.
 
-### Addresses for programs
-
-All the ways a program can connect to this radio, with the address to type into the program. Click an address to copy it. The explanations are in the chapter **The connections**.
-
 ### Buttons
 
 - **Test connection**: pretends to be a program and reads the frequency through every connection (serial port, Hamlib, flrig, network CAT, TCI). Every line with **✓** works, every line with **✗** has a problem. The test only reads: it never transmits and never changes anything.
@@ -120,7 +116,7 @@ The Rigger opens all these connections for every radio at once. Each program use
 | OmniRig | Rig 1 | Rig 2 | Windows |
 | Serial ports | /tmp/TheRigger/… | /tmp/TheRigger/… | Mac and Linux |
 
-If a port is already taken by another program (for example a real flrig or rigctld already running), The Rigger uses the next free one: you always find the exact address in the Radios tab.
+If a port is already taken by another program (for example a real flrig or rigctld already running), The Rigger uses the next free one: you see the exact address by pressing *Test connection* on the radio's card.
 
 ### Hamlib NET rigctl
 
@@ -178,7 +174,7 @@ CWIU1MVI finds The Rigger by itself: in CWIU1MVI's radio list choose **The Rigge
 
 ## Instructions for programs
 
-Here are the steps for the most used programs. Addresses are those of the first radio: for other radios copy them from the Radios tab.
+Here are the steps for the most used programs. Addresses are those of the first radio: for other radios see the table in the chapter *The connections*.
 
 ### WSJT-X, JTDX, JS8Call, WSJT-Z
 
@@ -375,7 +371,7 @@ Icom radios whose CI-V address was changed in the menu are found anyway.
 
 **On Windows the radio does not appear and the driver is missing.** Keep *Automatic USB drivers* on and confirm Windows' request. If that is not enough, install the cable maker's driver and press *Search radios again*.
 
-**The program does not connect.** Check in this manual that you chose the right connection and copy the exact address from the Radios tab (one click copies it). Then press *Test connection*: if every line has ✓, The Rigger works and the problem is in the program's settings.
+**The program does not connect.** Check in this manual that you chose the right connection and the address. Then press *Test connection* on the radio's card: it shows the exact addresses and, if every line has ✓, The Rigger works and the problem is in the program's settings.
 
 **The program's light is yellow.** The program is connected but is not asking the radio anything. Check in the program that CAT control is enabled (there is often a *Connect* or *Enable* button).
 
@@ -383,7 +379,7 @@ Icom radios whose CI-V address was changed in the menu are found anyway.
 
 **An OmniRig program says OmniRig is missing.** The Rigger must have been opened at least once on this computer. Open it, then reopen the program.
 
-**A port is already used by another program.** If flrig, rigctld or another program holds the same ports, The Rigger takes the next free one: copy the exact address from the Radios tab.
+**A port is already used by another program.** If flrig, rigctld or another program holds the same ports, The Rigger takes the next free one: check the exact address with *Test connection*.
 
 **I want to use the radio with the manufacturer's program.** Turn the radio off in The Rigger with its power button: the USB port is freed.
 

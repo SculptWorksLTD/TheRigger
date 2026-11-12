@@ -48,7 +48,7 @@ Cuando la radio aparezca en la pestaña **Radios** estará lista: para configura
 
 La ventana tiene tres pestañas, arriba en el centro:
 
-- **Radios**: las radios encontradas, con frecuencia, modo, programas conectados y direcciones;
+- **Radios**: las radios encontradas, con frecuencia, modo y programas conectados;
 - **Manual**: este manual, con el índice a la izquierda;
 - **Ajustes**: idioma, inicio, actualizaciones, puertos e información.
 
@@ -94,10 +94,6 @@ La lista de programas que usan esta radio, cada uno con una luz:
 
 A la derecha está la conexión que usa (por ejemplo `tcp:4532`, `flrig`, `TCI`, un puerto serie). Haz clic para copiar su dirección.
 
-### Direcciones para los programas
-
-Todas las formas en que un programa puede conectarse a esta radio, con la dirección que hay que escribir en el programa. Haz clic en una dirección para copiarla. Las explicaciones están en el capítulo **Las conexiones**.
-
 ### Botones
 
 - **Probar conexión**: se hace pasar por un programa y lee la frecuencia por cada conexión (puerto serie, Hamlib, flrig, CAT por red, TCI). Cada línea con **✓** funciona, cada línea con **✗** tiene un problema. La prueba solo lee: nunca transmite ni cambia nada.
@@ -120,7 +116,7 @@ The Rigger abre todas estas conexiones para cada radio a la vez. Cada programa u
 | OmniRig | Rig 1 | Rig 2 | Windows |
 | Puertos serie | /tmp/TheRigger/… | /tmp/TheRigger/… | Mac y Linux |
 
-Si un puerto ya lo ocupa otro programa (por ejemplo un flrig o rigctld reales ya abiertos), The Rigger usa el siguiente libre: la dirección exacta siempre está en la pestaña Radios.
+Si un puerto ya lo ocupa otro programa (por ejemplo un flrig o rigctld reales ya abiertos), The Rigger usa el siguiente libre: ves la dirección exacta pulsando *Probar conexión* en la ficha de la radio.
 
 ### Hamlib NET rigctl
 
@@ -178,7 +174,7 @@ CWIU1MVI encuentra The Rigger solo: en la lista de radios de CWIU1MVI elige **Th
 
 ## Instrucciones para los programas
 
-Estos son los pasos para los programas más usados. Las direcciones son las de la primera radio: para las demás, cópialas de la pestaña Radios.
+Estos son los pasos para los programas más usados. Las direcciones son las de la primera radio: para las demás, mira la tabla del capítulo *Las conexiones*.
 
 ### WSJT-X, JTDX, JS8Call, WSJT-Z
 
@@ -375,7 +371,7 @@ Las Icom con la dirección CI-V cambiada en el menú se encuentran igualmente.
 
 **En Windows la radio no aparece y falta el driver.** Deja activado *Drivers USB automáticos* y confirma la petición de Windows. Si no basta, instala el driver del fabricante del cable y pulsa *Buscar radios de nuevo*.
 
-**El programa no se conecta.** Comprueba en este manual la conexión elegida y copia la dirección exacta de la pestaña Radios (un clic la copia). Luego pulsa *Probar conexión*: si todas las líneas tienen ✓, The Rigger funciona y el problema está en los ajustes del programa.
+**El programa no se conecta.** Comprueba en este manual la conexión elegida y la dirección. Luego pulsa *Probar conexión* en la ficha de la radio: muestra las direcciones exactas y, si todas las líneas tienen ✓, The Rigger funciona y el problema está en los ajustes del programa.
 
 **La luz del programa es amarilla.** El programa está conectado pero no pide nada a la radio. Comprueba en el programa que el control CAT esté activado (suele haber un botón *Connect* o *Enable*).
 
@@ -383,7 +379,7 @@ Las Icom con la dirección CI-V cambiada en el menú se encuentran igualmente.
 
 **Un programa OmniRig dice que falta OmniRig.** The Rigger debe haberse abierto al menos una vez en este ordenador. Ábrelo y vuelve a abrir el programa.
 
-**Un puerto ya lo usa otro programa.** Si flrig, rigctld u otro programa ocupa los mismos puertos, The Rigger toma el siguiente libre: copia la dirección exacta de la pestaña Radios.
+**Un puerto ya lo usa otro programa.** Si flrig, rigctld u otro programa ocupa los mismos puertos, The Rigger toma el siguiente libre: comprueba la dirección exacta con *Probar conexión*.
 
 **Quiero usar la radio con el programa del fabricante.** Apaga la radio en The Rigger con su botón de encendido: el puerto USB queda libre.
 
