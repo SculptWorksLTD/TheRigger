@@ -2,91 +2,375 @@
 
 ## Qué hace
 
-The Rigger hace de centralita entre tus radios y los programas del ordenador. Normalmente, el puerto serie de una radio solo lo puede usar un programa a la vez. The Rigger es el único que habla con la radio y da a cada programa una conexión propia, así WSJT-X, el programa de registro, el de concursos y los demás trabajan juntos con la misma radio sin estorbarse.
+The Rigger hace de centralita entre tus radios y los programas del ordenador.
 
-Gestiona varias radios a la vez, en Windows y macOS.
+Normalmente el puerto CAT de una radio solo lo puede usar un programa a la vez: si WSJT-X lo abre, el libro de guardia ya no lo encuentra. Con The Rigger es distinto. The Rigger es el único que habla con la radio y da a cada programa una conexión propia. Así WSJT-X, el libro de guardia, el programa de concursos, CWIU1MVI, el programa SDR y los demás trabajan juntos en la misma radio sin molestarse.
+
+En resumen:
+
+- **encuentra las radios solo**: conectas el cable USB y la radio aparece, sin elegir puerto, velocidad ni modelo;
+- **varias radios a la vez**: cada una tiene sus conexiones;
+- **todas las conexiones que usan los programas**: Hamlib, flrig, TCI, OmniRig (Windows), Ham Radio Deluxe, CAT por red y puertos serie (Mac y Linux);
+- **se actualiza solo** y habla 7 idiomas.
+
+The Rigger nunca transmite por su cuenta ni cambia nada en la radio: solo hace lo que piden los programas.
 
 ## Instalación
 
-Descarga el archivo para tu sistema desde la página **Releases** del proyecto en GitHub.
+Descarga el archivo de tu sistema desde la página **Releases** del proyecto en GitHub (SculptWorksLTD/TheRigger).
 
-- **Windows**: ejecuta `The-Rigger-…-Setup.exe` y sigue la instalación. Si aparece «Windows protegió su PC», elige *Más información › Ejecutar de todas formas*.
-- **macOS**: abre `The-Rigger-…-Mac.pkg` (Mac con chip Apple) o `The-Rigger-…-Mac-Intel.pkg` (Mac Intel): The Rigger se instala en Aplicaciones. Si el Mac lo bloquea: clic derecho sobre el archivo › *Abrir*.
+### Windows
 
-A partir de ahí The Rigger se actualiza solo y arranca solo al encender el ordenador.
+1. Descarga `The-Rigger-…-Windows.zip`.
+2. Abre el zip y arrastra **The Rigger.exe** a una carpeta tuya, por ejemplo *Documentos › The Rigger*. No lo dejes dentro del zip ni en una carpeta de descargas temporal.
+3. Haz doble clic en **The Rigger.exe**.
+4. Si aparece *Windows protegió su PC*, pulsa **Más información** y luego **Ejecutar de todas formas**. Solo pasa la primera vez.
 
-## Primer arranque
+No hay que instalar nada más: ni OmniRig, ni com0com, ni Hamlib.
 
-Al arrancar aparece la ventana de bienvenida con los créditos. Pulsa **Empezar · 73**.
+### macOS
 
-Conecta la radio con el cable USB y enciéndela. En pocos segundos The Rigger la reconoce solo: prueba los puertos USB, el protocolo y la velocidad, y encuentra el modelo. No tienes que configurar nada.
+1. Descarga `The-Rigger-…-Mac.pkg` si tu Mac tiene chip Apple (M1, M2, M3, M4), o `The-Rigger-…-Mac-Intel.pkg` para un Mac Intel.
+2. Abre el archivo y sigue la instalación: The Rigger queda en **Aplicaciones**.
+3. Si el Mac no lo abre: clic derecho en el archivo › **Abrir**, o *Ajustes del Sistema › Privacidad y seguridad › Abrir igualmente*.
+
+Desde entonces The Rigger se actualiza solo.
+
+## Primer inicio
+
+Al iniciar aparece la ventana de bienvenida con los créditos: pulsa **Empezar · 73**.
+
+Conecta la radio con el cable USB y enciéndela. En pocos segundos The Rigger la encuentra: prueba los puertos USB, el protocolo (Icom CI-V, Kenwood, Elecraft, Yaesu, FT-817) y la velocidad, y reconoce el modelo. No tienes que configurar nada.
+
+Cuando la radio aparezca en la pestaña **Radios**, abre la pestaña **Programas**: ahí dice cómo configurar cada programa.
 
 ## La ventana
 
-La ventana muestra solo lo necesario:
+La ventana tiene cuatro pestañas, arriba en el centro:
 
-- **una línea por radio**, con una luz: verde si la radio está conectada y responde, gris si está apagada o desconectada;
-- **debajo de cada radio, los programas conectados**, cada uno con su luz: verde si está hablando con la radio, amarilla si tiene el puerto abierto pero está parado.
+- **Radios**: las radios encontradas, con frecuencia, modo, programas conectados y direcciones;
+- **Programas**: cómo conectar cada programa, listo para la radio elegida;
+- **Manual**: este manual, con el índice a la izquierda;
+- **Ajustes**: idioma, inicio, actualizaciones, puertos e información.
 
-Si debajo de una radio pone «ningún programa conectado», ningún programa la está usando.
+Arriba a la derecha hay dos botones:
 
-Arriba hay tres botones: **?** (cómo conectar los programas, y este manual), **⚙** (ajustes) y **⏻** (cierra The Rigger).
+- **Ocultar** (flecha hacia abajo): oculta la ventana. En Mac The Rigger queda en la barra de menús, junto al reloj: haz clic en el icono y elige *Mostrar The Rigger*. En Windows la ventana va a la barra de tareas.
+- **Apagar** (⏻): cierra The Rigger. Los programas conectados pierden la radio hasta que lo vuelvas a abrir.
 
-Cerrar la ventana no apaga The Rigger: sigue en el área de notificación, junto al reloj, y los programas siguen conectados. Para volver a abrirla, haz clic en el icono y elige *Mostrar ventana*.
+Abajo está la barra de estado: la luz es verde cuando hay al menos una radio conectada y amarilla cuando hay un aviso. El botón con la flecha circular busca las radios de nuevo. La versión está a la derecha.
 
-## Conectar los programas
+Puedes cambiar el tamaño de la ventana arrastrando sus bordes.
 
-Pulsa **?**: para cada programa The Rigger te dice exactamente qué configurar, con el puerto ya elegido. El botón **Copiar** copia el nombre del puerto o la dirección para pegarlo en el programa.
+## Pestaña Radios
 
-Hay dos tipos de conexión:
+Cada radio encontrada tiene su propia ficha.
 
-1. **Hamlib NET rigctl**: para WSJT-X, JTDX, JS8Call, fldigi, CQRLOG y los demás programas que lo admiten. En el programa elige *Hamlib NET rigctl* como radio y la dirección indicada como servidor (por ejemplo `127.0.0.1:4532`). Se pueden conectar todos los programas que quieras.
-2. **Puerto serie**: para Log4OM, N1MM Logger+, HRD, Logger32, DXLab Commander, MixW y todos los demás. En el programa elige como radio **el modelo real de tu radio** (por ejemplo Icom IC-7100) o **Kenwood TS-2000**, y el puerto indicado. Velocidad cualquiera, sin control de flujo, PTT por CAT.
-   - En Windows son puertos `COM` normales.
-   - En Mac están en `/tmp/TheRigger/`, por ejemplo `/tmp/TheRigger/IC-7100-1`.
+### Cabecera
 
-**Reconocimiento automático**: cada puerto reconoce solo el protocolo del programa (Icom CI-V, Kenwood, Elecraft, Yaesu, FT-817 o TS-2000). Si en el programa eliges el modelo real, los comandos van directamente a la radio y funcionan todas sus funciones. Si eliges Kenwood TS-2000 funcionan las funciones comunes: frecuencia, modo, PTT y split. Con las radios Yaesu, la primera vez que un programa configurado como TS-2000 usa un puerto, el PTT puede no activarse en la primera transmisión: a partir de la segunda funciona, y el puerto lo recuerda.
+- **Botón de encendido** (a la izquierda): activa o apaga la radio *dentro de The Rigger*. Apagada, The Rigger cierra su puerto USB y lo deja libre, por ejemplo para el programa del fabricante o una actualización de firmware. Pulsa otra vez para recuperarla. La radio real no se apaga.
+- **Nombre**: el modelo, con un número si tienes dos radios iguales (por ejemplo *IC-7300 2*).
+- **Estado**: *conectada* (responde), *desconectada* (cable quitado o radio apagada) o *apagada* (apagada en The Rigger).
 
-Un programa por puerto: The Rigger ya los asigna para que nunca choquen. Cada radio tiene 4 puertos, que puedes subir hasta 16 en los ajustes.
+### Pantalla
 
-### Ejemplos
+- **Frecuencia** del VFO en uso, en grande, con el **modo** al lado (USB, LSB, CW, CW-R, RTTY, AM, FM, USB-D, LSB-D, FM-D).
+- **A** y **B**: qué VFO está en uso.
+- **SPLIT**: encendido cuando la radio está en split.
+- **TX**: se pone rojo cuando la radio transmite.
+- Debajo: la frecuencia del otro VFO y la barra del **S-meter**.
 
-- **WSJT-X**: *Ajustes › Radio*: Radio *Hamlib NET rigctl*, Servidor *127.0.0.1:4532*, PTT *CAT*.
-- **Log4OM**: en la configuración CAT elige la radio *Kenwood TS-2000* en el puerto indicado para Log4OM. OmniRig ya no hace falta.
-- **Programas que usan OmniRig** (Windows): no hace falta instalar OmniRig. The Rigger ocupa su lugar: en el programa elige *OmniRig*; *Rig 1* es la primera radio encendida en The Rigger, *Rig 2* la segunda. Si el programa lo pide con The Rigger cerrado, Windows lo abre solo. (Interfaz compatible con OmniRig de Alex Shovkoplyas VE3NEA, licencia MIT.)
-- **N1MM Logger+**: *Config › Configure Ports*: Radio *Kenwood TS-2000*, el puerto COM indicado para N1MM, cualquier velocidad, *DTR* y *RTS* desactivados.
+La pantalla sigue a la radio en tiempo real, tanto al girar el mando como cuando un programa cambia la frecuencia.
+
+### Datos de la radio
+
+La línea gris muestra modelo, puerto USB, velocidad y, si la radio está activa en The Rigger, su número (**Rig 1**, **Rig 2**…). Ese número lo usan OmniRig y Ham Radio Deluxe.
+
+### Programas conectados
+
+La lista de programas que usan esta radio, cada uno con una luz:
+
+- **verde**: el programa está hablando con la radio;
+- **amarilla**: el programa está conectado pero ahora no pide nada.
+
+A la derecha está la conexión que usa (por ejemplo `tcp:4532`, `flrig`, `TCI`, un puerto serie). Haz clic para copiar su dirección.
+
+### Direcciones para los programas
+
+Todas las formas en que un programa puede conectarse a esta radio, con la dirección que hay que escribir en el programa. Haz clic en una dirección para copiarla. Las explicaciones están en el capítulo **Las conexiones**.
+
+### Botones
+
+- **Conectar los programas**: abre la pestaña Programas ya ajustada a esta radio.
+- **Probar conexión**: se hace pasar por un programa y lee la frecuencia por cada conexión (puerto serie, Hamlib, flrig, CAT por red, TCI). Cada línea con **✓** funciona, cada línea con **✗** tiene un problema. La prueba solo lee: nunca transmite ni cambia nada.
+
+### Buscar radios de nuevo
+
+El botón **Buscar radios de nuevo** (arriba a la derecha de la pestaña, o la flecha circular de abajo) vuelve a revisar todos los puertos USB enseguida. Úsalo después de encender una radio que The Rigger no veía, o después de cerrar un programa que tenía ocupado el puerto.
+
+## Pestaña Programas
+
+Aquí encuentras, para cada programa, la mejor conexión **en este ordenador** y **para la radio elegida**.
+
+1. Si tienes varias radios, elige la **Radio** arriba.
+2. Busca el programa escribiendo su nombre, o usa los filtros: *Modos digitales*, *Libros de guardia*, *Concursos*, *SDR*, *CW*, *Satélites*, *Otros programas*.
+3. Cada línea indica:
+   - el **nombre** del programa;
+   - la **conexión** recomendada, en color: Hamlib (verde), flrig (celeste), TCI (violeta), OmniRig (amarillo), HRD (naranja), CAT TCP (gris);
+   - **qué configurar** en el programa, con la dirección ya correcta;
+   - **Dónde**: el menú del programa donde se configura (escrito como aparece en el programa, normalmente en inglés).
+4. Pulsa **Copiar** y pega la dirección en el programa.
+
+Una línea atenuada significa que ese programa no tiene conexión disponible en este sistema para esta radio (por ejemplo OmniRig con una tercera radio: OmniRig solo maneja Rig 1 y Rig 2).
+
+## Las conexiones
+
+The Rigger abre todas estas conexiones para cada radio a la vez. Cada programa usa la que conoce, y varios programas pueden compartir la misma conexión.
+
+| Conexión | Dirección (primera radio) | Segunda radio | Sistemas |
+|---|---|---|---|
+| Hamlib NET rigctl | 127.0.0.1:4532 | 127.0.0.1:4534 | todos |
+| flrig | 127.0.0.1:12345 | 127.0.0.1:12346 | todos |
+| TCI | 127.0.0.1:40001 | 127.0.0.1:40002 | todos |
+| CAT por red (Kenwood TS-2000) | 127.0.0.1:4600 | 127.0.0.1:4601 | todos |
+| Ham Radio Deluxe | 127.0.0.1:7809 (radio 1) | mismo puerto, radio 2 | todos |
+| OmniRig | Rig 1 | Rig 2 | Windows |
+| Puertos serie | /tmp/TheRigger/… | /tmp/TheRigger/… | Mac y Linux |
+
+Si un puerto ya lo ocupa otro programa (por ejemplo un flrig o rigctld reales ya abiertos), The Rigger usa el siguiente libre: la dirección exacta siempre está en la pestaña Radios y en la pestaña Programas.
+
+### Hamlib NET rigctl
+
+Es la conexión de WSJT-X, JTDX, JS8Call, FreeDV, Gpredict, CQRLOG, KLog, MacLoggerDX, Pat y de todos los programas que usan Hamlib.
+
+En el programa elige como radio **Hamlib NET rigctl** (en algunos programas *NET rigctl* o *rigctld*, modelo Hamlib número 2) y como servidor la dirección indicada, por ejemplo `127.0.0.1:4532`. PTT en **CAT**.
+
+### flrig
+
+The Rigger responde exactamente como flrig (W1HKJ). Es la conexión de fldigi, QLog, Not1MM, HAMRS, WaveLogGate (Wavelog y Cloudlog), WFDlogger y de todos los programas con la opción *FLRig*.
+
+En el programa elige **FLRig**, dirección `127.0.0.1` y puerto `12345` (segunda radio `12346`). No hace falta instalar flrig.
+
+### TCI
+
+The Rigger responde como un equipo TCI (el protocolo de Expert Electronics). Lo usan N1MM Logger+, JTDX, MSHV, Log4OM, QLog, Swisslog, DXLog y otros.
+
+En el programa elige **TCI** y la dirección `127.0.0.1:40001` (segunda radio `40002`). El TCI de The Rigger transporta frecuencias, modo, PTT y split; el audio sigue en la tarjeta de sonido de la radio como siempre.
+
+### OmniRig (solo Windows)
+
+The Rigger ocupa el lugar de OmniRig: **no hace falta instalar OmniRig**. En el programa elige **OmniRig** y luego **Rig 1** para la primera radio activa en The Rigger o **Rig 2** para la segunda.
+
+Funciona con Log4OM, DXLog.net, HDSDR, SDR Console, CW Skimmer, UcxLog, Swisslog, MixW, QARTest, VarAC y con todos los programas que usan OmniRig, tanto de 32 como de 64 bits. Si un programa pide OmniRig con The Rigger cerrado, Windows abre The Rigger solo, oculto.
+
+Si también tienes instalado el OmniRig real, los programas encuentran igualmente The Rigger, salvo los que se inician *como administrador*: inícialos normalmente. No dejes abiertos los dos a la vez sobre la misma radio.
+
+### Ham Radio Deluxe
+
+The Rigger responde como *HRD Rig Control*. Sirve para HRD Logbook, DM-780 y los programas que se conectan a Ham Radio Deluxe (también WSJT-X y JTDX con la opción *Ham Radio Deluxe*).
+
+En el programa configura el servidor `127.0.0.1` puerto `7809`. Las radios se llaman igual que en The Rigger y están numeradas 1, 2, 3… en el orden de la pestaña Radios.
+
+### CAT por red (TCP)
+
+Una dirección que se comporta como el puerto serie de la radio. Sirve para los programas que saben conectarse a una radio por TCP, como N1MM Logger+ y MSHV.
+
+En el programa elige como radio **el modelo real** (por ejemplo *IC-7100*) o **Kenwood TS-2000**, y como puerto la dirección indicada, por ejemplo `127.0.0.1:4600`. PTT en **CAT**.
+
+### Puertos serie (Mac y Linux)
+
+Para los programas que exigen un puerto serie, The Rigger crea algunos puertos virtuales para cada radio, por ejemplo `/tmp/TheRigger/IC-7100-1`, `/tmp/TheRigger/IC-7100-2`…
+
+En el programa elige el **modelo real** o **Kenwood TS-2000**, el puerto indicado, velocidad **cualquiera**, control de flujo **ninguno**, PTT **CAT**.
+
+Cada puerto reconoce solo el lenguaje del programa: Icom CI-V, Kenwood, Elecraft, Yaesu, FT-817 o TS-2000. Con el modelo real llegan a la radio todos los comandos, también los especiales. Con TS-2000 funcionan frecuencia, modo, PTT y split.
+
+Un programa por puerto: The Rigger da a cada programa un puerto distinto. El número de puertos por radio se cambia en Ajustes (de 1 a 16).
+
+En Windows The Rigger no crea puertos COM virtuales: usa las otras conexiones, que no necesitan drivers.
+
+### CWIU1MVI
+
+CWIU1MVI encuentra The Rigger solo: en la lista de radios de CWIU1MVI elige **The Rigger · nombre de la radio**. No hay nada más que configurar.
+
+## Instrucciones para los programas
+
+Estos son los pasos para los programas más usados. Las direcciones son las de la primera radio: para las demás, cópialas de la pestaña Programas.
+
+### WSJT-X, JTDX, JS8Call, WSJT-Z
+
+1. *File › Settings › Radio*.
+2. **Rig**: *Hamlib NET rigctl*.
+3. **Network Server**: `127.0.0.1:4532`.
+4. **PTT Method**: *CAT*.
+5. **Mode**: *Data/Pkt* si quieres la radio en USB-D, si no *USB*.
+6. **Split Operation**: *Rig* o *Fake It*, como prefieras.
+7. Pulsa **Test CAT**: se pone verde. Luego **OK**.
+
+### fldigi
+
+1. *Configure › Config dialog › Rig Control › flrig*.
+2. Marca **Connect to flrig**, dirección `127.0.0.1`, puerto `12345`.
+3. Desmarca *Hamlib* y *RigCAT* si están marcados.
+4. **Save** y cierra: la frecuencia de fldigi sigue a la radio.
+
+### Log4OM 2 (Windows)
+
+1. *Settings › CAT interface*.
+2. **CAT engine**: *OmniRig*. **Rig**: *Rig 1* (o *Rig 2* para la segunda radio).
+3. Marca **Autostart** y pulsa **Connect**.
+
+No hace falta instalar OmniRig. Como alternativa elige *Hamlib* › *Connect to active HAMLIB interface* con el puerto `4532`.
+
+### N1MM Logger+ (Windows)
+
+1. *Config › Configure Ports, Mode Control, Winkey, etc… › Hardware*.
+2. En una línea de puerto elige **TCP**, **Radio**: *IC-7100* (el modelo real) o *Kenwood TS-2000*.
+3. Pulsa **Set** y escribe la dirección `127.0.0.1` puerto `4600`.
+4. Activa **PTT via Radio Command**.
+5. **OK**: abajo a la izquierda aparece la frecuencia.
+
+Como alternativa N1MM puede usar **TCI** con `127.0.0.1:40001`.
+
+### HRD Logbook y DM-780 (Windows)
+
+En la ventana de conexión con la radio elige el servidor `127.0.0.1` puerto `7809` y pulsa **Connect**. No hace falta abrir *HRD Rig Control*: responde The Rigger.
+
+### QLog
+
+1. *Settings › Equipment › Rig*, añade una radio.
+2. **Interface**: *FLRig*, host `127.0.0.1`, puerto `12345` (o *Hamlib* › *NET rigctl* con `127.0.0.1:4532`).
+3. Guarda y conecta la radio desde el menú *Equipment*.
+
+### MacLoggerDX (Mac)
+
+1. *Prefs › Radio*.
+2. Elige **Hamlib rigctld**, host `127.0.0.1`, puerto `4532`.
+3. Activa **Radio VFO** en la ventana de control.
+
+Como alternativa elige el modelo real de la radio y un puerto de `/tmp/TheRigger/`.
+
+### RUMlogNG y SkookumLogger (Mac)
+
+En las preferencias de la radio elige el **modelo real** (o Kenwood TS-2000) y un puerto de `/tmp/TheRigger/`, por ejemplo `/tmp/TheRigger/IC-7100-2`, velocidad cualquiera.
+
+### Wavelog y Cloudlog (con WaveLogGate)
+
+En WaveLogGate abre *Config › Radio*, elige **FLRig**, host `127.0.0.1`, puerto `12345`, y guarda. Wavelog recibe frecuencia y modo y puede cambiarlos.
+
+### HAMRS, Not1MM, WFDlogger
+
+En los ajustes de control de la radio elige **FLRig**, host `127.0.0.1`, puerto `12345`.
+
+### MSHV
+
+*Options › Radio and Network Configuration*: elige **TCI** y la dirección `127.0.0.1:40001`.
+
+### HDSDR, SDR Console, CW Skimmer (Windows)
+
+Elige **OmniRig** (en HDSDR *Options › CAT to Radio (Omni-Rig)*, en SDR Console *Radio › External Radio*, en CW Skimmer *Setup › Radio*) y luego **Rig 1**.
+
+### Gpredict
+
+*Edit › Preferences › Interfaces › Radios › Add new*: host `localhost`, puerto `4532`, tipo *RX + TX* o el que necesites.
+
+### CQRLOG (Linux)
+
+*Preferences › TRX control*: desmarca *Run rigctld*, **Rig model**: *2 Hamlib NET rigctl*, **Device**: `127.0.0.1:4532`.
+
+### VarAC (Windows)
+
+*Settings › Rig control*: elige **OmniRig** y *Rig 1*, o **Hamlib (rigctld)** con `127.0.0.1` puerto `4532`.
+
+### Programas que no están en la lista
+
+Mira qué conexión conoce el programa:
+
+- si tiene *Hamlib*, *NET rigctl* o *rigctld*, usa Hamlib (`127.0.0.1:4532`);
+- si tiene *FLRig*, usa flrig (`127.0.0.1:12345`);
+- si tiene *TCI*, usa TCI (`127.0.0.1:40001`);
+- si tiene *OmniRig* (Windows), usa OmniRig *Rig 1*;
+- si tiene *Ham Radio Deluxe*, usa `127.0.0.1:7809`;
+- si se conecta a una radio por TCP, usa el CAT por red (`127.0.0.1:4600`) con el modelo real o Kenwood TS-2000;
+- si solo quiere un puerto serie (Mac y Linux), usa un puerto de `/tmp/TheRigger/`.
+
+## Varias radios a la vez
+
+The Rigger gestiona todas las radios que conectes. Cada radio tiene:
+
+- sus propias direcciones (puertos distintos, mira la tabla del capítulo *Las conexiones*);
+- su número (**Rig 1**, **Rig 2**…) para OmniRig y Ham Radio Deluxe, según el orden de la pestaña Radios contando solo las radios activas.
+
+Si tienes dos radios del mismo modelo se llaman, por ejemplo, *IC-7300* e *IC-7300 2*.
+
+## Apagar una radio en The Rigger
+
+El botón de encendido de la ficha de una radio la apaga **solo dentro de The Rigger**: el puerto USB queda libre y las conexiones de esa radio se cierran. Sirve cuando otro programa tiene que usar la radio directamente, por ejemplo el programa del fabricante o una actualización de firmware.
+
+The Rigger recuerda la elección también tras reiniciar. Pulsa el botón otra vez para recuperar la radio.
 
 ## Ajustes
 
-- **Idioma**: automático (el del sistema) o uno de los siete disponibles.
-- **Inicio automático**: The Rigger arranca solo al encender el ordenador.
-- **Actualizaciones automáticas**: las versiones nuevas se instalan solas, y solo cuando ningún programa está usando la radio.
-- **Drivers USB automáticos**: los drivers USB que faltan se instalan solos.
-- **Puertos por radio**: de 1 a 16. Se aplica al momento; los puertos en uso nunca se quitan.
+### General
+
+- **Idioma**: *Automático* usa el idioma del sistema; si no, elige entre italiano, inglés, francés, alemán, español, portugués y japonés. Cambian enseguida toda la ventana, el manual y las instrucciones de los programas.
+- **Inicio automático**: The Rigger se abre solo al encender el ordenador, así las radios están listas antes que los programas.
+
+### Actualizaciones
+
+- **Actualizaciones automáticas**: en cada inicio The Rigger comprueba si hay una versión nueva. Si la hay, la descarga, la instala y se reinicia solo en pocos segundos; los programas se reconectan solos.
+- **Buscar actualizaciones**: comprueba ahora mismo. La línea de abajo dice qué pasa (*ya tienes la última versión*, *descargando la actualización…*).
+
+Las pequeñas correcciones de la ventana llegan al instante, incluso sin reiniciar.
+
+### Puertos y drivers
+
+- **Puertos serie por radio** (Mac y Linux): cuántos puertos virtuales crear para cada radio, de 1 a 16. Se aplica enseguida; los puertos que usa un programa nunca se quitan.
+- **Drivers USB automáticos** (Windows): si conectas una radio sin driver, The Rigger instala el oficial (mira *Drivers USB*).
+
+### Información
+
+Versión, créditos y el botón para invitar a un café a IU1MVI con PayPal.
 
 ## Drivers USB
 
-- **Windows**: si conectas una radio sin driver, The Rigger descarga el driver oficial firmado desde Windows Update (o del fabricante) y lo instala. Windows pide una confirmación. Cubre Silicon Labs (Icom, Yaesu, Kenwood), FTDI (Elecraft y muchos cables), WCH CH340 (Xiegu y cables económicos) y Prolific.
-- **macOS**: los drivers ya vienen con el sistema.
-
-Los puertos COM virtuales de Windows usan el driver gratuito *com0com*, que The Rigger instala solo la primera vez (con una confirmación de Windows).
+- **Windows**: si conectas una radio sin driver, The Rigger descarga el oficial firmado (de Windows Update o del fabricante) y lo instala. Windows pide confirmación una sola vez. Cubre Silicon Labs CP210x (Icom, Yaesu, Kenwood), FTDI (Elecraft y muchos cables), WCH CH340 (Xiegu y cables económicos) y Prolific.
+- **macOS**: los drivers ya están en el sistema, no hace falta nada.
 
 ## Radios compatibles
 
-- **Icom** y compatibles CI-V (también Xiegu): IC-7100, IC-7300, IC-705, IC-7610, IC-9700, IC-905, IC-7760 y otras.
-- **Kenwood**: TS-2000, TS-480, TS-590S/SG, TS-890S, TS-990S.
-- **Elecraft**: K3, KX2, KX3, K4.
-- **Yaesu** recientes: FT-991/A, FTDX10, FT-710, FTDX101, FT-891, FTDX3000 y otras.
-- **Yaesu** clásicas: FT-817, FT-818, FT-857, FT-897.
-- Otras radios con comandos compatibles Kenwood: Lab599 TX-500, QRP Labs QDX/QMX y muchas SDR.
+| Marca | Modelos |
+|---|---|
+| Icom | IC-7100, IC-7300, IC-7300MK2, IC-705, IC-7610, IC-7760, IC-9700, IC-905, IC-7851, IC-7800, IC-7700, IC-7600, IC-7410, IC-7200, IC-7000, IC-9100, IC-746PRO, IC-7400, IC-756 (todas), IC-718, IC-706 (todas), IC-703, IC-910H y las demás CI-V, receptores IC-R8600, IC-R75, IC-R30 |
+| Xiegu | G90, X6100, X6200, X5105, X108G (protocolo Icom CI-V) |
+| Kenwood | TS-890S, TS-990S, TS-590S/SG, TS-2000, TS-480, TS-870S, TS-570, TS-850, TS-450S, TS-690S y las demás con comandos CAT |
+| Elecraft | K3, K3S, K4, KX2, KX3 |
+| Yaesu | FTX-1, FTDX10, FTDX101D/MP, FT-710, FT-991/991A, FT-891, FTDX3000, FTDX5000, FTDX1200, FT-950, FT-2000, FT-450/450D, FTDX9000 |
+| Yaesu clásicas | FT-817, FT-818, FT-857, FT-897 |
+| FlexRadio | serie 6000 a través del puerto CAT de SmartSDR |
+| Compatibles Kenwood | Lab599 TX-500, QRP Labs QDX/QMX, (tr)uSDX, Malachite y muchas SDR |
+
+Las Icom con la dirección CI-V cambiada en el menú se encuentran igualmente.
 
 ## Problemas frecuentes
 
-- **La radio no aparece**: comprueba que esté encendida y conectada con el cable USB. En las Icom, la velocidad *CI-V USB* del menú de la radio debe estar en *Auto* o en un valor normal; *CI-V USB Echo Back* puede quedarse como está.
-- **Un programa no se conecta**: pulsa **?** y comprueba que elegiste *Kenwood TS-2000* (o *Hamlib NET rigctl*) y el puerto correcto. Dos programas no pueden usar el mismo puerto serie.
-- **La luz de un programa está amarilla**: el programa abrió el puerto pero no consulta la radio. Comprueba que el CAT esté activado en el programa.
-- **Windows no crea los puertos COM**: en algunos PC con Windows 11 el driver *com0com* puede estar bloqueado. En ese caso usa la conexión *Hamlib NET rigctl*, que funciona siempre.
+**La radio no aparece.** Comprueba que esté encendida y conectada con el cable USB, y pulsa *Buscar radios de nuevo*. Si otro programa abrió el puerto USB de la radio antes que The Rigger, ciérralo: el puerto lo tiene que tener The Rigger. En las Icom, el *CI-V USB Baud Rate* debe estar en *Auto* o en un valor normal.
+
+**En Windows la radio no aparece y falta el driver.** Deja activado *Drivers USB automáticos* y confirma la petición de Windows. Si no basta, instala el driver del fabricante del cable y pulsa *Buscar radios de nuevo*.
+
+**El programa no se conecta.** Abre la pestaña Programas, busca el programa y comprueba la conexión elegida y la dirección exacta (usa *Copiar*). Luego pulsa *Probar conexión* en la pestaña Radios: si todas las líneas tienen ✓, The Rigger funciona y el problema está en los ajustes del programa.
+
+**La luz del programa es amarilla.** El programa está conectado pero no pide nada a la radio. Comprueba en el programa que el control CAT esté activado (suele haber un botón *Connect* o *Enable*).
+
+**El PTT no funciona.** En el programa el PTT debe estar en **CAT** (o *PTT via Radio Command*), no en RTS ni DTR.
+
+**Un programa OmniRig dice que falta OmniRig.** The Rigger debe haberse abierto al menos una vez en este ordenador. Ábrelo y vuelve a abrir el programa.
+
+**Un puerto ya lo usa otro programa.** Si flrig, rigctld u otro programa ocupa los mismos puertos, The Rigger toma el siguiente libre: copia la dirección exacta de la pestaña Radios.
+
+**Quiero usar la radio con el programa del fabricante.** Apaga la radio en The Rigger con su botón de encendido: el puerto USB queda libre.
 
 ---
 
-The Rigger · software desarrollado por IU1MVI · uso libre y gratuito para todos los radioaficionados. ¡73!
+The Rigger · software desarrollado por IU1MVI · uso libre y gratuito para todos los radioaficionados.
+La compatibilidad OmniRig usa la interfaz pública de OmniRig de Alex Shovkoplyas, VE3NEA (licencia MIT). Hamlib, flrig, TCI y Ham Radio Deluxe son marcas de sus respectivos autores. ¡73!
