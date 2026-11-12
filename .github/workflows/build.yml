@@ -65,7 +65,7 @@ jobs:
               mode=none
             elif [ -n "$pb" ]; then
               files=$(GH_TOKEN="$SOURCE_TOKEN" gh api "repos/${SOURCE_REPO}/compare/${pb}...${sha}" --jq '.files[].filename' 2>/dev/null || echo "?")
-              rel=$(printf '%s\n' "$files" | grep -Ev '_test\.go$' | grep -E '^(\?|[^/]+\.go|go\.(mod|sum)|drivers\.json|app/.*|docs/.*|build/.*)$' || true)
+              rel=$(printf '%s\n' "$files" | grep -Ev '_test\.go$' | grep -E '^(\?|[^/]+\.(go|c|m|h)|go\.(mod|sum)|drivers\.json|app/.*|docs/.*|build/.*)$' || true)
               if [ -z "$rel" ]; then
                 mode=none
               elif [ "$rel" = "app/therigger.html" ]; then
