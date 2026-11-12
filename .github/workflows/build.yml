@@ -174,7 +174,7 @@ jobs:
             pkgbuild --root "$4" --component-plist pkgtmp/comp.plist --install-location /Applications \
               --scripts pkgtmp/scripts --identifier com.sculptworks.therigger --version "$VERSION" pkgtmp/TheRigger-core.pkg
             sed -e "s/__VERSION__/${VERSION}/" -e "s/__ARCH__/$3/" build/pkg/distribution.xml > pkgtmp/distribution.xml
-            productbuild --distribution pkgtmp/distribution.xml --resources build/pkg/resources --package-path pkgtmp "dist/The-Rigger-${VERSION}-$2.pkg"
+            productbuild --distribution pkgtmp/distribution.xml --resources build/pkg/resources --package-path pkgtmp "dist/The-Rigger-$2.pkg"
           }
           mkdir -p dist
           pack bin/arm64 Mac arm64 appA
@@ -219,6 +219,8 @@ jobs:
           mkdir -p dist zipdir
           cp "The Rigger.exe" zipdir/
           cd zipdir && 7z a "../dist/The-Rigger-${VERSION}-Windows.zip" "The Rigger.exe" >/dev/null
+          # copia con nome fisso per il download dalla pagina (quella con la versione serve agli aggiornamenti)
+          cp "../dist/The-Rigger-${VERSION}-Windows.zip" ../dist/The-Rigger-Windows.zip
       - name: Prova OmniRig (programmi a 64 e 32 bit)
         continue-on-error: true
         shell: pwsh
@@ -342,10 +344,25 @@ jobs:
           SHA: ${{ needs.check.outputs.sha }}
         run: |
           ls -la dist
+          D="https://github.com/${{ github.repository }}/releases/download/v${VERSION}"
+          {
+            echo "## Scarica · Download"
+            echo
+            echo "| Sistema · System | |"
+            echo "|---|---|"
+            echo "| **Mac** con chip Apple (M1, M2, M3, M4) | [⬇ The-Rigger-Mac.pkg](${D}/The-Rigger-Mac.pkg) |"
+            echo "| **Mac** Intel | [⬇ The-Rigger-Mac-Intel.pkg](${D}/The-Rigger-Mac-Intel.pkg) |"
+            echo "| **Windows** 10 / 11 | [⬇ The-Rigger-Windows.zip](${D}/The-Rigger-Windows.zip) |"
+            echo
+            echo "Mac: doppio clic sul .pkg (se il Mac lo blocca: tasto destro → Apri). Windows: apri lo zip e avvia The Rigger.exe."
+            echo "Gli altri file servono agli aggiornamenti automatici: non serve scaricarli."
+            echo
+            echo "Le installazioni esistenti si aggiornano da sole. (build ${SHA:0:12})"
+          } > notes.md
           gh release create "v${VERSION}" dist/* \
             --repo "${{ github.repository }}" \
             --title "The Rigger ${VERSION}" \
-            --notes "Le installazioni esistenti si aggiornano da sole. (build ${SHA:0:12})" --latest
+            --notes-file notes.md --latest
           gh release list --repo "${{ github.repository }}" --limit 100 --json tagName --jq '.[].tagName' | while read -r t; do
             if [ "$t" != "v${VERSION}" ]; then
               gh release delete "$t" --repo "${{ github.repository }}" --yes --cleanup-tag || true

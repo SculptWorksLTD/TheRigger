@@ -1,59 +1,32 @@
 # The Rigger
 
-Gestore CAT per radioamatori: collega tutte le radio USB e le condivide con tutti i programmi, contemporaneamente. Sostituisce OmniRig ed è fatto per non doverci mai mettere le mani.
+**Un solo programma per tutte le radio e tutti i programmi.** · *One program for all your radios and all your software.*
 
-**Windows · macOS** Si scarica dalla pagina [Releases](../../releases/latest).
+## Scarica · Download
 
-## Cosa fa
+| Sistema · System | |
+|---|---|
+| **Mac** con chip Apple (M1, M2, M3, M4) | [⬇ Scarica per Mac](https://github.com/SculptWorksLTD/TheRigger/releases/latest/download/The-Rigger-Mac.pkg) |
+| **Mac** Intel | [⬇ Scarica per Mac Intel](https://github.com/SculptWorksLTD/TheRigger/releases/latest/download/The-Rigger-Mac-Intel.pkg) |
+| **Windows** 10 / 11 | [⬇ Scarica per Windows](https://github.com/SculptWorksLTD/TheRigger/releases/latest/download/The-Rigger-Windows.zip) |
 
-- **Trova le radio da solo**: scansiona le porte USB e prova CI-V, CAT testuale e CAT binario Yaesu a tutte le velocità. Riconosce il modello. Se scolleghi e ricolleghi il cavo, la radio si ricollega da sola.
-- **Tutte le radio insieme**, senza il limite di due di OmniRig.
-- **Tutti i collegamenti che usano i programmi, insieme, per ogni radio**:
-  - **Hamlib NET rigctl** (`127.0.0.1:4532`, `4534`…): WSJT-X, JTDX, JS8Call, FreeDV, Gpredict, CQRLOG, MacLoggerDX…
-  - **flrig** (`127.0.0.1:12345`, `12346`…): fldigi, QLog, Not1MM, HAMRS, Wavelog/Cloudlog (WaveLogGate)…
-  - **TCI** (`127.0.0.1:40001`, `40002`…): N1MM Logger+, JTDX, MSHV, Log4OM…
-  - **OmniRig** (Windows, Rig 1 e Rig 2): Log4OM, DXLog.net, HDSDR, SDR Console, CW Skimmer, Swisslog… senza installare OmniRig.
-  - **Ham Radio Deluxe** (`127.0.0.1:7809`): HRD Logbook, DM-780…
-  - **CAT via rete** (`127.0.0.1:4600`…): come la porta seriale della radio, per N1MM Logger+ e simili.
-  - **Porte seriali virtuali** (Mac e Linux, `/tmp/TheRigger/…`): ogni porta riconosce da sola il linguaggio del programma (Icom CI-V, Kenwood, Elecraft, Yaesu, FT-817 o Kenwood TS-2000).
-- **Anche DXLab Commander e N3FJP**: Commander si collega via rete come a Thetis; ad ACLog The Rigger manda da solo banda, modo e frequenza.
-- **Manuale con le istruzioni passo per passo per più di 40 programmi**, in 10 lingue, dentro il programma.
-- **Driver USB automatici**: su Windows, se colleghi una radio senza driver, The Rigger scarica quello ufficiale firmato e lo installa. Su Mac i driver sono già nel sistema.
-- **Nessun conflitto**: un solo processo parla con la radio, mette in coda i comandi e risponde a tutti dalla memoria. Il PTT ha la precedenza.
-- **Leggerissimo**: un solo programma nativo di pochi MB.
-- **Si aggiorna da solo** dalle release GitHub, all'avvio, e si riavvia da solo.
+Mac: doppio clic sul file (se il Mac lo blocca: tasto destro → Apri). Windows: apri lo zip e avvia `The Rigger.exe`.
+Poi collega la radio: il resto lo fa da solo, aggiornamenti compresi. Gratis per tutti gli OM.
 
-## Radio supportate
+## Cos'è
 
-| Famiglia | Protocollo | Esempi |
-|---|---|---|
-| Icom (e compatibili CI-V: Xiegu…) | CI-V | IC-7100, IC-7300, IC-705, IC-7610, IC-9700, IC-905, IC-7760, IC-7851, IC-9100, IC-7000, IC-718, IC-706… |
-| Kenwood | CAT testuale | TS-2000, TS-480, TS-590S/SG, TS-890S, TS-990S, TS-870S, TS-570… |
-| Elecraft | CAT testuale | K3, KX2, KX3, K4 |
-| Yaesu moderne | CAT testuale | FTX-1, FT-991/A, FTDX10, FT-710, FTDX101, FT-891, FTDX3000, FTDX5000… |
-| Yaesu classiche | CAT binario 5 byte | FT-817, FT-818, FT-857, FT-897 |
-| FlexRadio | CAT di SmartSDR | serie 6000 |
-| Altre compatibili Kenwood | CAT testuale | Lab599 TX-500, QRP Labs QDX/QMX, (tr)uSDX, molte SDR |
+The Rigger è un gestore CAT che sostituisce OmniRig: trova da solo le radio USB, le tiene collegate e le condivide con tutti i programmi nello stesso momento, senza conflitti.
 
-## Lingue e manuale
+- **Tutte le radio insieme**: Icom, Yaesu, Kenwood, Elecraft, FlexRadio, Xiegu, Lab599, QRP Labs e molte SDR.
+- **Tutti i programmi insieme**: WSJT-X, JTDX, fldigi, N1MM, Log4OM, HRD, MacLoggerDX, DXLab, N3FJP e oltre 40 altri, con OmniRig, Hamlib, flrig, TCI, HRD e CAT via rete.
+- **Driver USB automatici** su Windows, **segnalazioni e idee** anonime dal programma.
+- **Leggero**: un solo programma nativo di pochi MB, in 10 lingue, con manuale passo per passo.
 
-Interfaccia in 10 lingue: italiano, English, français, Deutsch, español, português, 日本語, русский, العربية, 中文.
+## Manuale · Manual
 
-Manuale: [Italiano](docs/MANUALE_IT.md) · [English](docs/MANUAL_EN.md) · [Français](docs/MANUEL_FR.md) · [Deutsch](docs/HANDBUCH_DE.md) · [Español](docs/MANUAL_ES.md) · [Português](docs/MANUAL_PT.md) · [日本語](docs/MANUAL_JA.md)
+[Italiano](docs/MANUALE_IT.md) · [English](docs/MANUAL_EN.md) · [Français](docs/MANUEL_FR.md) · [Deutsch](docs/HANDBUCH_DE.md) · [Español](docs/MANUAL_ES.md) · [Português](docs/MANUAL_PT.md) · [日本語](docs/MANUAL_JA.md) · [Русский](docs/RUKOVODSTVO_RU.md) · [العربية](docs/DALIL_AR.md) · [中文](docs/SHOUCE_ZH.md)
 
-## Uso
+---
 
-1. Scarica dalla pagina [Releases](../../releases/latest) il file per il tuo sistema:
-   - **Windows**: `The-Rigger-…-Windows.zip` (apri lo zip e avvia `The Rigger.exe`)
-   - **Mac con chip Apple**: `The-Rigger-…-Mac.pkg` · **Mac Intel**: `The-Rigger-…-Mac-Intel.pkg`
-2. Collega la radio. Nient'altro.
-3. Nel **Manuale** (dentro il programma) trovi come impostare ogni programma; gli indirizzi da copiare sono nella scheda della radio.
-
-Su macOS, se il Mac blocca l'installer: tasto destro sul file → Apri.
-
-## Licenza
-
-The Rigger è un programma di Enrico Migliorati (IU1MVI). Tutti i diritti riservati.
-L'uso è libero e gratuito per tutti gli OM; è vietato copiarlo, modificarlo, decompilarlo e ridistribuirlo senza il permesso dell'autore. Vedi [LICENSE](LICENSE).
-
-La compatibilità OmniRig usa l'interfaccia pubblica (type library) di OmniRig di Alex Shovkoplyas, VE3NEA, distribuita con licenza MIT.
+The Rigger · © 2026 Enrico Migliorati, IU1MVI. Tutti i diritti riservati / All rights reserved. Uso libero e gratuito; vietato copiare, modificare, decompilare e ridistribuire senza permesso. Vedi [LICENSE](LICENSE).
+La compatibilità OmniRig usa l'interfaccia pubblica di OmniRig di Alex Shovkoplyas, VE3NEA (licenza MIT).
