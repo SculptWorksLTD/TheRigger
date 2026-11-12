@@ -111,6 +111,7 @@ The Rigger ouvre toutes ces connexions pour chaque radio en même temps. Chaque 
 | Hamlib NET rigctl | 127.0.0.1:4532 | 127.0.0.1:4534 | tous |
 | flrig | 127.0.0.1:12345 | 127.0.0.1:12346 | tous |
 | TCI | 127.0.0.1:40001 | 127.0.0.1:40002 | tous |
+| DXLab Commander | 127.0.0.1:52002 | 127.0.0.1:52102 | tous |
 | CAT réseau (Kenwood TS-2000) | 127.0.0.1:4600 | 127.0.0.1:4601 | tous |
 | Ham Radio Deluxe | 127.0.0.1:7809 (radio 1) | même port, radio 2 | tous |
 | OmniRig | Rig 1 | Rig 2 | Windows |
@@ -135,6 +136,12 @@ Dans le programme, choisissez **FLRig**, adresse `127.0.0.1` et port `12345` (de
 The Rigger répond comme un appareil TCI (le protocole d'Expert Electronics). Il est utilisé par N1MM Logger+, JTDX, MSHV, Log4OM, QLog, Swisslog, DXLog et d'autres.
 
 Dans le programme, choisissez **TCI** et l'adresse `127.0.0.1:40001` (deuxième radio `40002`). Le TCI de The Rigger transporte fréquences, mode, PTT et split ; l'audio reste sur la carte son de la radio, comme toujours.
+
+### DXLab Commander (pour BBLogger)
+
+The Rigger répond aussi comme DXLab Commander, avec les mêmes messages réseau. BBLogger l’utilise, ainsi que, si vous le souhaitez, WSJT-X, JTDX et MSHV avec la radio *DX Lab Suite Commander*.
+
+Adresse `127.0.0.1:52002` (deuxième radio `52102`). Fréquence, mode, PTT et split. Si le vrai DXLab Commander tourne déjà sur le PC, le port 52002 reste à lui et The Rigger ne l’utilise pas.
 
 ### OmniRig (Windows uniquement)
 
@@ -278,6 +285,17 @@ Les programmes N3FJP ne savent pas partager une radio sans port COM, mais ils on
 3. C'est tout : bande, mode et fréquence se remplissent tout seuls. The Rigger n'enregistre jamais de QSO à votre place.
 
 Ainsi ACLog ne peut pas changer la fréquence de la radio (par exemple en cliquant sur un spot).
+
+### BBLogger (Windows)
+
+BBLogger ne parle pas seul à la radio : il s’appuie sur un programme CAT externe qui utilise les messages de DXLab Commander. The Rigger prend sa place, sans CatBKT.
+
+1. Dans BBLogger, ouvrez *Outils › Configuration/Maintenance › Preferences* (ou *Outils › Configurer le CAT*).
+2. Dans le cadre **CAT**, laissez **IP** `127.0.0.1` et **Port** `52002` (deuxième radio `52102`). Inutile d’appuyer sur *Download* ou d’installer CatBKT.
+3. Laissez **Autostart** vide : The Rigger est déjà ouvert.
+4. Fermez la fenêtre : BBLogger affiche la fréquence et le mode de la radio, modifiables depuis la fenêtre du QSO.
+
+Si BBLogger ne lit pas la fréquence, fermez CatBKT ou DXLab Commander s’ils sont ouverts : ils occupent le port 52002.
 
 ### MMSSTV, MMTTY et MMVARI (Windows)
 

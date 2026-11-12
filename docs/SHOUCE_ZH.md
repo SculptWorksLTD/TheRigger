@@ -111,6 +111,7 @@ The Rigger 会同时为每台电台打开所有这些连接。每个程序使用
 | Hamlib NET rigctl | 127.0.0.1:4532 | 127.0.0.1:4534 | 全部 |
 | flrig | 127.0.0.1:12345 | 127.0.0.1:12346 | 全部 |
 | TCI | 127.0.0.1:40001 | 127.0.0.1:40002 | 全部 |
+| DXLab Commander | 127.0.0.1:52002 | 127.0.0.1:52102 | 全部 |
 | 网络 CAT（Kenwood TS-2000） | 127.0.0.1:4600 | 127.0.0.1:4601 | 全部 |
 | Ham Radio Deluxe | 127.0.0.1:7809（电台 1） | 同一端口，电台 2 | 全部 |
 | OmniRig | Rig 1 | Rig 2 | Windows |
@@ -135,6 +136,12 @@ The Rigger 的响应与 flrig（W1HKJ）完全相同。供 fldigi、QLog、Not1M
 The Rigger 的响应与 TCI 收发信机（Expert Electronics 协议）相同。N1MM Logger+、JTDX、MSHV、Log4OM、QLog、Swisslog、DXLog 等都在使用。
 
 在程序中选择 **TCI**，地址 `127.0.0.1:40001`（第二台电台 `40002`）。The Rigger 的 TCI 传送频率、模式、PTT 和异频；音频仍像往常一样走电台的声卡。
+
+### DXLab Commander（用于 BBLogger）
+
+The Rigger 也能像 DXLab Commander 一样，用相同的网络消息应答。BBLogger 使用它；如有需要，WSJT-X、JTDX 和 MSHV 也可以选择电台 *DX Lab Suite Commander* 来使用。
+
+地址 `127.0.0.1:52002`（第二台电台 `52102`）。支持频率、模式、PTT 和异频（split）。如果电脑上已经在运行真正的 DXLab Commander，52002 端口归它使用，The Rigger 不会占用。
 
 ### OmniRig（仅 Windows）
 
@@ -278,6 +285,17 @@ N3FJP 的程序没有 COM 端口就无法共用电台，但它们有网络接口
 3. 完成：波段、模式和频率会自动填写。The Rigger 从不替你记录 QSO。
 
 这种方式下，ACLog 无法更改电台频率（例如点击某个 spot）。
+
+### BBLogger（Windows）
+
+BBLogger 本身不直接与电台通信，而是借助一个使用 DXLab Commander 消息的外部 CAT 程序。The Rigger 可以代替它，无需 CatBKT。
+
+1. 在 BBLogger 中打开 *Strumenti › Configurazione/Manutenzione › Preferences*（或 CAT 设置）。
+2. 在 **CAT** 区域保持 **IP** 为 `127.0.0.1`、**Porta** 为 `52002`（第二台电台 `52102`）。不需要点击 *Download*，也不需要安装 CatBKT。
+3. **Autostart** 留空：The Rigger 已经在运行。
+4. 关闭窗口：BBLogger 会显示电台的频率和模式，并可在 QSO 窗口中修改。
+
+如果 BBLogger 读不到频率，请关闭已打开的 CatBKT 或 DXLab Commander：它们占用了 52002 端口。
 
 ### MMSSTV、MMTTY 和 MMVARI（Windows）
 

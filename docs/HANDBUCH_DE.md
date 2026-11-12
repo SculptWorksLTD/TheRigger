@@ -111,6 +111,7 @@ The Rigger öffnet für jedes Funkgerät alle diese Verbindungen gleichzeitig. J
 | Hamlib NET rigctl | 127.0.0.1:4532 | 127.0.0.1:4534 | alle |
 | flrig | 127.0.0.1:12345 | 127.0.0.1:12346 | alle |
 | TCI | 127.0.0.1:40001 | 127.0.0.1:40002 | alle |
+| DXLab Commander | 127.0.0.1:52002 | 127.0.0.1:52102 | alle |
 | Netzwerk-CAT (Kenwood TS-2000) | 127.0.0.1:4600 | 127.0.0.1:4601 | alle |
 | Ham Radio Deluxe | 127.0.0.1:7809 (Gerät 1) | gleicher Port, Gerät 2 | alle |
 | OmniRig | Rig 1 | Rig 2 | Windows |
@@ -135,6 +136,12 @@ Im Programm **FLRig** wählen, Adresse `127.0.0.1` und Port `12345` (zweites Ger
 The Rigger antwortet wie ein TCI-Gerät (das Protokoll von Expert Electronics). Es wird von N1MM Logger+, JTDX, MSHV, Log4OM, QLog, Swisslog, DXLog und anderen benutzt.
 
 Im Programm **TCI** und die Adresse `127.0.0.1:40001` wählen (zweites Gerät `40002`). Das TCI von The Rigger überträgt Frequenzen, Betriebsart, PTT und Split; das Audio bleibt wie immer auf der Soundkarte des Funkgeräts.
+
+### DXLab Commander (für BBLogger)
+
+The Rigger antwortet auch wie DXLab Commander, mit denselben Netzwerk-Nachrichten. BBLogger nutzt das, und auf Wunsch auch WSJT-X, JTDX und MSHV mit dem Funkgerät *DX Lab Suite Commander*.
+
+Adresse `127.0.0.1:52002` (zweites Funkgerät `52102`). Frequenz, Betriebsart, PTT und Split. Läuft der echte DXLab Commander schon auf dem PC, bleibt Port 52002 bei ihm und The Rigger nutzt ihn nicht.
 
 ### OmniRig (nur Windows)
 
@@ -278,6 +285,17 @@ Die N3FJP-Programme können ein Funkgerät ohne COM-Port nicht teilen, haben abe
 3. Fertig: Band, Betriebsart und Frequenz füllen sich selbst aus. The Rigger loggt nie QSOs für dich.
 
 So kann ACLog die Frequenz des Funkgeräts nicht ändern (zum Beispiel durch Klick auf einen Spot).
+
+### BBLogger (Windows)
+
+BBLogger spricht nicht selbst mit dem Funkgerät: es nutzt ein externes CAT-Programm mit den Nachrichten von DXLab Commander. The Rigger übernimmt diese Rolle, CatBKT ist nicht nötig.
+
+1. In BBLogger *Strumenti/Tools › Configurazione/Manutenzione › Preferences* öffnen (oder *CAT konfigurieren*).
+2. Im Feld **CAT** **IP** `127.0.0.1` und **Porta** `52002` lassen (zweites Funkgerät `52102`). *Download* und CatBKT sind nicht nötig.
+3. **Autostart** leer lassen: The Rigger läuft schon.
+4. Fenster schließen: BBLogger zeigt Frequenz und Betriebsart und kann sie im QSO-Fenster ändern.
+
+Liest BBLogger die Frequenz nicht, CatBKT oder DXLab Commander schließen, falls offen: sie belegen Port 52002.
 
 ### MMSSTV, MMTTY und MMVARI (Windows)
 

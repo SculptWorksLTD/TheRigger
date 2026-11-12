@@ -111,6 +111,7 @@ The Rigger لوحة توزيع بين أجهزة الراديو والبرامج
 | Hamlib NET rigctl | 127.0.0.1:4532 | 127.0.0.1:4534 | الكل |
 | flrig | 127.0.0.1:12345 | 127.0.0.1:12346 | الكل |
 | TCI | 127.0.0.1:40001 | 127.0.0.1:40002 | الكل |
+| DXLab Commander | 127.0.0.1:52002 | 127.0.0.1:52102 | الكل |
 | CAT عبر الشبكة (Kenwood TS-2000) | 127.0.0.1:4600 | 127.0.0.1:4601 | الكل |
 | Ham Radio Deluxe | 127.0.0.1:7809 (الجهاز 1) | المنفذ نفسه، الجهاز 2 | الكل |
 | OmniRig | Rig 1 | Rig 2 | Windows |
@@ -135,6 +136,12 @@ The Rigger لوحة توزيع بين أجهزة الراديو والبرامج
 يستجيب The Rigger مثل جهاز إرسال واستقبال TCI (بروتوكول Expert Electronics). يستخدمه N1MM Logger+ وJTDX وMSHV وLog4OM وQLog وSwisslog وDXLog وغيرها.
 
 في البرنامج اختر **TCI** والعنوان `127.0.0.1:40001` (الجهاز الثاني `40002`). ينقل TCI في The Rigger الترددات ونمط التشغيل وPTT وsplit؛ ويبقى الصوت على بطاقة صوت الجهاز كالمعتاد.
+
+### DXLab Commander (لبرنامج BBLogger)
+
+يستجيب The Rigger أيضًا مثل DXLab Commander بنفس رسائل الشبكة. يستخدمه BBLogger، ويمكن أيضًا استخدامه مع WSJT-X وJTDX وMSHV باختيار الجهاز *DX Lab Suite Commander*.
+
+العنوان `127.0.0.1:52002` (الجهاز الثاني `52102`). ينقل التردد والنمط وPTT والـ split. إذا كان DXLab Commander الحقيقي يعمل على الحاسوب، يبقى المنفذ 52002 له ولا يستخدمه The Rigger.
 
 ### OmniRig (على Windows فقط)
 
@@ -278,6 +285,17 @@ The Rigger لوحة توزيع بين أجهزة الراديو والبرامج
 3. انتهى: يُملأ النطاق ونمط التشغيل والتردد تلقائيًا. لا يسجّل The Rigger أي اتصال (QSO) نيابة عنك أبدًا.
 
 بهذه الطريقة لا يستطيع ACLog تغيير تردد الجهاز (مثلًا بالنقر على spot).
+
+### BBLogger (Windows)
+
+لا يتحدث BBLogger مع الجهاز بنفسه، بل يعتمد على برنامج CAT خارجي يستخدم رسائل DXLab Commander. يحل The Rigger محله دون الحاجة إلى CatBKT.
+
+1. في BBLogger افتح *Strumenti › Configurazione/Manutenzione › Preferences* (أو إعداد الـ CAT).
+2. في خانة **CAT** اترك **IP** على `127.0.0.1` و**Porta** على `52002` (الجهاز الثاني `52102`). لا حاجة للضغط على *Download* ولا لتثبيت CatBKT.
+3. اترك **Autostart** فارغًا: The Rigger يعمل بالفعل.
+4. أغلق النافذة: يعرض BBLogger تردد الجهاز ونمطه، ويمكنك تغييرهما من نافذة الـ QSO.
+
+إذا لم يقرأ BBLogger التردد، أغلق CatBKT أو DXLab Commander إن كانا مفتوحين: فهما يشغلان المنفذ 52002.
 
 ### MMSSTV وMMTTY وMMVARI ‏(Windows)
 

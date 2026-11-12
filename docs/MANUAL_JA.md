@@ -111,6 +111,7 @@ The Rigger は無線機ごとに、これらの接続をすべて同時に開き
 | Hamlib NET rigctl | 127.0.0.1:4532 | 127.0.0.1:4534 | すべて |
 | flrig | 127.0.0.1:12345 | 127.0.0.1:12346 | すべて |
 | TCI | 127.0.0.1:40001 | 127.0.0.1:40002 | すべて |
+| DXLab Commander | 127.0.0.1:52002 | 127.0.0.1:52102 | すべて |
 | ネットワーク CAT（Kenwood TS-2000） | 127.0.0.1:4600 | 127.0.0.1:4601 | すべて |
 | Ham Radio Deluxe | 127.0.0.1:7809（無線機 1） | 同じポート、無線機 2 | すべて |
 | OmniRig | Rig 1 | Rig 2 | Windows |
@@ -135,6 +136,12 @@ The Rigger は flrig（W1HKJ）とまったく同じように応答します。f
 The Rigger は TCI 機器（Expert Electronics のプロトコル）として応答します。N1MM Logger+、JTDX、MSHV、Log4OM、QLog、Swisslog、DXLog などが使います。
 
 ソフトで **TCI** を選び、アドレス `127.0.0.1:40001`（2 台目は `40002`）にします。The Rigger の TCI は周波数、モード、PTT、スプリットを扱います。音声はいつもどおり無線機のサウンドカードを使います。
+
+### DXLab Commander（BBLogger 用）
+
+The Rigger は DXLab Commander と同じネットワークメッセージにも応答します。BBLogger が使い、必要なら WSJT-X、JTDX、MSHV も無線機 *DX Lab Suite Commander* で使えます。
+
+アドレスは `127.0.0.1:52002`（2 台目は `52102`）。周波数、モード、PTT、スプリットを扱います。本物の DXLab Commander がすでに動いている場合、ポート 52002 はそちらが使い、The Rigger は使いません。
 
 ### OmniRig（Windows のみ）
 
@@ -278,6 +285,17 @@ N3FJP のソフトは COM ポートなしでは無線機を共有できません
 3. 完了です。バンド、モード、周波数が自動で入ります。The Rigger が勝手に QSO を記録することはありません。
 
 この方法では、ACLog から無線機の周波数を変えることはできません（スポットのクリックなど）。
+
+### BBLogger（Windows）
+
+BBLogger は自分では無線機と通信せず、DXLab Commander のメッセージを使う外部 CAT ソフトを利用します。The Rigger がその代わりになり、CatBKT は不要です。
+
+1. BBLogger で *Strumenti › Configurazione/Manutenzione › Preferences*（または CAT の設定）を開きます。
+2. **CAT** 欄の **IP** は `127.0.0.1`、**Porta** は `52002`（2 台目は `52102`）のままにします。*Download* や CatBKT のインストールは不要です。
+3. **Autostart** は空のままにします。The Rigger はすでに起動しています。
+4. ウィンドウを閉じると、BBLogger に周波数とモードが表示され、QSO ウィンドウから変更できます。
+
+周波数が読めない場合は、CatBKT や DXLab Commander が開いていれば閉じてください。ポート 52002 を使っています。
 
 ### MMSSTV、MMTTY、MMVARI（Windows）
 
