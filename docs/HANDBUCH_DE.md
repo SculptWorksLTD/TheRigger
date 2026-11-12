@@ -365,6 +365,24 @@ Version, Credits und die Taste, um IU1MVI mit PayPal einen Kaffee zu spendieren.
 
 Icom-Geräte, deren CI-V-Adresse im Menü geändert wurde, werden trotzdem gefunden.
 
+## com0com-Bereinigung (Windows)
+
+### Was passiert
+
+Ein Fenster öffnet sich und zeigt jeden Schritt. Es sucht com0com, den kostenlosen Treiber, der Paare virtueller COM-Ports anlegt, und dann: deinstalliert ihn, entfernt alle seine virtuellen Ports (auch die „Geister“-Ports, die der Geräte-Manager nicht zeigt), entfernt seinen Treiber aus Windows und gibt die COM-Nummern frei, die diese Ports belegt hatten. Bevor etwas geändert wird, zeigt es, was gefunden wurde, und fragt nach (J/N); am Ende bietet es einen Neustart an.
+
+### Wozu
+
+Mit der Zeit hinterlässt com0com Dutzende oder Hunderte virtueller Ports und reservierter COM-Nummern: neue USB-Ports bekommen sehr hohe Nummern, Windows zeigt ständig Fehler, Funkprogramme kommen durcheinander und der PC wird langsamer. The Rigger nutzt keine virtuellen COM-Ports (die Programme verbinden sich über OmniRig, Hamlib, flrig, TCI, HRD oder Netzwerk-CAT: siehe Handbuch), daher wird com0com nicht mehr gebraucht.
+
+### Risiken
+
+Administratorrechte sind nötig. Programme, die com0com benutzen, funktionieren mit diesen Ports nicht mehr: zum Beispiel ein Port-Splitter oder zwei Programme, die über virtuelle Ports verbunden sind. Echte COM-Ports (Funkgeräte, USB-Seriell-Kabel) werden nicht angefasst. Das lässt sich nicht rückgängig machen: Wenn du com0com wieder brauchst, musst du es neu installieren. Schließe vorher die Programme, die COM-Ports benutzen. Nutzung auf eigene Gefahr: der Autor haftet nicht für Probleme.
+
+### So geht’s
+
+**Einstellungen → Ports und Treiber → com0com-Bereinigung → Bereinigen…** (die Taste ist nur aktiv, wenn com0com auf dem PC ist). Lies den Hinweis, setze den Haken bei *Gelesen und verstanden* und drücke **Bereinigung starten**. Windows fragt nach Administratorrechten; im Fenster, das sich öffnet, mit **J** bestätigen, am Ende wählen, ob neu gestartet wird, und mit EINGABE schließen. Wenn das Fenster meldet, dass Geräte übrig sind, PC neu starten und die Bereinigung wiederholen.
+
 ## Häufige Probleme
 
 **Das Funkgerät erscheint nicht.** Prüfe, ob es eingeschaltet und mit dem USB-Kabel verbunden ist, und drücke dann *Funkgeräte erneut suchen*. Hat ein anderes Programm den USB-Port des Geräts vor The Rigger geöffnet, schließe es: Den Port muss The Rigger haben. Bei Icom-Geräten sollte *CI-V USB Baud Rate* auf *Auto* oder einem normalen Wert stehen.

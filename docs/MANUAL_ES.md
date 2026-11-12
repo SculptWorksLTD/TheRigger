@@ -365,6 +365,24 @@ Versión, créditos y el botón para invitar a un café a IU1MVI con PayPal.
 
 Las Icom con la dirección CI-V cambiada en el menú se encuentran igualmente.
 
+## Limpieza de com0com (Windows)
+
+### Qué hace
+
+Abre una ventana que muestra cada paso. Busca com0com, el driver gratuito que crea pares de puertos COM virtuales, y después: lo desinstala, quita todos sus puertos virtuales (también los “fantasma” que el Administrador de dispositivos no muestra), quita su driver de Windows y libera los números COM que esos puertos tenían ocupados. Antes de tocar nada te muestra lo que ha encontrado y pide confirmación (S/N); al final propone reiniciar.
+
+### Por qué usarla
+
+Con el tiempo com0com deja decenas o cientos de puertos virtuales y números COM reservados: los nuevos puertos USB reciben números altísimos, Windows muestra errores sin parar, los programas de radio se confunden y el PC va más lento. The Rigger no usa puertos COM virtuales (los programas se conectan con OmniRig, Hamlib, flrig, TCI, HRD o CAT por red: mira el Manual), así que com0com ya no hace falta.
+
+### Riesgos
+
+Hace falta permiso de administrador. Los programas que usan com0com dejan de funcionar con esos puertos: por ejemplo un divisor de puertos o dos programas unidos con puertos virtuales. Los puertos COM reales (radios, cables USB-serie) no se tocan. No se puede deshacer: si vuelves a necesitar com0com tendrás que reinstalarlo. Cierra antes los programas que usan puertos COM. La usas bajo tu responsabilidad: el autor no responde de posibles problemas.
+
+### Cómo se usa
+
+**Ajustes → Puertos y drivers → Limpieza de com0com → Limpiar…** (el botón solo está activo si com0com está en el PC). Lee el aviso, marca *Lo he leído y lo entiendo* y pulsa **Iniciar la limpieza**. Windows pide permiso de administrador; en la ventana que se abre responde **S** para seguir, al final elige si reiniciar y pulsa INTRO para cerrar. Si la ventana dice que quedan dispositivos, reinicia el PC y repite la limpieza.
+
 ## Problemas frecuentes
 
 **La radio no aparece.** Comprueba que esté encendida y conectada con el cable USB, y pulsa *Buscar radios de nuevo*. Si otro programa abrió el puerto USB de la radio antes que The Rigger, ciérralo: el puerto lo tiene que tener The Rigger. En las Icom, el *CI-V USB Baud Rate* debe estar en *Auto* o en un valor normal.

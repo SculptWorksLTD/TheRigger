@@ -365,6 +365,24 @@ Version, credits and the button to buy IU1MVI a coffee with PayPal.
 
 Icom radios whose CI-V address was changed in the menu are found anyway.
 
+## com0com cleanup (Windows)
+
+### What it does
+
+It opens a window that shows every step. It looks for com0com, the free driver that creates pairs of virtual COM ports, and then: uninstalls it, removes all its virtual ports (including the “ghost” ones Device Manager does not show), removes its driver from Windows and frees the COM numbers those ports were holding. Before changing anything it shows what it found and asks for confirmation (Y/N); at the end it offers to restart.
+
+### Why use it
+
+Over time com0com leaves dozens or hundreds of virtual ports and reserved COM numbers: new USB ports get very high numbers, Windows keeps showing errors, radio programs get confused and the PC slows down. The Rigger does not use virtual COM ports (programs connect through OmniRig, Hamlib, flrig, TCI, HRD or network CAT: see the Manual), so com0com is no longer needed.
+
+### Risks
+
+Administrator permission is required. Programs that use com0com stop working with those ports: for example a port splitter, or two programs linked through virtual ports. Real COM ports (radios, USB-serial cables) are not touched. It cannot be undone: if you need com0com again you have to reinstall it. Close the programs that use COM ports first. Use it at your own risk: the author is not liable for any problems.
+
+### How to use it
+
+**Settings → Ports and drivers → com0com cleanup → Clean up…** (the button is active only if com0com is on the PC). Read the warning, tick *I have read and understood* and press **Start cleanup**. Windows asks for administrator permission; in the window that opens answer **Y** to go ahead, at the end choose whether to restart and press ENTER to close. If the window says some devices are left, restart the PC and run the cleanup again.
+
 ## Troubleshooting
 
 **The radio does not appear.** Check that it is on and connected with the USB cable, then press *Search radios again*. If another program opened the radio's USB port before The Rigger, close it: The Rigger must own the port. On Icom radios the *CI-V USB Baud Rate* should be *Auto* or a normal value.
