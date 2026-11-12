@@ -424,6 +424,8 @@ El botón con el bocadillo, arriba a la derecha, sirve para avisar de un problem
 
 El registro es un archivo de texto que The Rigger guarda en tu ordenador (los últimos 12 arranques); solo se envía si tú lo eliges.
 
+**Indicativo.** Arriba hay una casilla opcional para el indicativo: si la rellenas podremos contactarte para pedirte detalles; si la dejas vacía el aviso sigue siendo totalmente anónimo. The Rigger lo recuerda para la próxima vez.
+
 ## Problemas frecuentes
 
 **La radio no aparece.** Comprueba que esté encendida y conectada con el cable USB, y pulsa *Buscar radios de nuevo*. Si otro programa abrió el puerto USB de la radio antes que The Rigger, ciérralo: el puerto lo tiene que tener The Rigger. En las Icom, el *CI-V USB Baud Rate* debe estar en *Auto* o en un valor normal.

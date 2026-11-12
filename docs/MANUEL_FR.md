@@ -424,6 +424,8 @@ Le bouton en forme de bulle, en haut à droite, sert à signaler un problème ou
 
 Le journal est un fichier texte que The Rigger garde sur votre ordinateur (les 12 derniers démarrages) ; il n’est envoyé que si vous le choisissez.
 
+**Indicatif.** En haut, une case facultative pour l’indicatif : si vous la remplissez, nous pourrons vous recontacter ; si vous la laissez vide, le signalement reste totalement anonyme. The Rigger s’en souvient pour la prochaine fois.
+
 ## Problèmes courants
 
 **La radio n'apparaît pas.** Vérifiez qu'elle est allumée et branchée avec le câble USB, puis appuyez sur *Rechercher à nouveau les radios*. Si un autre programme a ouvert le port USB de la radio avant The Rigger, fermez-le : c'est The Rigger qui doit avoir le port. Sur les Icom, le *CI-V USB Baud Rate* doit être sur *Auto* ou une valeur normale.

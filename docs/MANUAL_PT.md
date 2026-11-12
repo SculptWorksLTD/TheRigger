@@ -424,6 +424,8 @@ O botão com o balão, em cima à direita, serve para comunicar um problema ou p
 
 O registo é um ficheiro de texto que o The Rigger guarda no seu computador (os últimos 12 arranques); só é enviado se o escolher.
 
+**Indicativo.** No topo há uma caixa opcional para o indicativo: se a preencher podemos contactá-lo para pedir detalhes; se a deixar vazia o relatório fica totalmente anónimo. O The Rigger lembra-se dele para a próxima vez.
+
 ## Problemas comuns
 
 **O rádio não aparece.** Verifique se está ligado e com o cabo USB, depois carregue em *Procurar rádios de novo*. Se outro programa abriu a porta USB do rádio antes do The Rigger, feche-o: a porta tem de ficar com o The Rigger. Nos Icom, o *CI-V USB Baud Rate* deve estar em *Auto* ou num valor normal.

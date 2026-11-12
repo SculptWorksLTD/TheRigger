@@ -424,6 +424,8 @@ Mit der Sprechblasen-Taste oben rechts meldest du ein Problem oder schlägst ein
 
 Das Protokoll ist eine Textdatei, die The Rigger auf deinem Computer führt (die letzten 12 Starts); sie wird nur gesendet, wenn du es wählst.
 
+**Rufzeichen.** Oben gibt es ein freiwilliges Feld für das Rufzeichen: füllst du es aus, können wir dich für Rückfragen kontaktieren; bleibt es leer, ist die Meldung völlig anonym. The Rigger merkt es sich für das nächste Mal.
+
 ## Häufige Probleme
 
 **Das Funkgerät erscheint nicht.** Prüfe, ob es eingeschaltet und mit dem USB-Kabel verbunden ist, und drücke dann *Funkgeräte erneut suchen*. Hat ein anderes Programm den USB-Port des Geräts vor The Rigger geöffnet, schließe es: Den Port muss The Rigger haben. Bei Icom-Geräten sollte *CI-V USB Baud Rate* auf *Auto* oder einem normalen Wert stehen.

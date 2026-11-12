@@ -424,6 +424,8 @@ Il tasto con il fumetto, in alto a destra, serve per segnalare un problema o pro
 
 Il diario è un file di testo che The Rigger tiene sul tuo computer (gli ultimi 12 avvii); parte solo se lo scegli tu.
 
+**Nominativo.** In alto c'è una casella facoltativa per il nominativo: se la riempi possiamo ricontattarti per chiederti dettagli; se la lasci vuota la segnalazione resta del tutto anonima. The Rigger se lo ricorda per la volta dopo.
+
 ## Problemi comuni
 
 **La radio non compare.** Controlla che sia accesa e collegata con il cavo USB, poi premi *Cerca di nuovo le radio*. Se un altro programma ha aperto la porta USB della radio prima di The Rigger, chiudilo: la porta deve averla The Rigger. Sulle Icom la velocità *CI-V USB Baud Rate* va su *Auto* o su un valore normale.

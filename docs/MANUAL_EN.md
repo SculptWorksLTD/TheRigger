@@ -424,6 +424,8 @@ The speech-bubble button at the top right lets you report a problem or suggest a
 
 The log is a text file The Rigger keeps on your computer (the last 12 starts); it is sent only if you choose so.
 
+**Callsign.** At the top there is an optional callsign box: if you fill it in we can contact you for details; if you leave it empty the report stays completely anonymous. The Rigger remembers it for next time.
+
 ## Troubleshooting
 
 **The radio does not appear.** Check that it is on and connected with the USB cable, then press *Search radios again*. If another program opened the radio's USB port before The Rigger, close it: The Rigger must own the port. On Icom radios the *CI-V USB Baud Rate* should be *Auto* or a normal value.
