@@ -42,14 +42,13 @@ Beim Start erscheint das Willkommensfenster mit den Credits: **Los geht’s · 7
 
 Das Funkgerät mit dem USB-Kabel anschließen und einschalten. Nach wenigen Sekunden findet The Rigger es: Es probiert die USB-Ports, das Protokoll (Icom CI-V, Kenwood, Elecraft, Yaesu, FT-817) und die Geschwindigkeit und erkennt dann das Modell. Du musst nichts einstellen.
 
-Sobald das Funkgerät im Reiter **Funkgeräte** erscheint, öffne den Reiter **Programme**: Dort steht, wie jedes Programm einzustellen ist.
+Sobald das Funkgerät im Reiter **Funkgeräte** erscheint, ist es bereit: Wie jedes Programm einzustellen ist, steht im Kapitel **Anleitungen für Programme** dieses Handbuchs.
 
 ## Das Fenster
 
-Das Fenster hat vier Reiter, oben in der Mitte:
+Das Fenster hat drei Reiter, oben in der Mitte:
 
 - **Funkgeräte**: die gefundenen Funkgeräte mit Frequenz, Betriebsart, verbundenen Programmen und Adressen;
-- **Programme**: wie jedes Programm verbunden wird, fertig für das gewählte Funkgerät;
 - **Handbuch**: dieses Handbuch, mit dem Inhaltsverzeichnis links;
 - **Einstellungen**: Sprache, Start, Updates, Ports und Info.
 
@@ -101,27 +100,11 @@ Alle Wege, auf denen sich ein Programm mit diesem Funkgerät verbinden kann, mit
 
 ### Tasten
 
-- **Programme verbinden**: öffnet den Reiter Programme, schon auf dieses Funkgerät eingestellt.
 - **Verbindung testen**: tut so, als wäre es ein Programm, und liest die Frequenz über jede Verbindung (serieller Port, Hamlib, flrig, Netzwerk-CAT, TCI). Jede Zeile mit **✓** funktioniert, jede Zeile mit **✗** hat ein Problem. Der Test liest nur: Er sendet nie und ändert nichts.
 
 ### Funkgeräte erneut suchen
 
 Die Taste **Funkgeräte erneut suchen** (oben rechts im Reiter oder der Kreispfeil unten) prüft sofort alle USB-Ports neu. Benutze sie, nachdem du ein Funkgerät eingeschaltet hast, das The Rigger nicht gesehen hat, oder nachdem du ein Programm geschlossen hast, das den Port belegt hatte.
-
-## Reiter Programme
-
-Hier findest du für jedes Programm die beste Verbindung **auf diesem Computer** und **für das gewählte Funkgerät**.
-
-1. Bei mehreren Funkgeräten oben das **Funkgerät** wählen.
-2. Das Programm durch Eintippen des Namens suchen oder die Filter benutzen: *Digitale Betriebsarten*, *Logbücher*, *Contest*, *SDR*, *CW*, *Satelliten*, *Andere Programme*.
-3. Jede Zeile zeigt:
-   - den **Namen** des Programms;
-   - die empfohlene **Verbindung**, farbig: Hamlib (grün), flrig (hellblau), TCI (violett), OmniRig (gelb), HRD (orange), CAT TCP (grau);
-   - **was einzustellen ist**, mit der schon richtigen Adresse;
-   - **Wo**: das Menü des Programms, in dem man es einstellt (so geschrieben wie im Programm, meist Englisch).
-4. **Kopieren** drücken und die Adresse im Programm einfügen.
-
-Eine blasse Zeile bedeutet, dass dieses Programm auf diesem System für dieses Funkgerät keine Verbindung hat (zum Beispiel OmniRig mit einem dritten Funkgerät: OmniRig kennt nur Rig 1 und Rig 2).
 
 ## Die Verbindungen
 
@@ -137,7 +120,7 @@ The Rigger öffnet für jedes Funkgerät alle diese Verbindungen gleichzeitig. J
 | OmniRig | Rig 1 | Rig 2 | Windows |
 | Serielle Ports | /tmp/TheRigger/… | /tmp/TheRigger/… | Mac und Linux |
 
-Ist ein Port schon von einem anderen Programm belegt (zum Beispiel ein echtes flrig oder rigctld), nimmt The Rigger den nächsten freien: Die genaue Adresse steht immer im Reiter Funkgeräte und im Reiter Programme.
+Ist ein Port schon von einem anderen Programm belegt (zum Beispiel ein echtes flrig oder rigctld), nimmt The Rigger den nächsten freien: Die genaue Adresse steht immer im Reiter Funkgeräte.
 
 ### Hamlib NET rigctl
 
@@ -195,7 +178,7 @@ CWIU1MVI findet The Rigger selbst: in der Funkgeräteliste von CWIU1MVI **The Ri
 
 ## Anleitungen für Programme
 
-Hier die Schritte für die meistbenutzten Programme. Die Adressen gelten für das erste Funkgerät: für die anderen aus dem Reiter Programme kopieren.
+Hier die Schritte für die meistbenutzten Programme. Die Adressen gelten für das erste Funkgerät: für die anderen aus dem Reiter Funkgeräte kopieren.
 
 ### WSJT-X, JTDX, JS8Call, WSJT-Z
 
@@ -282,6 +265,33 @@ In den Einstellungen der Funkgerätesteuerung **FLRig** wählen, Host `127.0.0.1
 
 *Settings › Rig control*: **OmniRig** und *Rig 1* wählen, oder **Hamlib (rigctld)** mit `127.0.0.1` Port `4532`.
 
+### DXLab Commander (Windows)
+
+Commander kann weder OmniRig noch Hamlib benutzen, aber über das Netzwerk mit Thetis sprechen: The Rigger antwortet wie Thetis.
+
+1. *Config › Ports*, Feld des Funkgeräts: **Model**: *Thetis*.
+2. **Communicate via TCP** ankreuzen, **IP Address** `127.0.0.1`, **IP Port** `4600` (zweites Gerät `4601`).
+3. Konfiguration schließen: Commander zeigt die Frequenz, und mit ihm DXKeeper, SpotCollector und der Rest der DXLab-Suite.
+
+### N3FJP ACLog und N3FJP-Contestprogramme (Windows)
+
+Die N3FJP-Programme können ein Funkgerät ohne COM-Port nicht teilen, haben aber eine Netzwerkschnittstelle: The Rigger nutzt sie selbst und sendet Band, Betriebsart und Frequenz des ersten eingeschalteten Funkgeräts.
+
+1. *Settings › Rig Interface*: **None** wählen.
+2. *Settings › Application Program Interface*: **TCP API Enabled (Server)** ankreuzen, Port `1100`.
+3. Fertig: Band, Betriebsart und Frequenz füllen sich selbst aus. The Rigger loggt nie QSOs für dich.
+
+So kann ACLog die Frequenz des Funkgeräts nicht ändern (zum Beispiel durch Klick auf einen Spot).
+
+### MMSSTV, MMTTY und MMVARI (Windows)
+
+- **MMSSTV**: *Option › Setup › TX › Radio command*, **OmniRig** und *Rig 1* wählen.
+- **MMTTY und MMVARI**: das kostenlose Plugin **HRDPTT.mmr** herunterladen (es lässt die MM-Programme mit Ham Radio Deluxe sprechen), in den Programmordner kopieren, dann *Option › Setup › TX › Radio command* und als Port **HRDPTT** wählen. The Rigger antwortet wie Ham Radio Deluxe, also läuft die PTT über The Rigger.
+
+### Programme, die nur einen COM-Port wollen (Windows)
+
+Logger32, Win-Test, Winlink Express und SatPC32 kennen nur COM-Ports, die unter Windows einen von Microsoft signierten Treiber brauchen: Mit diesen Programmen lässt sich The Rigger vorerst nicht benutzen. In Winlink Express ist die Funkgerätesteuerung freiwillig; statt SatPC32 kannst du Gpredict benutzen.
+
 ### Programme, die nicht in der Liste stehen
 
 Schau, welche Verbindung das Programm kennt:
@@ -358,7 +368,7 @@ Icom-Geräte, deren CI-V-Adresse im Menü geändert wurde, werden trotzdem gefun
 
 **Unter Windows erscheint das Funkgerät nicht und der Treiber fehlt.** *USB-Treiber automatisch* eingeschaltet lassen und die Frage von Windows bestätigen. Reicht das nicht, den Treiber des Kabelherstellers installieren und *Funkgeräte erneut suchen* drücken.
 
-**Das Programm verbindet sich nicht.** Reiter Programme öffnen, das Programm suchen und prüfen, ob die richtige Verbindung und die genaue Adresse gewählt sind (*Kopieren* benutzen). Dann im Reiter Funkgeräte *Verbindung testen* drücken: Haben alle Zeilen ✓, funktioniert The Rigger und das Problem liegt in den Einstellungen des Programms.
+**Das Programm verbindet sich nicht.** Prüfe in diesem Handbuch die gewählte Verbindung und kopiere die genaue Adresse aus dem Reiter Funkgeräte (ein Klick kopiert sie). Dann *Verbindung testen* drücken: Haben alle Zeilen ✓, funktioniert The Rigger und das Problem liegt in den Einstellungen des Programms.
 
 **Die Lampe des Programms ist gelb.** Das Programm ist verbunden, fragt das Funkgerät aber nichts. Prüfe im Programm, ob die CAT-Steuerung aktiv ist (oft gibt es eine Taste *Connect* oder *Enable*).
 

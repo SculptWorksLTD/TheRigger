@@ -42,14 +42,13 @@ At start-up the welcome window with the credits appears: press **Start · 73**.
 
 Connect the radio with the USB cable and switch it on. Within a few seconds The Rigger finds it: it tries the USB ports, the protocol (Icom CI-V, Kenwood, Elecraft, Yaesu, FT-817) and the speed, then recognises the model. You do not have to set anything.
 
-When the radio appears in the **Radios** tab, open the **Programs** tab: it tells you how to set up each program.
+When the radio appears in the **Radios** tab it is ready: to set up each program see the chapter **Instructions for programs** in this manual.
 
 ## The window
 
-The window has four tabs, chosen at the top in the middle:
+The window has three tabs, chosen at the top in the middle:
 
 - **Radios**: the radios found, with frequency, mode, connected programs and addresses;
-- **Programs**: how to connect each program, ready for the chosen radio;
 - **Manual**: this manual, with the index on the left;
 - **Settings**: language, start-up, updates, ports and information.
 
@@ -101,27 +100,11 @@ All the ways a program can connect to this radio, with the address to type into 
 
 ### Buttons
 
-- **Connect programs**: opens the Programs tab already set to this radio.
 - **Test connection**: pretends to be a program and reads the frequency through every connection (serial port, Hamlib, flrig, network CAT, TCI). Every line with **✓** works, every line with **✗** has a problem. The test only reads: it never transmits and never changes anything.
 
 ### Search radios again
 
 The **Search radios again** button (top right of the tab, or the circular arrow at the bottom) checks all USB ports again right away. Use it after switching on a radio The Rigger did not see, or after closing a program that was holding the port.
-
-## Programs tab
-
-Here you find, for each program, the best connection **on this computer** and **for the chosen radio**.
-
-1. If you have several radios, choose the **Radio** at the top.
-2. Search for the program by typing its name, or use the filters: *Digital modes*, *Loggers*, *Contest*, *SDR*, *CW*, *Satellites*, *Other programs*.
-3. Each line shows:
-   - the program **name**;
-   - the recommended **connection**, colour-coded: Hamlib (green), flrig (light blue), TCI (purple), OmniRig (yellow), HRD (orange), CAT TCP (grey);
-   - **what to set** in the program, with the right address already filled in;
-   - **Where**: the program menu where you set it (written as it appears in the program, usually in English).
-4. Press **Copy** and paste the address into the program.
-
-A faded line means that program has no connection available on this system for this radio (for example OmniRig with a third radio: OmniRig only handles Rig 1 and Rig 2).
 
 ## The connections
 
@@ -137,7 +120,7 @@ The Rigger opens all these connections for every radio at once. Each program use
 | OmniRig | Rig 1 | Rig 2 | Windows |
 | Serial ports | /tmp/TheRigger/… | /tmp/TheRigger/… | Mac and Linux |
 
-If a port is already taken by another program (for example a real flrig or rigctld already running), The Rigger uses the next free one: you always find the exact address in the Radios tab and in the Programs tab.
+If a port is already taken by another program (for example a real flrig or rigctld already running), The Rigger uses the next free one: you always find the exact address in the Radios tab.
 
 ### Hamlib NET rigctl
 
@@ -195,7 +178,7 @@ CWIU1MVI finds The Rigger by itself: in CWIU1MVI's radio list choose **The Rigge
 
 ## Instructions for programs
 
-Here are the steps for the most used programs. Addresses are those of the first radio: for other radios copy them from the Programs tab.
+Here are the steps for the most used programs. Addresses are those of the first radio: for other radios copy them from the Radios tab.
 
 ### WSJT-X, JTDX, JS8Call, WSJT-Z
 
@@ -282,6 +265,33 @@ Choose **OmniRig** (in HDSDR *Options › CAT to Radio (Omni-Rig)*, in SDR Conso
 
 *Settings › Rig control*: choose **OmniRig** and *Rig 1*, or **Hamlib (rigctld)** with `127.0.0.1` port `4532`.
 
+### DXLab Commander (Windows)
+
+Commander cannot use OmniRig or Hamlib, but it can talk to Thetis over the network: The Rigger answers like Thetis.
+
+1. *Config › Ports*, radio panel: **Model**: *Thetis*.
+2. Tick **Communicate via TCP**, **IP Address** `127.0.0.1`, **IP Port** `4600` (second radio `4601`).
+3. Close the configuration: Commander shows the frequency, and so do DXKeeper, SpotCollector and the rest of the DXLab suite.
+
+### N3FJP ACLog and N3FJP contest programs (Windows)
+
+N3FJP programs cannot share a radio without a COM port, but they have a network interface: The Rigger uses it by itself to send band, mode and frequency of the first radio that is on.
+
+1. *Settings › Rig Interface*: choose **None**.
+2. *Settings › Application Program Interface*: tick **TCP API Enabled (Server)**, port `1100`.
+3. Done: band, mode and frequency fill in by themselves. The Rigger never logs QSOs for you.
+
+This way ACLog cannot change the radio's frequency (for example by clicking a spot).
+
+### MMSSTV, MMTTY and MMVARI (Windows)
+
+- **MMSSTV**: *Option › Setup › TX › Radio command*, choose **OmniRig** and *Rig 1*.
+- **MMTTY and MMVARI**: download the free **HRDPTT.mmr** plugin (it lets MM programs talk to Ham Radio Deluxe), copy it into the program folder, then *Option › Setup › TX › Radio command* and choose **HRDPTT** as the port. The Rigger answers like Ham Radio Deluxe, so PTT goes through The Rigger.
+
+### Programs that only want a COM port (Windows)
+
+Logger32, Win-Test, Winlink Express and SatPC32 only know COM ports, which on Windows need a driver signed by Microsoft: for now The Rigger cannot be used with these programs. In Winlink Express radio control is optional; instead of SatPC32 you can use Gpredict.
+
 ### Programs not listed
 
 Look for which connection the program knows:
@@ -358,7 +368,7 @@ Icom radios whose CI-V address was changed in the menu are found anyway.
 
 **On Windows the radio does not appear and the driver is missing.** Keep *Automatic USB drivers* on and confirm Windows' request. If that is not enough, install the cable maker's driver and press *Search radios again*.
 
-**The program does not connect.** Open the Programs tab, find the program and check that you chose the right connection and the exact address (use *Copy*). Then press *Test connection* in the Radios tab: if every line has ✓, The Rigger works and the problem is in the program's settings.
+**The program does not connect.** Check in this manual that you chose the right connection and copy the exact address from the Radios tab (one click copies it). Then press *Test connection*: if every line has ✓, The Rigger works and the problem is in the program's settings.
 
 **The program's light is yellow.** The program is connected but is not asking the radio anything. Check in the program that CAT control is enabled (there is often a *Connect* or *Enable* button).
 

@@ -42,14 +42,13 @@ No arranque aparece a janela de boas-vindas com os créditos: carregue em **Come
 
 Ligue o rádio com o cabo USB e ligue-o. Em poucos segundos o The Rigger encontra-o: experimenta as portas USB, o protocolo (Icom CI-V, Kenwood, Elecraft, Yaesu, FT-817) e a velocidade, e reconhece o modelo. Não tem de configurar nada.
 
-Quando o rádio aparecer no separador **Rádios**, abra o separador **Programas**: lá diz como configurar cada programa.
+Quando o rádio aparecer no separador **Rádios** está pronto: para configurar cada programa veja o capítulo **Instruções para os programas** deste manual.
 
 ## A janela
 
-A janela tem quatro separadores, em cima ao centro:
+A janela tem três separadores, em cima ao centro:
 
 - **Rádios**: os rádios encontrados, com frequência, modo, programas ligados e endereços;
-- **Programas**: como ligar cada programa, pronto para o rádio escolhido;
 - **Manual**: este manual, com o índice à esquerda;
 - **Definições**: idioma, arranque, atualizações, portas e informações.
 
@@ -101,27 +100,11 @@ Todas as maneiras de um programa se ligar a este rádio, com o endereço a escre
 
 ### Botões
 
-- **Ligar os programas**: abre o separador Programas já definido para este rádio.
 - **Testar ligação**: faz de conta que é um programa e lê a frequência por cada ligação (porta série, Hamlib, flrig, CAT em rede, TCI). Cada linha com **✓** funciona, cada linha com **✗** tem um problema. O teste só lê: nunca transmite nem muda nada.
 
 ### Procurar rádios de novo
 
 O botão **Procurar rádios de novo** (em cima à direita do separador, ou a seta circular em baixo) volta a verificar todas as portas USB de imediato. Use-o depois de ligar um rádio que o The Rigger não via, ou depois de fechar um programa que tinha a porta ocupada.
-
-## Separador Programas
-
-Aqui encontra, para cada programa, a melhor ligação **neste computador** e **para o rádio escolhido**.
-
-1. Se tiver vários rádios, escolha o **Rádio** em cima.
-2. Procure o programa escrevendo o nome, ou use os filtros: *Modos digitais*, *Livros de registo*, *Concursos*, *SDR*, *CW*, *Satélites*, *Outros programas*.
-3. Cada linha mostra:
-   - o **nome** do programa;
-   - a **ligação** aconselhada, a cores: Hamlib (verde), flrig (azul-claro), TCI (roxo), OmniRig (amarelo), HRD (laranja), CAT TCP (cinzento);
-   - **o que configurar** no programa, com o endereço já correto;
-   - **Onde**: o menu do programa onde se configura (escrito como aparece no programa, normalmente em inglês).
-4. Carregue em **Copiar** e cole o endereço no programa.
-
-Uma linha esbatida significa que esse programa não tem ligação disponível neste sistema para este rádio (por exemplo OmniRig com um terceiro rádio: o OmniRig só gere Rig 1 e Rig 2).
 
 ## As ligações
 
@@ -137,7 +120,7 @@ O The Rigger abre todas estas ligações para cada rádio ao mesmo tempo. Cada p
 | OmniRig | Rig 1 | Rig 2 | Windows |
 | Portas série | /tmp/TheRigger/… | /tmp/TheRigger/… | Mac e Linux |
 
-Se uma porta já estiver ocupada por outro programa (por exemplo um flrig ou rigctld verdadeiros já abertos), o The Rigger usa a seguinte livre: o endereço exato está sempre no separador Rádios e no separador Programas.
+Se uma porta já estiver ocupada por outro programa (por exemplo um flrig ou rigctld verdadeiros já abertos), o The Rigger usa a seguinte livre: o endereço exato está sempre no separador Rádios.
 
 ### Hamlib NET rigctl
 
@@ -195,7 +178,7 @@ O CWIU1MVI encontra o The Rigger sozinho: na lista de rádios do CWIU1MVI escolh
 
 ## Instruções para os programas
 
-Aqui estão os passos para os programas mais usados. Os endereços são os do primeiro rádio: para os outros, copie-os do separador Programas.
+Aqui estão os passos para os programas mais usados. Os endereços são os do primeiro rádio: para os outros, copie-os do separador Rádios.
 
 ### WSJT-X, JTDX, JS8Call, WSJT-Z
 
@@ -282,6 +265,33 @@ Escolha **OmniRig** (no HDSDR *Options › CAT to Radio (Omni-Rig)*, no SDR Cons
 
 *Settings › Rig control*: escolha **OmniRig** e *Rig 1*, ou **Hamlib (rigctld)** com `127.0.0.1` porta `4532`.
 
+### DXLab Commander (Windows)
+
+O Commander não sabe usar o OmniRig nem o Hamlib, mas sabe falar em rede com o Thetis: o The Rigger responde como o Thetis.
+
+1. *Config › Ports*, painel do rádio: **Model**: *Thetis*.
+2. Marque **Communicate via TCP**, **IP Address** `127.0.0.1`, **IP Port** `4600` (segundo rádio `4601`).
+3. Feche a configuração: o Commander mostra a frequência, e com ele o DXKeeper, o SpotCollector e o resto da suite DXLab.
+
+### N3FJP ACLog e programas de concursos N3FJP (Windows)
+
+Os programas N3FJP não sabem partilhar um rádio sem porta COM, mas têm uma interface de rede: o The Rigger usa-a sozinho para enviar banda, modo e frequência do primeiro rádio ligado.
+
+1. *Settings › Rig Interface*: escolha **None**.
+2. *Settings › Application Program Interface*: marque **TCP API Enabled (Server)**, porta `1100`.
+3. Pronto: banda, modo e frequência preenchem-se sozinhos. O The Rigger nunca regista QSO por si.
+
+Assim o ACLog não pode mudar a frequência do rádio (por exemplo ao clicar num spot).
+
+### MMSSTV, MMTTY e MMVARI (Windows)
+
+- **MMSSTV**: *Option › Setup › TX › Radio command*, escolha **OmniRig** e *Rig 1*.
+- **MMTTY e MMVARI**: descarregue o plugin gratuito **HRDPTT.mmr** (faz os programas MM falarem com o Ham Radio Deluxe), copie-o para a pasta do programa, depois *Option › Setup › TX › Radio command* e escolha **HRDPTT** como porta. O The Rigger responde como o Ham Radio Deluxe, por isso o PTT passa pelo The Rigger.
+
+### Programas que só querem uma porta COM (Windows)
+
+O Logger32, o Win-Test, o Winlink Express e o SatPC32 só conhecem portas COM, que no Windows precisam de um driver assinado pela Microsoft: por agora o The Rigger não pode ser usado com estes programas. No Winlink Express o controlo do rádio é opcional; em vez do SatPC32 pode usar o Gpredict.
+
 ### Programas que não estão na lista
 
 Veja que ligação o programa conhece:
@@ -358,7 +368,7 @@ Os Icom com o endereço CI-V alterado no menu são encontrados na mesma.
 
 **No Windows o rádio não aparece e falta o driver.** Deixe ativo *Drivers USB automáticos* e confirme o pedido do Windows. Se não chegar, instale o driver do fabricante do cabo e carregue em *Procurar rádios de novo*.
 
-**O programa não se liga.** Abra o separador Programas, procure o programa e verifique a ligação escolhida e o endereço exato (use *Copiar*). Depois carregue em *Testar ligação* no separador Rádios: se todas as linhas tiverem ✓, o The Rigger funciona e o problema está nas definições do programa.
+**O programa não se liga.** Verifique neste manual a ligação escolhida e copie o endereço exato do separador Rádios (um clique copia-o). Depois carregue em *Testar ligação*: se todas as linhas tiverem ✓, o The Rigger funciona e o problema está nas definições do programa.
 
 **A luz do programa está amarela.** O programa está ligado mas não pede nada ao rádio. Verifique no programa se o controlo CAT está ativo (costuma haver um botão *Connect* ou *Enable*).
 
