@@ -290,7 +290,14 @@ N3FJP のソフトは COM ポートなしでは無線機を共有できません
 
 ### COM ポートしか使えないソフト（Windows）
 
-Logger32、Win-Test、Winlink Express、SatPC32 は COM ポートしか使えません。Windows で COM ポートを作るには Microsoft が署名したドライバーが必要なため、いまのところ The Rigger ではこれらのソフトを使えません。Winlink Express では無線機の制御は必須ではありません。SatPC32 の代わりに Gpredict を使えます。
+Logger32、Win-Test、Winlink Express、SatPC32 は COM ポートしか使えません。Windows で COM ポートを作るには Microsoft が署名したドライバーが必要なため、いまのところ The Rigger ではこれらのソフトを使えません。代わりに次のソフトを使えます（どれも無料か、The Rigger とすでにつながるものです）：
+
+| 代わりに | 使うソフト | 接続 |
+|---|---|---|
+| Logger32 | Log4OM 2、Swisslog、UcxLog、QLog、DXLab スイート | OmniRig、Hamlib、flrig、Thetis（Commander） |
+| Win-Test | N1MM Logger+、DXLog.net、QARTest | ネットワーク CAT / TCI、OmniRig |
+| Winlink Express | Pat Winlink、または無線機制御なしの Winlink Express（周波数は手動） | Hamlib |
+| SatPC32 | Gpredict | Hamlib |
 
 ### 一覧にないソフト
 

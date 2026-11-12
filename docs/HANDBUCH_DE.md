@@ -290,7 +290,14 @@ So kann ACLog die Frequenz des Funkgeräts nicht ändern (zum Beispiel durch Kli
 
 ### Programme, die nur einen COM-Port wollen (Windows)
 
-Logger32, Win-Test, Winlink Express und SatPC32 kennen nur COM-Ports, die unter Windows einen von Microsoft signierten Treiber brauchen: Mit diesen Programmen lässt sich The Rigger vorerst nicht benutzen. In Winlink Express ist die Funkgerätesteuerung freiwillig; statt SatPC32 kannst du Gpredict benutzen.
+Logger32, Win-Test, Winlink Express und SatPC32 kennen nur COM-Ports, die unter Windows einen von Microsoft signierten Treiber brauchen: Mit diesen Programmen lässt sich The Rigger vorerst nicht benutzen. Das kannst du stattdessen nehmen, alles kostenlos oder schon mit The Rigger nutzbar:
+
+| Statt | Nimm | Verbindung |
+|---|---|---|
+| Logger32 | Log4OM 2, Swisslog, UcxLog, QLog oder die DXLab-Suite | OmniRig, Hamlib, flrig oder Thetis (Commander) |
+| Win-Test | N1MM Logger+, DXLog.net oder QARTest | Netzwerk-CAT / TCI, OmniRig |
+| Winlink Express | Pat Winlink, oder Winlink Express ohne Funkgerätesteuerung (Frequenz von Hand) | Hamlib |
+| SatPC32 | Gpredict | Hamlib |
 
 ### Programme, die nicht in der Liste stehen
 

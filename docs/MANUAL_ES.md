@@ -290,7 +290,14 @@ Así ACLog no puede cambiar la frecuencia de la radio (por ejemplo al hacer clic
 
 ### Programas que solo quieren un puerto COM (Windows)
 
-Logger32, Win-Test, Winlink Express y SatPC32 solo conocen los puertos COM, que en Windows necesitan un driver firmado por Microsoft: por ahora The Rigger no se puede usar con estos programas. En Winlink Express el control de la radio es opcional; en lugar de SatPC32 puedes usar Gpredict.
+Logger32, Win-Test, Winlink Express y SatPC32 solo conocen los puertos COM, que en Windows necesitan un driver firmado por Microsoft: por ahora The Rigger no se puede usar con estos programas. Esto es lo que puedes usar en su lugar, todo gratuito o ya compatible con The Rigger:
+
+| En lugar de | Usa | Conexión |
+|---|---|---|
+| Logger32 | Log4OM 2, Swisslog, UcxLog, QLog o la suite DXLab | OmniRig, Hamlib, flrig o Thetis (Commander) |
+| Win-Test | N1MM Logger+, DXLog.net o QARTest | CAT por red / TCI, OmniRig |
+| Winlink Express | Pat Winlink, o Winlink Express sin control de la radio (frecuencia a mano) | Hamlib |
+| SatPC32 | Gpredict | Hamlib |
 
 ### Programas que no están en la lista
 

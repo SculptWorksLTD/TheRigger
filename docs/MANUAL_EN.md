@@ -290,7 +290,14 @@ This way ACLog cannot change the radio's frequency (for example by clicking a sp
 
 ### Programs that only want a COM port (Windows)
 
-Logger32, Win-Test, Winlink Express and SatPC32 only know COM ports, which on Windows need a driver signed by Microsoft: for now The Rigger cannot be used with these programs. In Winlink Express radio control is optional; instead of SatPC32 you can use Gpredict.
+Logger32, Win-Test, Winlink Express and SatPC32 only know COM ports, which on Windows need a driver signed by Microsoft: for now The Rigger cannot be used with these programs. Here is what to use instead, all free or already working with The Rigger:
+
+| Instead of | Use | Connection |
+|---|---|---|
+| Logger32 | Log4OM 2, Swisslog, UcxLog, QLog or the DXLab suite | OmniRig, Hamlib, flrig or Thetis (Commander) |
+| Win-Test | N1MM Logger+, DXLog.net or QARTest | Network CAT / TCI, OmniRig |
+| Winlink Express | Pat Winlink, or Winlink Express without rig control (frequency set by hand) | Hamlib |
+| SatPC32 | Gpredict | Hamlib |
 
 ### Programs not listed
 
