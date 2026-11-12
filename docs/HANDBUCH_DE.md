@@ -369,7 +369,7 @@ Icom-Geräte, deren CI-V-Adresse im Menü geändert wurde, werden trotzdem gefun
 
 ### Was passiert
 
-Ein Fenster öffnet sich und zeigt jeden Schritt. Es sucht com0com, den kostenlosen Treiber, der Paare virtueller COM-Ports anlegt, und dann: deinstalliert ihn, entfernt alle seine virtuellen Ports (auch die „Geister“-Ports, die der Geräte-Manager nicht zeigt), entfernt seinen Treiber aus Windows und gibt die COM-Nummern frei, die diese Ports belegt hatten. Bevor etwas geändert wird, zeigt es, was gefunden wurde, und fragt nach (J/N); am Ende bietet es einen Neustart an.
+Jeder Schritt wird im Fenster von The Rigger angezeigt. Gesucht wird com0com, den kostenlosen Treiber, der Paare virtueller COM-Ports anlegt, und dann: deinstalliert ihn, entfernt alle seine virtuellen Ports (auch die „Geister“-Ports, die der Geräte-Manager nicht zeigt), entfernt seinen Treiber aus Windows und gibt die COM-Nummern frei, die diese Ports belegt hatten. Bevor etwas geändert wird, zeigt es, was gefunden wurde, und fragt nach; am Ende bietet es einen Neustart an.
 
 ### Wozu
 
@@ -381,7 +381,7 @@ Administratorrechte sind nötig. Programme, die com0com benutzen, funktionieren 
 
 ### So geht’s
 
-**Einstellungen → Ports und Treiber → com0com-Bereinigung → Bereinigen…** (die Taste ist nur aktiv, wenn com0com auf dem PC ist). Lies den Hinweis, setze den Haken bei *Gelesen und verstanden* und drücke **Bereinigung starten**. Windows fragt nach Administratorrechten; im Fenster, das sich öffnet, mit **J** bestätigen, am Ende wählen, ob neu gestartet wird, und mit EINGABE schließen. Wenn das Fenster meldet, dass Geräte übrig sind, PC neu starten und die Bereinigung wiederholen.
+**Einstellungen → Ports und Treiber → com0com-Bereinigung → Bereinigen…** (die Taste ist nur aktiv, wenn com0com auf dem PC ist). Lies den Hinweis, setze den Haken bei *Gelesen und verstanden* und drücke **Bereinigung starten**. Windows fragt nach Administratorrechten: mit **Ja** bestätigen. Die Schritte erscheinen im selben Fenster von The Rigger; nach der Suche **Weiter** drücken (oder **Abbrechen**, um nichts zu ändern). Am Ende **Jetzt neu starten** oder **Schließen** drücken. Wenn das Fenster meldet, dass Geräte übrig sind, PC neu starten und die Bereinigung wiederholen.
 
 ## Häufige Probleme
 

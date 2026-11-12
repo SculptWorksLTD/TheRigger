@@ -369,7 +369,7 @@ Icom radios whose CI-V address was changed in the menu are found anyway.
 
 ### What it does
 
-It opens a window that shows every step. It looks for com0com, the free driver that creates pairs of virtual COM ports, and then: uninstalls it, removes all its virtual ports (including the “ghost” ones Device Manager does not show), removes its driver from Windows and frees the COM numbers those ports were holding. Before changing anything it shows what it found and asks for confirmation (Y/N); at the end it offers to restart.
+It shows every step in the The Rigger window. It looks for com0com, the free driver that creates pairs of virtual COM ports, and then: uninstalls it, removes all its virtual ports (including the “ghost” ones Device Manager does not show), removes its driver from Windows and frees the COM numbers those ports were holding. Before changing anything it shows what it found and asks for confirmation; at the end it offers to restart.
 
 ### Why use it
 
@@ -381,7 +381,7 @@ Administrator permission is required. Programs that use com0com stop working wit
 
 ### How to use it
 
-**Settings → Ports and drivers → com0com cleanup → Clean up…** (the button is active only if com0com is on the PC). Read the warning, tick *I have read and understood* and press **Start cleanup**. Windows asks for administrator permission; in the window that opens answer **Y** to go ahead, at the end choose whether to restart and press ENTER to close. If the window says some devices are left, restart the PC and run the cleanup again.
+**Settings → Ports and drivers → com0com cleanup → Clean up…** (the button is active only if com0com is on the PC). Read the warning, tick *I have read and understood* and press **Start cleanup**. Windows asks for administrator permission: answer **Yes**. The steps appear in the same The Rigger window; after the search press **Go ahead** (or **Cancel** to leave everything as it is). At the end you can press **Restart now** or **Close**. If the window says some devices are left, restart the PC and run the cleanup again.
 
 ## Troubleshooting
 

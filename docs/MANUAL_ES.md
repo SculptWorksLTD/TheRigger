@@ -369,7 +369,7 @@ Las Icom con la dirección CI-V cambiada en el menú se encuentran igualmente.
 
 ### Qué hace
 
-Abre una ventana que muestra cada paso. Busca com0com, el driver gratuito que crea pares de puertos COM virtuales, y después: lo desinstala, quita todos sus puertos virtuales (también los “fantasma” que el Administrador de dispositivos no muestra), quita su driver de Windows y libera los números COM que esos puertos tenían ocupados. Antes de tocar nada te muestra lo que ha encontrado y pide confirmación (S/N); al final propone reiniciar.
+Muestra cada paso en la ventana de The Rigger. Busca com0com, el driver gratuito que crea pares de puertos COM virtuales, y después: lo desinstala, quita todos sus puertos virtuales (también los “fantasma” que el Administrador de dispositivos no muestra), quita su driver de Windows y libera los números COM que esos puertos tenían ocupados. Antes de tocar nada te muestra lo que ha encontrado y pide confirmación; al final propone reiniciar.
 
 ### Por qué usarla
 
@@ -381,7 +381,7 @@ Hace falta permiso de administrador. Los programas que usan com0com dejan de fun
 
 ### Cómo se usa
 
-**Ajustes → Puertos y drivers → Limpieza de com0com → Limpiar…** (el botón solo está activo si com0com está en el PC). Lee el aviso, marca *Lo he leído y lo entiendo* y pulsa **Iniciar la limpieza**. Windows pide permiso de administrador; en la ventana que se abre responde **S** para seguir, al final elige si reiniciar y pulsa INTRO para cerrar. Si la ventana dice que quedan dispositivos, reinicia el PC y repite la limpieza.
+**Ajustes → Puertos y drivers → Limpieza de com0com → Limpiar…** (el botón solo está activo si com0com está en el PC). Lee el aviso, marca *Lo he leído y lo entiendo* y pulsa **Iniciar la limpieza**. Windows pide permiso de administrador: responde **Sí**. Los pasos aparecen en la misma ventana de The Rigger; tras la búsqueda pulsa **Seguir** (o **Cancelar** para no tocar nada). Al final puedes pulsar **Reiniciar ahora** o **Cerrar**. Si la ventana dice que quedan dispositivos, reinicia el PC y repite la limpieza.
 
 ## Problemas frecuentes
 

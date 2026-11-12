@@ -369,7 +369,7 @@ Les Icom dont l'adresse CI-V a été changée dans le menu sont trouvées quand 
 
 ### Ce que ça fait
 
-Une fenêtre s’ouvre et montre chaque étape. Elle cherche com0com, le pilote gratuit qui crée des paires de ports COM virtuels, puis : le désinstalle, supprime tous ses ports virtuels (même les ports « fantômes » que le Gestionnaire de périphériques n’affiche pas), retire son pilote de Windows et libère les numéros COM que ces ports occupaient. Avant de modifier quoi que ce soit, elle montre ce qu’elle a trouvé et demande confirmation (O/N) ; à la fin, elle propose de redémarrer.
+Chaque étape s’affiche dans la fenêtre de The Rigger. Le nettoyage cherche com0com, le pilote gratuit qui crée des paires de ports COM virtuels, puis : le désinstalle, supprime tous ses ports virtuels (même les ports « fantômes » que le Gestionnaire de périphériques n’affiche pas), retire son pilote de Windows et libère les numéros COM que ces ports occupaient. Avant de modifier quoi que ce soit, elle montre ce qu’elle a trouvé et demande confirmation ; à la fin, elle propose de redémarrer.
 
 ### Pourquoi l’utiliser
 
@@ -381,7 +381,7 @@ Il faut l’autorisation d’administrateur. Les programmes qui utilisent com0co
 
 ### Mode d’emploi
 
-**Réglages → Ports et pilotes → Nettoyage com0com → Nettoyer…** (le bouton n’est actif que si com0com est sur le PC). Lisez l’avertissement, cochez *J’ai lu et compris* et appuyez sur **Lancer le nettoyage**. Windows demande l’autorisation d’administrateur ; dans la fenêtre qui s’ouvre, répondez **O** pour continuer, à la fin choisissez si vous redémarrez et appuyez sur ENTRÉE pour fermer. Si la fenêtre indique qu’il reste des périphériques, redémarrez le PC et relancez le nettoyage.
+**Réglages → Ports et pilotes → Nettoyage com0com → Nettoyer…** (le bouton n’est actif que si com0com est sur le PC). Lisez l’avertissement, cochez *J’ai lu et compris* et appuyez sur **Lancer le nettoyage**. Windows demande l’autorisation d’administrateur : répondez **Oui**. Les étapes s’affichent dans la même fenêtre de The Rigger ; après la recherche, appuyez sur **Continuer** (ou **Annuler** pour ne rien modifier). À la fin, appuyez sur **Redémarrer maintenant** ou **Fermer**. Si la fenêtre indique qu’il reste des périphériques, redémarrez le PC et relancez le nettoyage.
 
 ## Problèmes courants
 

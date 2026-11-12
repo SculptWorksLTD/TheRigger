@@ -369,7 +369,7 @@ Os Icom com o endereço CI-V alterado no menu são encontrados na mesma.
 
 ### O que faz
 
-Abre uma janela que mostra cada passo. Procura o com0com, o driver gratuito que cria pares de portas COM virtuais, e depois: desinstala-o, remove todas as suas portas virtuais (incluindo as “fantasma” que o Gestor de dispositivos não mostra), remove o seu driver do Windows e liberta os números COM que essas portas ocupavam. Antes de alterar seja o que for mostra o que encontrou e pede confirmação (S/N); no fim propõe reiniciar.
+Mostra cada passo na janela do The Rigger. Procura o com0com, o driver gratuito que cria pares de portas COM virtuais, e depois: desinstala-o, remove todas as suas portas virtuais (incluindo as “fantasma” que o Gestor de dispositivos não mostra), remove o seu driver do Windows e liberta os números COM que essas portas ocupavam. Antes de alterar seja o que for mostra o que encontrou e pede confirmação; no fim propõe reiniciar.
 
 ### Porquê usá-la
 
@@ -381,7 +381,7 @@ Com o tempo o com0com deixa dezenas ou centenas de portas virtuais e números CO
 
 ### Como usar
 
-**Definições → Portas e drivers → Limpeza do com0com → Limpar…** (o botão só está ativo se o com0com estiver no PC). Leia o aviso, marque *Li e compreendi* e carregue em **Iniciar a limpeza**. O Windows pede permissão de administrador; na janela que abre responda **S** para continuar, no fim escolha se reinicia e prima ENTER para fechar. Se a janela disser que restam dispositivos, reinicie o PC e repita a limpeza.
+**Definições → Portas e drivers → Limpeza do com0com → Limpar…** (o botão só está ativo se o com0com estiver no PC). Leia o aviso, marque *Li e compreendi* e carregue em **Iniciar a limpeza**. O Windows pede permissão de administrador: responda **Sim**. Os passos aparecem na mesma janela do The Rigger; depois da procura carregue em **Continuar** (ou **Cancelar** para não alterar nada). No fim pode carregar em **Reiniciar agora** ou **Fechar**. Se a janela disser que restam dispositivos, reinicie o PC e repita a limpeza.
 
 ## Problemas comuns
 

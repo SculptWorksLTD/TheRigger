@@ -369,7 +369,7 @@ Le Icom con l'indirizzo CI-V cambiato nel menu vengono trovate lo stesso.
 
 ### Cosa fa
 
-Apre una finestra che mostra ogni passo. Cerca com0com, il driver gratuito che crea coppie di porte COM virtuali, e poi: lo disinstalla, toglie tutte le sue porte virtuali (anche quelle “fantasma” che Gestione dispositivi non mostra), toglie il suo driver da Windows e libera i numeri COM che quelle porte tenevano occupati. Prima di toccare qualcosa ti mostra cosa ha trovato e chiede conferma (S/N); alla fine propone il riavvio.
+Mostra ogni passo nella finestra di The Rigger. Cerca com0com, il driver gratuito che crea coppie di porte COM virtuali, e poi: lo disinstalla, toglie tutte le sue porte virtuali (anche quelle “fantasma” che Gestione dispositivi non mostra), toglie il suo driver da Windows e libera i numeri COM che quelle porte tenevano occupati. Prima di toccare qualcosa ti mostra cosa ha trovato e chiede conferma; alla fine propone il riavvio.
 
 ### Perché usarla
 
@@ -381,7 +381,7 @@ Serve il permesso di amministratore. I programmi che usano com0com smettono di f
 
 ### Come si usa
 
-**Impostazioni → Porte e driver → Pulizia com0com → Pulisci…** (il tasto è attivo solo se com0com è sul PC). Leggi l’avviso, spunta *Ho letto e ho capito* e premi **Avvia la pulizia**. Windows chiede il permesso di amministratore; nella finestra che si apre rispondi **S** per procedere, alla fine scegli se riavviare e premi INVIO per chiudere. Se la finestra dice che restano dei dispositivi, riavvia il PC e ripeti la pulizia.
+**Impostazioni → Porte e driver → Pulizia com0com → Pulisci…** (il tasto è attivo solo se com0com è sul PC). Leggi l’avviso, spunta *Ho letto e ho capito* e premi **Avvia la pulizia**. Windows chiede il permesso di amministratore: rispondi **Sì**. I passi compaiono nella stessa finestra di The Rigger; dopo la ricerca premi **Procedi** (o **Annulla** per non toccare niente). Alla fine puoi premere **Riavvia ora** oppure **Chiudi**. Se la finestra dice che restano dei dispositivi, riavvia il PC e ripeti la pulizia.
 
 ## Problemi comuni
 
