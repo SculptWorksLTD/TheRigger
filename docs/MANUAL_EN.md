@@ -96,10 +96,6 @@ The list of programs using this radio, each with a light:
 
 On the right is the connection it uses (for example `tcp:4532`, `flrig`, `TCI`, a serial port). Click it to copy its address.
 
-### Buttons
-
-- **Test connection**: pretends to be a program and reads the frequency through every connection (serial port, Hamlib, flrig, network CAT, TCI). Every line with **✓** works, every line with **✗** has a problem. The test only reads: it never transmits and never changes anything.
-
 ### Search radios again
 
 The **Search radios again** button (top right of the tab, or the circular arrow at the bottom) checks all USB ports again right away. Use it after switching on a radio The Rigger did not see, or after closing a program that was holding the port.
@@ -119,7 +115,7 @@ The Rigger opens all these connections for every radio at once. Each program use
 | OmniRig | Rig 1 | Rig 2 | Windows |
 | Serial ports | /tmp/TheRigger/… | /tmp/TheRigger/… | Mac and Linux |
 
-If a port is already taken by another program (for example a real flrig or rigctld already running), The Rigger uses the next free one: you see the exact address by pressing *Test connection* on the radio's card.
+If a port is already taken by another program (for example a real flrig or rigctld already running), The Rigger uses the next free one: the addresses for each radio are in the table in the *The connections* section.
 
 ### Hamlib NET rigctl
 
@@ -436,7 +432,7 @@ The log is a text file The Rigger keeps on your computer (the last 12 starts); i
 
 **On Windows the radio does not appear and the driver is missing.** Keep *Automatic USB drivers* on and confirm Windows' request. If that is not enough, install the cable maker's driver and press *Search radios again*.
 
-**The program does not connect.** Check in this manual that you chose the right connection and the address. Then press *Test connection* on the radio's card: it shows the exact addresses and, if every line has ✓, The Rigger works and the problem is in the program's settings.
+**The program does not connect.** Check in this manual that you chose the right connection and the address: the addresses for each radio are in the table in the *The connections* section. If the program is listed among the connected ones in The Rigger, the engine works and the problem is in the program's settings.
 
 **The program's light is yellow.** The program is connected but is not asking the radio anything. Check in the program that CAT control is enabled (there is often a *Connect* or *Enable* button).
 
@@ -444,7 +440,7 @@ The log is a text file The Rigger keeps on your computer (the last 12 starts); i
 
 **An OmniRig program says OmniRig is missing.** The Rigger must have been opened at least once on this computer. Open it, then reopen the program.
 
-**A port is already used by another program.** If flrig, rigctld or another program holds the same ports, The Rigger takes the next free one: check the exact address with *Test connection*.
+**A port is already used by another program.** If flrig, rigctld or another program holds the same ports, The Rigger takes the next free one: the addresses for each radio are in the table in the *The connections* section.
 
 **I want to use the radio with the manufacturer's program.** Turn the radio off in The Rigger with its power button: the USB port is freed.
 

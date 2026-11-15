@@ -96,10 +96,6 @@ Die Liste der Programme, die dieses Funkgerät benutzen, jedes mit einer Lampe:
 
 Rechts steht die benutzte Verbindung (zum Beispiel `tcp:4532`, `flrig`, `TCI`, ein serieller Port). Anklicken kopiert ihre Adresse.
 
-### Tasten
-
-- **Verbindung testen**: tut so, als wäre es ein Programm, und liest die Frequenz über jede Verbindung (serieller Port, Hamlib, flrig, Netzwerk-CAT, TCI). Jede Zeile mit **✓** funktioniert, jede Zeile mit **✗** hat ein Problem. Der Test liest nur: Er sendet nie und ändert nichts.
-
 ### Funkgeräte erneut suchen
 
 Die Taste **Funkgeräte erneut suchen** (oben rechts im Reiter oder der Kreispfeil unten) prüft sofort alle USB-Ports neu. Benutze sie, nachdem du ein Funkgerät eingeschaltet hast, das The Rigger nicht gesehen hat, oder nachdem du ein Programm geschlossen hast, das den Port belegt hatte.
@@ -119,7 +115,7 @@ The Rigger öffnet für jedes Funkgerät alle diese Verbindungen gleichzeitig. J
 | OmniRig | Rig 1 | Rig 2 | Windows |
 | Serielle Ports | /tmp/TheRigger/… | /tmp/TheRigger/… | Mac und Linux |
 
-Ist ein Port schon von einem anderen Programm belegt (zum Beispiel ein echtes flrig oder rigctld), nimmt The Rigger den nächsten freien: Die genaue Adresse zeigt *Verbindung testen* auf der Karte des Funkgeräts.
+Ist ein Port schon von einem anderen Programm belegt (zum Beispiel ein echtes flrig oder rigctld), nimmt The Rigger den nächsten freien: Die Adressen für jedes Funkgerät stehen in der Tabelle im Abschnitt *Die Verbindungen*.
 
 ### Hamlib NET rigctl
 
@@ -436,7 +432,7 @@ Das Protokoll ist eine Textdatei, die The Rigger auf deinem Computer führt (die
 
 **Unter Windows erscheint das Funkgerät nicht und der Treiber fehlt.** *USB-Treiber automatisch* eingeschaltet lassen und die Frage von Windows bestätigen. Reicht das nicht, den Treiber des Kabelherstellers installieren und *Funkgeräte erneut suchen* drücken.
 
-**Das Programm verbindet sich nicht.** Prüfe in diesem Handbuch die gewählte Verbindung und die Adresse. Dann auf der Karte des Funkgeräts *Verbindung testen* drücken: Es zeigt die genauen Adressen, und haben alle Zeilen ✓, funktioniert The Rigger und das Problem liegt in den Einstellungen des Programms.
+**Das Programm verbindet sich nicht.** Prüfe in diesem Handbuch die gewählte Verbindung und die Adresse: Die Adressen für jedes Funkgerät stehen in der Tabelle im Abschnitt *Die Verbindungen*. Steht das Programm bei The Rigger unter den verbundenen Programmen, funktioniert The Rigger und das Problem liegt in den Einstellungen des Programms.
 
 **Die Lampe des Programms ist gelb.** Das Programm ist verbunden, fragt das Funkgerät aber nichts. Prüfe im Programm, ob die CAT-Steuerung aktiv ist (oft gibt es eine Taste *Connect* oder *Enable*).
 
@@ -444,7 +440,7 @@ Das Protokoll ist eine Textdatei, die The Rigger auf deinem Computer führt (die
 
 **Ein OmniRig-Programm sagt, OmniRig fehlt.** The Rigger muss auf diesem Computer mindestens einmal geöffnet worden sein. Öffne es und starte dann das Programm neu.
 
-**Ein Port wird schon von einem anderen Programm benutzt.** Belegt flrig, rigctld oder ein anderes Programm dieselben Ports, nimmt The Rigger den nächsten freien: Prüfe die genaue Adresse mit *Verbindung testen*.
+**Ein Port wird schon von einem anderen Programm benutzt.** Belegt flrig, rigctld oder ein anderes Programm dieselben Ports, nimmt The Rigger den nächsten freien: Die Adressen für jedes Funkgerät stehen in der Tabelle im Abschnitt *Die Verbindungen*.
 
 **Ich will das Funkgerät mit dem Programm des Herstellers benutzen.** Schalte das Funkgerät in The Rigger mit seiner Ein-/Aus-Taste aus: Der USB-Port wird frei.
 

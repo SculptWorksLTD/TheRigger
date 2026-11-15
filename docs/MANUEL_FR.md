@@ -96,10 +96,6 @@ La liste des programmes qui utilisent cette radio, chacun avec un voyant :
 
 À droite figure la connexion utilisée (par exemple `tcp:4532`, `flrig`, `TCI`, un port série). Cliquez dessus pour copier son adresse.
 
-### Boutons
-
-- **Tester la connexion** : se fait passer pour un programme et lit la fréquence par chaque connexion (port série, Hamlib, flrig, CAT réseau, TCI). Chaque ligne avec **✓** fonctionne, chaque ligne avec **✗** a un problème. Le test ne fait que lire : il n'émet jamais et ne modifie rien.
-
 ### Rechercher à nouveau les radios
 
 Le bouton **Rechercher à nouveau les radios** (en haut à droite de l'onglet, ou la flèche circulaire en bas) revérifie tout de suite tous les ports USB. Utilisez-le après avoir allumé une radio que The Rigger ne voyait pas, ou après avoir fermé un programme qui occupait le port.
@@ -119,7 +115,7 @@ The Rigger ouvre toutes ces connexions pour chaque radio en même temps. Chaque 
 | OmniRig | Rig 1 | Rig 2 | Windows |
 | Ports série | /tmp/TheRigger/… | /tmp/TheRigger/… | Mac et Linux |
 
-Si un port est déjà pris par un autre programme (par exemple un vrai flrig ou rigctld déjà lancé), The Rigger utilise le suivant libre : vous voyez l'adresse exacte en appuyant sur *Tester la connexion* dans la fiche de la radio.
+Si un port est déjà pris par un autre programme (par exemple un vrai flrig ou rigctld déjà lancé), The Rigger utilise le suivant libre : les adresses de chaque radio sont dans le tableau de la section *Les connexions*.
 
 ### Hamlib NET rigctl
 
@@ -436,7 +432,7 @@ Le journal est un fichier texte que The Rigger garde sur votre ordinateur (les 1
 
 **Sous Windows, la radio n'apparaît pas et le pilote manque.** Laissez *Pilotes USB automatiques* activé et confirmez la demande de Windows. Si cela ne suffit pas, installez le pilote du fabricant du câble et appuyez sur *Rechercher à nouveau les radios*.
 
-**Le programme ne se connecte pas.** Vérifiez dans ce manuel la connexion choisie et l'adresse. Puis appuyez sur *Tester la connexion* dans la fiche de la radio : il affiche les adresses exactes et, si toutes les lignes ont ✓, The Rigger fonctionne et le problème vient des réglages du programme.
+**Le programme ne se connecte pas.** Vérifiez dans ce manuel la connexion choisie et l'adresse : les adresses de chaque radio sont dans le tableau de la section *Les connexions*. Si le programme figure parmi les programmes connectés dans The Rigger, The Rigger fonctionne et le problème vient des réglages du programme.
 
 **Le voyant du programme est jaune.** Le programme est connecté mais ne demande rien à la radio. Vérifiez dans le programme que le contrôle CAT est activé (il y a souvent un bouton *Connect* ou *Enable*).
 
@@ -444,7 +440,7 @@ Le journal est un fichier texte que The Rigger garde sur votre ordinateur (les 1
 
 **Un programme OmniRig dit qu'OmniRig est absent.** The Rigger doit avoir été ouvert au moins une fois sur cet ordinateur. Ouvrez-le, puis rouvrez le programme.
 
-**Un port est déjà utilisé par un autre programme.** Si flrig, rigctld ou un autre programme occupe les mêmes ports, The Rigger prend le suivant libre : vérifiez l'adresse exacte avec *Tester la connexion*.
+**Un port est déjà utilisé par un autre programme.** Si flrig, rigctld ou un autre programme occupe les mêmes ports, The Rigger prend le suivant libre : les adresses de chaque radio sont dans le tableau de la section *Les connexions*.
 
 **Je veux utiliser la radio avec le logiciel du fabricant.** Désactivez la radio dans The Rigger avec son bouton marche : le port USB se libère.
 
