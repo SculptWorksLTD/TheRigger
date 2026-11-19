@@ -79,17 +79,21 @@ As radio the **real model** or **Kenwood TS-2000**, port `/tmp/TheRigger/IC-7100
 
 *Rig Interface*: **None**. *Application Program Interface*: tick **TCP API Enabled**, port `1100`. Band, mode and frequency fill in by themselves.
 
-### Second radio
+### More radios (up to 10 and beyond)
 
-| Mode | First radio | Second radio |
-|---|---|---|
-| Hamlib | 4532 | 4534 |
-| flrig | 12345 | 12346 |
-| TCI | 40001 | 40002 |
-| DXLab Commander | 52002 | 52102 |
-| Network CAT | 4600 | 4601 |
-| OmniRig | Rig 1 | Rig 2 |
-| Ham Radio Deluxe | radio 1 | radio 2 (same port 7809) |
+Each radio has its own addresses: radio 1 is the first in the Radio tab, radio 2 the second, and so on. For the others add the step shown.
+
+| Mode | Radio 1 | Radio 2 | Radio 3 | Each extra radio | Radio 10 |
+|---|---|---|---|---|---|
+| Hamlib | 4532 | 4534 | 4536 | +2 | 4550 |
+| flrig | 12345 | 12346 | 12347 | +1 | 12354 |
+| TCI | 40001 | 40002 | 40003 | +1 | 40010 |
+| DXLab Commander | 52002 | 52102 | 52202 | +100 | 52902 |
+| Network CAT | 4600 | 4601 | 4602 | +1 | 4609 |
+| Ham Radio Deluxe | radio 1 | radio 2 | radio 3 | same port 7809 | radio 10 |
+| OmniRig | Rig 1 | Rig 2 | — | only 2: that is OmniRig’s limit | — |
+
+Two identical radios are called for example *IC-7300* and *IC-7300 2*. With more than two radios, OmniRig programs see only the first two: for the others use Hamlib, flrig or TCI.
 
 ### Programs not listed
 

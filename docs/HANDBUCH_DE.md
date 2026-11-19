@@ -79,17 +79,21 @@ Als Funkgerät das **echte Modell** oder **Kenwood TS-2000**, Port `/tmp/TheRigg
 
 *Rig Interface*: **None**. *Application Program Interface*: **TCP API Enabled** anhaken, Port `1100`. Band, Betriebsart und Frequenz füllen sich selbst aus.
 
-### Zweites Funkgerät
+### Mehrere Funkgeräte (bis 10 und mehr)
 
-| Art | Erstes Funkgerät | Zweites Funkgerät |
-|---|---|---|
-| Hamlib | 4532 | 4534 |
-| flrig | 12345 | 12346 |
-| TCI | 40001 | 40002 |
-| DXLab Commander | 52002 | 52102 |
-| Netzwerk-CAT | 4600 | 4601 |
-| OmniRig | Rig 1 | Rig 2 |
-| Ham Radio Deluxe | Funkgerät 1 | Funkgerät 2 (gleicher Port 7809) |
+Jedes Funkgerät hat eigene Adressen: Funkgerät 1 ist das erste im Reiter Funkgeräte, Funkgerät 2 das zweite und so weiter. Für die weiteren den angegebenen Schritt addieren.
+
+| Art | Funkgerät 1 | Funkgerät 2 | Funkgerät 3 | Jedes weitere | Funkgerät 10 |
+|---|---|---|---|---|---|
+| Hamlib | 4532 | 4534 | 4536 | +2 | 4550 |
+| flrig | 12345 | 12346 | 12347 | +1 | 12354 |
+| TCI | 40001 | 40002 | 40003 | +1 | 40010 |
+| DXLab Commander | 52002 | 52102 | 52202 | +100 | 52902 |
+| Netzwerk-CAT | 4600 | 4601 | 4602 | +1 | 4609 |
+| Ham Radio Deluxe | Funkgerät 1 | Funkgerät 2 | Funkgerät 3 | gleicher Port 7809 | Funkgerät 10 |
+| OmniRig | Rig 1 | Rig 2 | — | nur 2: das ist die Grenze von OmniRig | — |
+
+Zwei gleiche Funkgeräte heißen zum Beispiel *IC-7300* und *IC-7300 2*. Bei mehr als zwei Funkgeräten sehen OmniRig-Programme nur die ersten beiden: für die anderen Hamlib, flrig oder TCI nehmen.
 
 ### Programme, die nicht in der Liste stehen
 
