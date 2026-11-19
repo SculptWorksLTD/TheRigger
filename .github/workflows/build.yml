@@ -161,8 +161,10 @@ jobs:
             <key>CFBundlePackageType</key><string>APPL</string>
             <key>LSMinimumSystemVersion</key><string>10.15</string>
             <key>NSHighResolutionCapable</key><true/>
+            <key>CFBundleLocalizations</key><array><string>it</string></array>
           </dict></plist>
           PL
+            mkdir -p "$C/Resources/it.lproj"
             codesign --force --deep --sign - "$APP"
           }
           pack() { # cartella-bin, suffisso, arch-installer, destinazione
