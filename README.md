@@ -20,11 +20,11 @@ The Rigger è un gestore CAT che sostituisce OmniRig: trova da solo le radio USB
 - **Tutte le radio insieme**: Icom, Yaesu, Kenwood, Elecraft, FlexRadio, Xiegu, Lab599, QRP Labs e molte SDR.
 - **Tutti i programmi insieme**: WSJT-X, JTDX, fldigi, N1MM, Log4OM, HRD, MacLoggerDX, DXLab, N3FJP e oltre 40 altri, con OmniRig, Hamlib, flrig, TCI, HRD e CAT via rete.
 - **Driver USB automatici** su Windows, **segnalazioni e idee** anonime dal programma.
-- **Leggero**: un solo programma nativo di pochi MB, in 10 lingue, con manuale passo per passo.
+- **Leggero**: un solo programma nativo di pochi MB, in 9 lingue, con manuale passo per passo.
 
 ## Manuale · Manual
 
-[Italiano](docs/MANUALE_IT.md) · [English](docs/MANUAL_EN.md) · [Français](docs/MANUEL_FR.md) · [Deutsch](docs/HANDBUCH_DE.md) · [Español](docs/MANUAL_ES.md) · [Português](docs/MANUAL_PT.md) · [日本語](docs/MANUAL_JA.md) · [Русский](docs/RUKOVODSTVO_RU.md) · [العربية](docs/DALIL_AR.md) · [中文](docs/SHOUCE_ZH.md)
+[Italiano](docs/MANUALE_IT.md) · [English](docs/MANUAL_EN.md) · [Français](docs/MANUEL_FR.md) · [Deutsch](docs/HANDBUCH_DE.md) · [Español](docs/MANUAL_ES.md) · [Português](docs/MANUAL_PT.md) · [日本語](docs/MANUAL_JA.md) · [Русский](docs/RUKOVODSTVO_RU.md) · [中文](docs/SHOUCE_ZH.md)
 
 ---
 
