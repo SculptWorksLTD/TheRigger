@@ -1,6 +1,6 @@
 {
   "_info": "Pacchetti dei produttori usati da The Rigger su Windows quando Windows Update non ha il driver. Modificabile senza rilasciare una nuova versione.",
-  "report_url": "https://therigger-segnalazioni.nerosdmf.workers.dev/",
+  "report_url": "https://qthome-mothership.nerosdmf.workers.dev/rigger",
   "packages": [
     {
       "name": "Silicon Labs CP210x (Icom, Yaesu, Kenwood)",
